@@ -774,8 +774,8 @@
 
     <script>
       /* ============================================================
-               MSK MODULE APP
-               ============================================================ */
+                     MSK MODULE APP
+                     ============================================================ */
 
       const STORAGE_KEY = "msk_module_progress_v1";
       const BOOKMARK_KEY = "msk_bookmarks_v1";
@@ -1897,28 +1897,592 @@
             },
           ],
         },
+
+        /* ========== MSK PATHOLOGY ========== */
+
         {
           id: "msk-patho-2017",
           subject: "MSK Pathology",
-          topic: "Skin Pathology",
+          topic: "Bone, Joint, Muscle & Skin Pathology",
           year: 2017,
           title: "MSK Pathology 2017",
           icon: "🔬",
-          section: "MSK Past Year Exam",
+          section: "MSK Past Year Exam — 2017",
           questions: [
             {
-              q: "[PLACEHOLDER] Example MSK Pathology 2017 question — replace with real one.",
+              q: "A 50-year-old has flaccid blisters that rupture easily, with acantholysis on biopsy. What is the key autoantibody?",
               options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
+                { letter: "A", text: "Anti-basement membrane (IgG)" },
+                { letter: "B", text: "Anti-mitochondrial (IgM)" },
+                { letter: "C", text: "Anti-nuclear (ANA)" },
+                { letter: "D", text: "Anti-desmoglein (IgG)" },
+              ],
+              correct: "D",
+              explanation:
+                "<strong>Answer: D — Anti-desmoglein (IgG)</strong><br><br>Diagnosis: Pemphigus vulgaris.<br><br>The patient has flaccid, easily ruptured blisters with acantholysis on biopsy. These findings are characteristic of pemphigus vulgaris, an autoimmune blistering disorder caused by antibodies against desmosomal proteins.<br><br>🎯 <strong>Key Autoantibody</strong><br><br>Anti-desmoglein IgG is the characteristic autoantibody.<br><br>🔻 Desmoglein 3 → primarily involved in mucosal disease.<br>🔻 Desmoglein 1 + 3 → mucocutaneous disease.<br>🔻 Autoantibodies disrupt desmosomal adhesion between keratinocytes → acantholysis → intraepidermal blister formation.",
+            },
+            {
+              q: "A 40-year-old man with acute great toe pain has negatively birefringent needle-shaped crystals in synovial fluid. What is the underlying metabolic defect?",
+              options: [
+                { letter: "A", text: "Purine metabolism dysfunction" },
+                { letter: "B", text: "Calcium pyrophosphate deposition" },
+                { letter: "C", text: "Iron overload" },
+                { letter: "D", text: "Vitamin C deficiency" },
               ],
               correct: "A",
-              explanation: "This is a placeholder explanation.",
+              explanation:
+                "<strong>Answer: A — Purine metabolism dysfunction</strong><br><br>The findings are classic for gout, caused by deposition of monosodium urate crystals due to hyperuricemia.<br><br><strong>Definition of Each Choice</strong><br><br><strong>A. Purine metabolism dysfunction ✅</strong><br>Definition: Abnormal metabolism of purines, the nitrogenous bases found in nucleic acids, resulting in increased production or accumulation of uric acid.<br>✔️ Purines → hypoxanthine → xanthine → uric acid<br>✔️ Excess uric acid → hyperuricemia<br>✔️ Hyperuricemia → monosodium urate crystal deposition<br>✔️ Crystals → acute inflammatory arthritis (gout)<br>🔬 Crystal: Needle-shaped, negatively birefringent<br>Example: Gout / podagra.<br><br><strong>B. Calcium pyrophosphate deposition ❌</strong><br>Definition: Deposition of calcium pyrophosphate dihydrate (CPPD) crystals within articular cartilage and other tissues. This causes CPPD crystal arthritis (pseudogout).<br>🔬 Crystal:<br>♦️ Rhomboid-shaped<br>Weakly positively birefringent<br>📍 Common sites: knee and wrist<br>🧠 Remember:<br>Gout → Needle → Negative<br>CPPD → Rhomboid → Positive<br><br><strong>C. Iron overload ❌</strong><br>Definition: Excess accumulation of iron in body tissues, particularly the liver, heart, pancreas, and joints. A classic condition is hemochromatosis.<br>Excess iron can cause:<br>🔻 Liver disease<br>🔻 Diabetes mellitus<br>🔻 Cardiomyopathy<br>🔻 Arthropathy<br>Importantly, iron overload is associated with CPPD deposition, but it does not produce the needle-shaped, negatively birefringent monosodium urate crystals described in this question.<br><br><strong>D. Vitamin C deficiency ❌</strong><br>Definition: Deficiency of ascorbic acid (vitamin C), which is required for collagen synthesis and normal connective-tissue integrity. Severe deficiency causes scurvy.<br>Clinical manifestations include:<br>👉 Bleeding gums<br>👉 Petechiae/ecchymoses<br>👉 Poor wound healing<br>👉 Bone abnormalities, especially in children<br>👉 Anemia<br>It is not the metabolic defect responsible for gout.",
+            },
+            {
+              q: "A patient has thickened skin with prominent markings due to chronic scratching. What is this called?",
+              options: [
+                { letter: "A", text: "Lichenification" },
+                { letter: "B", text: "Onycholysis" },
+                { letter: "C", text: "Excoriation" },
+                { letter: "D", text: "Wheal" },
+              ],
+              correct: "A",
+              explanation:
+                "<strong>Answer: A — Lichenification</strong><br><br><strong>Definition:</strong><br>Lichenification is thickening of the skin with prominent or accentuated skin markings, resulting from repeated or chronic scratching or rubbing.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Lichenification — Correct</strong><br>Chronic scratching or rubbing causes epidermal hyperplasia and thickening of the skin. The normal skin lines become more prominent. It is commonly seen in chronic pruritic skin disorders.<br><br><strong>B. Onycholysis — Incorrect</strong><br>Onycholysis is the separation of the nail plate from the underlying nail bed. It may occur in conditions such as psoriasis, fungal infections, or trauma.<br><br><strong>C. Excoriation — Incorrect</strong><br>Excoriation is a superficial loss or abrasion of the epidermis caused by scratching or mechanical trauma.<br><br><strong>D. Wheal — Incorrect</strong><br>A wheal is a transient, raised area of dermal edema, typically seen in urticaria. It is usually pale or erythematous and disappears within a relatively short period.",
+            },
+            {
+              q: "A 30 years old patient present with well-demarcated, pink to salmon-colored plaque covered by loosely adherent scales that are characteristically silver-white. What is the most likely diagnosis?",
+              options: [
+                { letter: "A", text: "Psoriasis" },
+                { letter: "B", text: "Erythema Multiforme" },
+                { letter: "C", text: "Lichen Planus" },
+                { letter: "D", text: "Impetigo" },
+              ],
+              correct: "A",
+              explanation:
+                '<strong>Answer: A — Psoriasis</strong><br><br>Diagnosis: Psoriasis.<br><br>Psoriasis is a chronic inflammatory skin disease characterized by well-demarcated, erythematous (pink to salmon-colored) plaques covered by loosely adherent, silvery-white scales. The description in the question is classic for psoriasis.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Psoriasis — Correct</strong><br>Psoriasis typically presents as well-demarcated erythematous plaques with characteristic silvery-white scales. Common sites include the extensor surfaces of the elbows and knees, scalp, and lumbosacral region.<br><br><strong>B. Erythema multiforme — Incorrect</strong><br>Erythema multiforme is an acute immune-mediated skin reaction characterized by target (iris) lesions, often involving the extremities. It does not typically produce chronic, silvery-white scales.<br><br><strong>C. Lichen planus — Incorrect</strong><br>Lichen planus is an inflammatory disorder characterized by pruritic, purple, polygonal, planar papules. A classic mnemonic is the "6 P\'s": pruritic, purple, polygonal, planar, papules, plaques.<br><br><strong>D. Impetigo — Incorrect</strong><br>Impetigo is a superficial bacterial infection of the skin, commonly caused by Staphylococcus aureus or Streptococcus pyogenes. It typically produces vesicles or pustules that rupture and form honey-colored crusts.',
+            },
+            {
+              q: "A patient with anti-Jo1 antibodies develops interstitial lung disease and mechanic's hands. This is most associated with:",
+              options: [
+                { letter: "A", text: "Polymyositis" },
+                { letter: "B", text: "Myotonic dystrophy" },
+                { letter: "C", text: "McArdle disease" },
+                { letter: "D", text: "Charcot-Marie-Tooth disease" },
+              ],
+              correct: "A",
+              explanation:
+                "<strong>Answer: A — Polymyositis</strong><br><br>The patient has features of antisynthetase syndrome, which is strongly associated with anti-Jo-1 antibodies. Anti-Jo-1 is an antibody against histidyl-tRNA synthetase and is associated with inflammatory myopathies, particularly polymyositis.<br><br>Characteristic manifestations include:<br>✔️ Myositis → proximal muscle weakness<br>✔️ Interstitial lung disease<br>✔️ Mechanic's hands → rough, cracked, hyperkeratotic skin of the hands<br>✔️ Arthritis<br>✔️ Raynaud phenomenon<br>✔️ Fever<br><br><strong>Explanation of the options</strong><br><br><strong>A. Polymyositis — Correct ✅</strong><br>Polymyositis is an idiopathic inflammatory myopathy characterized primarily by symmetric proximal muscle weakness. Anti-Jo-1 antibodies are associated with polymyositis and antisynthetase syndrome, particularly when interstitial lung disease is present.<br><br><strong>B. Myotonic dystrophy — Incorrect ❌</strong><br>A hereditary muscular dystrophy characterized by myotonia, progressive muscle weakness, and muscle wasting. It is caused by a genetic repeat expansion and is not associated with anti-Jo-1 antibodies.<br><br><strong>C. McArdle disease — Incorrect ❌</strong><br>McArdle disease is a metabolic myopathy caused by deficiency of muscle glycogen phosphorylase. Patients develop exercise-induced muscle cramps, fatigue, and sometimes myoglobinuria.<br><br><strong>D. Charcot-Marie-Tooth disease — Incorrect ❌</strong><br>Charcot-Marie-Tooth disease is an inherited peripheral neuropathy causing progressive distal muscle weakness, sensory loss, and foot deformities. It is not an inflammatory myopathy and is not associated with anti-Jo-1 antibodies.",
+            },
+            {
+              q: "A 45-year-old woman presents with a 5 mm flat, brown lesion on her forearm. There is no elevation or scaling. What is the most appropriate term for this lesion?",
+              options: [
+                { letter: "A", text: "Papule" },
+                { letter: "B", text: "Macule" },
+                { letter: "C", text: "Nodule" },
+                { letter: "D", text: "Plaque" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Macule</strong><br><br>A macule is a flat, circumscribed area of skin discoloration that is not palpable. It is differentiated from papules, plaques, and nodules by the absence of elevation.<br><br>In this case, the lesion is:<br>✔️ 5 mm in diameter<br>✔️ Flat<br>✔️ Brown<br>✔️ Not elevated<br>✔️ No scaling<br><br>Therefore, it is a macule.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Papule — Incorrect</strong><br>A papule is a small, solid, elevated lesion, usually less than 1 cm in diameter.<br><br><strong>B. Macule — Correct ✅</strong><br>A macule is a flat, nonpalpable change in skin color, usually less than 1 cm in diameter.<br><br><strong>C. Nodule — Incorrect</strong><br>A nodule is a solid, palpable lesion that is generally larger and extends deeper into the dermis or subcutaneous tissue.<br><br><strong>D. Plaque — Incorrect</strong><br>A plaque is a raised, flat-topped lesion, usually greater than 1 cm in diameter. It may result from the coalescence of papules.<br><br><strong>Key Point</strong><br>Flat + nonpalpable + <1 cm → Macule<br>Flat + nonpalpable + >1 cm → Patch",
+            },
+            {
+              q: "A newborn presents with multiple fractures after minimal handling and has blue sclerae. Genetic testing reveals a mutation in COL1A1. What is the most likely diagnosis?",
+              options: [
+                { letter: "A", text: "Achondroplasia" },
+                { letter: "B", text: "Paget disease" },
+                { letter: "C", text: "Rickets" },
+                { letter: "D", text: "Osteogenesis imperfecta (Type I)" },
+              ],
+              correct: "D",
+              explanation:
+                "<strong>Answer: D — Osteogenesis imperfecta (Type I)</strong><br><br>The newborn has multiple fractures after minimal trauma, blue sclerae, and a mutation in COL1A1. These findings are characteristic of osteogenesis imperfecta (OI), a hereditary disorder caused by abnormalities in type I collagen.<br><br><strong>Explanation</strong><br><br><strong>A. Achondroplasia — Incorrect ❌</strong><br>Achondroplasia is the most common form of disproportionate short-limbed dwarfism. It is caused by an activating mutation in the FGFR3 gene, not COL1A1. Fractures and blue sclerae are not characteristic features.<br><br><strong>B. Paget disease — Incorrect ❌</strong><br>Paget disease is a localized disorder of bone remodeling, characterized by increased osteoclast activity followed by excessive, disorganized bone formation. It primarily affects older adults and is not a congenital collagen disorder.<br><br><strong>C. Rickets — Incorrect ❌</strong><br>Rickets results from defective mineralization of growing bone, commonly due to vitamin D deficiency or abnormalities in vitamin D/phosphate metabolism. It produces skeletal deformities rather than the characteristic blue sclerae and COL1A1 mutation.<br><br><strong>D. Osteogenesis imperfecta (Type I) — Correct ✅</strong><br>OI is a hereditary disorder of type I collagen caused most commonly by mutations in COL1A1 or COL1A2.<br>Typical features include:<br>✔️ Fragile bones → recurrent fractures<br>✔️ Blue sclerae<br>✔️ Dentinogenesis imperfecta in some patients<br>✔️ Hearing loss in some cases<br>✔️ Normal or near-normal stature in milder Type I disease<br><br>🎯 <strong>Important distinction</strong><br>🔻 COL1A1/COL1A2 → Type I collagen → Osteogenesis imperfecta<br>🔻 FGFR3 → Achondroplasia",
+            },
+            {
+              q: "An umbilicated papule in a child is caused by:",
+              options: [
+                { letter: "A", text: "HSV" },
+                { letter: "B", text: "HPV" },
+                { letter: "C", text: "Molluscum contagiosum" },
+                { letter: "D", text: "Tinea corporis" },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — Molluscum contagiosum</strong><br><br>Molluscum contagiosum is a common viral infection of the skin caused by a poxvirus (molluscum contagiosum virus). It typically produces small, firm, pearly, flesh-colored papules with central umbilication.<br><br><strong>Explanation of the options</strong><br><br><strong>A. HSV — Incorrect ❌</strong><br>Herpes simplex virus (HSV) typically causes grouped vesicles on an erythematous base, which may rupture and form erosions or crusts. Umbilicated papules are not the characteristic lesion.<br><br><strong>B. HPV — Incorrect ❌</strong><br>Human papillomavirus (HPV) causes warts (verrucae). They are usually rough, hyperkeratotic papules or plaques rather than smooth, centrally umbilicated papules.<br><br><strong>C. Molluscum contagiosum — Correct ✅</strong><br>Characteristically produces dome-shaped, pearly papules with central umbilication. It is particularly common in children and spreads through direct skin-to-skin contact or autoinoculation.<br><br><strong>D. Tinea corporis — Incorrect ❌</strong><br>Tinea corporis (ringworm) is a dermatophyte infection that produces annular, scaly plaques with an advancing border and central clearing. It does not cause umbilicated papules.",
+            },
+            {
+              q: "A 45-year-old diabetic patient presents with numbness and burning pain in both feet, worsening over 6 months. Nerve conduction studies show reduced amplitude but preserved conduction velocity. What is the most likely pathology?",
+              options: [
+                { letter: "A", text: "Demyelinating neuropathy" },
+                { letter: "B", text: "Axonal neuropathy" },
+                { letter: "C", text: "Neuronopathy" },
+                { letter: "D", text: "Myopathy" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Axonal neuropathy</strong><br><br>The patient has numbness and burning pain in both feet, progressing gradually over 6 months, which is typical of diabetic peripheral neuropathy.<br><br>The key nerve conduction finding is:<br>✔️ Reduced amplitude → indicates loss or dysfunction of axons<br>✔️ Preserved conduction velocity → argues against primary demyelination<br><br>Therefore, the underlying pathology is axonal neuropathy.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Demyelinating neuropathy — Incorrect ❌</strong><br>Demyelination primarily affects the myelin sheath. Nerve conduction studies typically show markedly reduced conduction velocity, prolonged distal latencies, and sometimes conduction block.<br><br><strong>B. Axonal neuropathy — Correct ✅</strong><br>Axonal neuropathy results from damage or loss of axons. Nerve conduction studies typically demonstrate reduced amplitude of sensory or motor responses, while conduction velocity is relatively preserved.<br>Diabetic neuropathy is classically a length-dependent axonal polyneuropathy, producing:<br>✔️ Burning pain<br>✔️ Numbness<br>✔️ Paresthesia<br>✔️ Loss of sensation, especially in the feet<br><br><strong>C. Neuronopathy — Incorrect ❌</strong><br>Neuronopathy results from primary damage to the neuronal cell body, such as sensory neuronopathy involving dorsal root ganglia. It is not the typical pattern of diabetic peripheral neuropathy.<br><br><strong>D. Myopathy — Incorrect ❌</strong><br>Myopathy is a disorder of skeletal muscle, producing primarily muscle weakness, rather than distal sensory symptoms such as numbness and burning pain.",
+            },
+            {
+              q: "Which of the following pair is incorrect about Fractures?",
+              options: [
+                { letter: "A", text: "Simple: the overlying skin is intact" },
+                {
+                  letter: "B",
+                  text: "Compound: the bone communicates with the skin surface",
+                },
+                { letter: "C", text: "Comminuted: the bone is fragmented" },
+                {
+                  letter: "D",
+                  text: "Displaced: the ends of the bone at the fracture site are not aligned",
+                },
+                {
+                  letter: "E",
+                  text: "Greenstick: extending only partially through the bone, common in elderly when bones are thick",
+                },
+              ],
+              correct: "E",
+              explanation:
+                "<strong>Answer: E — Greenstick</strong><br><br>The incorrect statement is E because greenstick fractures are characteristic of children, whose bones are more flexible and less brittle—not elderly patients.<br><br><strong>Explanation of each option</strong><br><br><strong>A. Simple fracture — Correct ✅</strong><br>A simple (closed) fracture is a fracture in which the overlying skin remains intact and there is no communication between the fracture and the external environment.<br><br><strong>B. Compound fracture — Correct ✅</strong><br>A compound (open) fracture is a fracture in which the fracture site communicates with the external environment through a wound in the skin.<br><br><strong>C. Comminuted fracture — Correct ✅</strong><br>A comminuted fracture is one in which the bone is broken or fragmented into multiple pieces.<br><br><strong>D. Displaced fracture — Correct ✅</strong><br>A displaced fracture occurs when the fracture fragments are no longer in their normal anatomical alignment.<br><br><strong>E. Greenstick fracture — Incorrect ❌</strong><br>A greenstick fracture is an incomplete fracture in which the bone bends and cracks, with the fracture extending only partially through the bone.",
+            },
+            {
+              q: "A bilateral vestibular schwannoma is most associated with:",
+              options: [
+                { letter: "A", text: "NF1" },
+                { letter: "B", text: "NF2" },
+                { letter: "C", text: "Tuberous sclerosis" },
+                { letter: "D", text: "Li-Fraumeni syndrome" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — NF2</strong><br><br>Neurofibromatosis type 2 (NF2) is characterized classically by bilateral vestibular schwannomas. It results from mutations in the NF2 gene, which encodes the tumor-suppressor protein merlin (schwannomin).<br><br><strong>Explanation of the options</strong><br><br><strong>A. NF1 — Incorrect:</strong> Associated with neurofibromas, café-au-lait macules, and optic pathway gliomas.<br><br><strong>B. NF2 — Correct:</strong> Characteristically associated with bilateral vestibular schwannomas.<br><br><strong>C. Tuberous sclerosis — Incorrect:</strong> Associated with cortical tubers, renal angiomyolipomas, and cardiac rhabdomyomas.<br><br><strong>D. Li-Fraumeni syndrome — Incorrect:</strong> Associated with germline TP53 mutations and multiple malignancies.",
+            },
+            {
+              q: "A diabetic patient with a foot ulcer develops localized bone pain and fever. MRI shows bone marrow edema and Staphylococcus aureus is cultured. What is the diagnosis?",
+              options: [
+                { letter: "A", text: "Gout" },
+                { letter: "B", text: "Osteomyelitis" },
+                { letter: "C", text: "Osteosarcoma" },
+                { letter: "D", text: "Rheumatoid arthritis" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Osteomyelitis</strong><br><br>The patient has a diabetic foot ulcer, localized bone pain, fever, bone marrow edema on MRI, and growth of Staphylococcus aureus. These findings are characteristic of osteomyelitis, an infection of bone and bone marrow.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Gout — Incorrect:</strong> Caused by deposition of monosodium urate crystals, producing acute inflammatory arthritis.<br><br><strong>B. Osteomyelitis — Correct:</strong> Infection and inflammation of bone and bone marrow, commonly caused by S. aureus.<br><br><strong>C. Osteosarcoma — Incorrect:</strong> A malignant bone-forming tumor, usually presenting as a destructive bone mass rather than an acute infection with positive bacterial culture.<br><br><strong>D. Rheumatoid arthritis — Incorrect:</strong> A systemic autoimmune inflammatory disease primarily affecting synovial joints.",
+            },
+            {
+              q: "A newborn has a large congenital nevus. What is the most significant risk associated with this lesion?",
+              options: [
+                { letter: "A", text: "Vitiligo" },
+                { letter: "B", text: "Malignant melanoma" },
+                { letter: "C", text: "Lichen planus" },
+                { letter: "D", text: "Pemphigus vulgaris" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Malignant melanoma</strong><br><br>A large congenital nevus, particularly a giant congenital melanocytic nevus, carries an increased risk of developing malignant melanoma.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Vitiligo — Incorrect:</strong> An autoimmune disorder characterized by loss of melanocytes and depigmented skin.<br><br><strong>B. Malignant melanoma — Correct:</strong> Congenital melanocytic nevi, especially large/giant lesions, are associated with an increased risk of melanoma.<br><br><strong>C. Lichen planus — Incorrect:</strong> An inflammatory disorder characterized by pruritic, purple, polygonal, flat-topped papules.<br><br><strong>D. Pemphigus vulgaris — Incorrect:</strong> An autoimmune blistering disorder caused by antibodies against desmosomal proteins, particularly desmogleins.",
+            },
+            {
+              q: "A chronic ulcer in a burn scar transforms into a keratin-producing tumor. What is the most likely mutation?",
+              options: [
+                { letter: "A", text: "BRAF V600E" },
+                { letter: "B", text: "JAK2" },
+                { letter: "C", text: "TP53" },
+                { letter: "D", text: "BCR-ABL" },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — TP53</strong><br><br>A chronic ulcer arising in a burn scar that subsequently develops into a keratin-producing malignant tumor is characteristic of a Marjolin ulcer, most commonly cutaneous squamous cell carcinoma (SCC).<br><br>TP53 mutations are commonly involved in the pathogenesis of cutaneous SCC and lead to loss of tumor-suppressor function.<br><br><strong>Explanation of the options</strong><br><br><strong>A. BRAF V600E — Incorrect:</strong> Commonly associated with melanoma and some other tumors.<br><br><strong>B. JAK2 — Incorrect:</strong> Classically associated with myeloproliferative neoplasms, particularly polycythemia vera.<br><br><strong>C. TP53 — Correct:</strong> A major tumor-suppressor gene frequently altered in squamous cell carcinoma.<br><br><strong>D. BCR-ABL — Incorrect:</strong> Characteristic of chronic myeloid leukemia (CML) and some cases of acute lymphoblastic leukemia.",
+            },
+            {
+              q: "Select the wrong statement about gout?",
+              options: [
+                { letter: "A", text: "hyperuricemia" },
+                {
+                  letter: "B",
+                  text: "overproduction or under excretion of uric acid.",
+                },
+                {
+                  letter: "C",
+                  text: "Primary gout (90%) is idiopathic, affects females more than males, and is typically seen in older women",
+                },
+                {
+                  letter: "D",
+                  text: "Secondary gout (10%) is seen with excessive cell breakdown (chemotherapy), decreased renal excretion (drugs), and Lesch-Nyhan syndrome.",
+                },
+              ],
+              correct: "C",
+              explanation:
+                '<strong>Answer: C — Primary gout (90%) is idiopathic, affects females more than males, and is typically seen in older women</strong><br><br>This statement is incorrect.<br><br>Primary gout is usually idiopathic and accounts for the great majority of cases. However, it occurs much more commonly in men than women, particularly before menopause. In women, gout becomes more common after menopause.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Hyperuricemia — Correct ✅</strong><br>Gout is associated with hyperuricemia, resulting in deposition of monosodium urate crystals in tissues.<br><br><strong>B. Overproduction or under-excretion of uric acid — Correct ✅</strong><br>Hyperuricemia can result from:<br>🔻 Increased uric acid production<br>🔻 Decreased renal excretion of uric acid<br>Decreased renal excretion is the more common mechanism.<br><br><strong>C. Primary gout (90%) is idiopathic, affects females more than males, and is typically seen in older women — Incorrect ❌</strong><br>The error is "affects females more than males." Gout is substantially more common in men. Women are relatively protected before menopause, partly because estrogen promotes uric acid excretion.<br><br><strong>D. Secondary gout (10%) is seen with excessive cell breakdown (chemotherapy), decreased renal excretion (drugs), and Lesch-Nyhan syndrome — Correct ✅</strong><br>Secondary hyperuricemia can occur with:<br>🔻 Increased cell turnover or destruction, including tumor lysis after chemotherapy<br>🔻 Reduced renal excretion<br>🔻 Certain drugs<br>🔻 Lesch-Nyhan syndrome due to HGPRT deficiency',
+            },
+            {
+              q: "A patient develops ascending paralysis 2 weeks after a Campylobacter jejuni infection. CSF analysis reveals elevated protein without pleocytosis. What is the diagnosis?",
+              options: [
+                { letter: "A", text: "Multiple sclerosis" },
+                { letter: "B", text: "Guillain-Barré syndrome" },
+                { letter: "C", text: "Poliomyelitis" },
+                { letter: "D", text: "ALS" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Guillain-Barré syndrome</strong><br><br>The patient develops ascending paralysis approximately 2 weeks after a Campylobacter jejuni infection. CSF shows elevated protein without significant pleocytosis, a classic finding known as albuminocytologic dissociation.<br><br>This is characteristic of Guillain-Barré syndrome (GBS), an acute immune-mediated peripheral neuropathy.<br><br><strong>Explanation of the options</strong><br><br><strong>A. Multiple sclerosis — Incorrect ❌</strong><br>Multiple sclerosis is a chronic immune-mediated demyelinating disease of the central nervous system. It typically produces neurologic deficits separated in time and space rather than acute ascending paralysis following C. jejuni infection.<br><br><strong>B. Guillain-Barré syndrome — Correct ✅</strong><br>GBS is an acute immune-mediated peripheral neuropathy, frequently preceded by an infection. Campylobacter jejuni is a classic trigger.<br>Typical findings:<br>✔️ Progressive ascending weakness<br>✔️ Decreased or absent deep tendon reflexes<br>✔️ Possible respiratory muscle involvement<br>✔️ Albuminocytologic dissociation in CSF<br><br><strong>C. Poliomyelitis — Incorrect ❌</strong><br>Poliovirus can cause acute flaccid paralysis by damaging anterior horn cells, but the classic association with C. jejuni and albuminocytologic dissociation points to GBS.<br><br><strong>D. ALS — Incorrect ❌</strong><br>Amyotrophic lateral sclerosis is a progressive neurodegenerative disease involving upper and lower motor neurons. It is not typically triggered by an acute infection and does not present as classic postinfectious ascending paralysis.",
+            },
+            {
+              q: "A 70-year-old man has a pearly, nodular lesion with telangiectasia on his nose. Biopsy shows peripheral palisading of basaloid cells. What is the diagnosis?",
+              options: [
+                { letter: "A", text: "Squamous cell carcinoma" },
+                { letter: "B", text: "Melanoma" },
+                { letter: "C", text: "Basal cell carcinoma" },
+                { letter: "D", text: "Seborrheic keratosis" },
+              ],
+              correct: "C",
+              explanation:
+                '<strong>Answer: C — Basal cell carcinoma</strong><br><br><strong>Clinical Presentation:</strong> A pearly, translucent nodule with prominent telangiectasias (dilated blood vessels) and rolled borders located on sun-exposed areas (most commonly the face/nose) is the classic clinical description of Basal Cell Carcinoma (BCC).<br><br><strong>Histopathology:</strong> Nests and islands of uniform, dark basaloid cells (cells resembling the basal layer of epidermis) that exhibit peripheral palisading (nuclei aligned parallel to each other at the outer rim) and clefting / retraction artifact separating the tumor nests from the surrounding stroma.<br><br><strong>Why not other options?</strong><br><br><em>Squamous Cell Carcinoma (SCC):</em> Presents as a scaling, ulcerated, or hyperkeratotic plaque with keratin pearls and intercellular bridges on biopsy.<br><br><em>Melanoma:</em> Characterized by asymmetrical, irregular pigmented lesions with atypical melanocytic nests.<br><br><em>Seborrheic Keratosis:</em> Benign "stuck-on" brown/tan warty plaques with pseudo-horn cysts.',
+            },
+            {
+              q: 'A 10-year-old with fever and "onion-skin" periosteal reaction on X-ray has a small round blue cell tumor. What is the key genetic marker?',
+              options: [
+                { letter: "A", text: "FGFR3 mutation" },
+                { letter: "B", text: "COL1A1 mutation" },
+                { letter: "C", text: "BRAF V600E" },
+                { letter: "D", text: "t(11;22) translocation" },
+              ],
+              correct: "D",
+              explanation:
+                '<strong>Answer: D — t(11;22) translocation</strong><br><br><strong>Diagnosis:</strong> Ewing Sarcoma (and PNET), a malignant small round blue cell tumor of bone affecting children and adolescents (typically ages 10–15).<br><br><strong>Radiology & Clinical:</strong> Arises in the diaphysis of long bones (femur, tibia) and flat bones of the pelvis; presents with localized pain, fever, and leukocytosis (mimicking osteomyelitis). X-ray reveals a characteristic layered, lamellated "onion-skin" periosteal reaction.<br><br><strong>Pathognomonic Genetics:</strong> t(11;22)(q24;q12) translocation in >90% of cases, resulting in the fusion of the EWSR1 gene (chromosome 22) with the FLI1 transcription factor gene (chromosome 11).<br><br><strong>Why not other options?</strong><br><br><em>FGFR3 mutation:</em> Associated with Achondroplasia.<br><em>COL1A1 mutation:</em> Associated with Osteogenesis Imperfecta (Brittle Bone Disease).<br><em>BRAF V600E:</em> Associated with Melanoma and Langerhans Cell Histiocytosis.',
+            },
+            {
+              q: "A 50-year-old woman has a heliotrope rash and proximal muscle weakness. Muscle biopsy shows perifascicular atrophy and C5b-9 deposition in capillaries. What is the diagnosis?",
+              options: [
+                { letter: "A", text: "Polymyositis" },
+                { letter: "B", text: "Inclusion body myositis" },
+                { letter: "C", text: "Dermatomyositis" },
+                { letter: "D", text: "ALS" },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — Dermatomyositis</strong><br><br><strong>Pathogenesis:</strong> Dermatomyositis is an antibody-mediated autoimmune microangiopathy targeting intramuscular microvasculature. Early complement activation leads to deposition of C5b-9 (membrane attack complex) in capillary walls, causing capillary loss, ischemia, and downstream myofiber degeneration.<br><br><strong>Histopathology:</strong> Characterized by perifascicular atrophy (atrophy of muscle fibers located at the periphery of the fascicles due to hypoperfusion) and a predominantly CD4+ T-cell perimysial/perivascular infiltrate.<br><br><strong>Clinical Hallmarks:</strong><br><em>Heliotrope rash:</em> Violaceous (purple-red) discoloration of the upper eyelids with periorbital edema.<br><em>Gottron papules:</em> Flat-topped red-to-violaceous papules over the knuckles (metacarpophalangeal and interphalangeal joints).<br><em>Symmetrical proximal muscle weakness</em> (difficulty climbing stairs, combing hair).<br><br><strong>Why not Polymyositis?</strong> Polymyositis is mediated by CD8+ cytotoxic T-cells directly invading non-necrotic myofibers within the endomysium without skin rashes or perifascicular atrophy.",
+            },
+            {
+              q: "The most common benign soft tissue tumor of adulthood?",
+              options: [
+                { letter: "A", text: "lipoma" },
+                { letter: "B", text: "fibroma" },
+                { letter: "C", text: "schwannoma" },
+                { letter: "D", text: "poroma" },
+              ],
+              correct: "A",
+              explanation:
+                "<strong>Answer: A — lipoma</strong><br><br>Lipoma is the single most common benign soft tissue tumor of adulthood.<br><br><strong>Features:</strong> A well-circumscribed, slow-growing, painless, mobile, soft/doughy mass located in the subcutaneous tissue of the trunk, neck, or extremities.<br><br><strong>Histopathology:</strong> Composed of mature, uniform adipocytes (fat cells) separated by thin fibrous septa, virtually indistinguishable from normal adipose tissue.",
+            },
+            {
+              q: "Which one is correct about Rheumatoid arthritis (RA)?",
+              options: [
+                {
+                  letter: "A",
+                  text: "RA is thought to be caused by an autoimmune reaction",
+                },
+                {
+                  letter: "B",
+                  text: "RA most commonly affects the hand, wrist, knee, and ankle joints, and the involvement tends to be asymmetrical.",
+                },
+                {
+                  letter: "C",
+                  text: "affects weight-bearing joints (knees, hips, and spine), often with asymmetrical involvement",
+                },
+                {
+                  letter: "D",
+                  text: "The changes may include subchondral bone cysts, loose bodies (joint mice), which are free floating fragments of cartilage and bone, and osteophytes (bone spurs)",
+                },
+              ],
+              correct: "A",
+              explanation:
+                '<strong>Answer: A — RA is thought to be caused by an autoimmune reaction</strong><br><br><strong>a is CORRECT:</strong> Rheumatoid Arthritis (RA) is a chronic, systemic autoimmune inflammatory disease primarily driven by CD4+ T-helper cells (Th1 and Th17), cytokines (TNF-α, IL-1, IL-6), and autoantibodies (Rheumatoid Factor [IgM against IgG Fc] and anti-CCP / ACPA), triggering proliferative synovitis and pannus formation.<br><br><strong>Why the other options are FALSE:</strong><br><br><em>b is FALSE:</em> RA characteristically presents as a symmetrical polyarthritis (not asymmetrical).<br><br><em>c is FALSE:</em> Asymmetrical involvement of large, weight-bearing joints (knees, hips, lumbar spine) is the classic hallmark of Osteoarthritis (OA), not RA.<br><br><em>d is FALSE:</em> Subchondral bone cysts, loose bodies ("joint mice"), eburnation, and osteophytes (bone spurs) are the classic features of Osteoarthritis (OA). (RA instead causes marginal erosions, pannus formation, and ankylosis).',
+            },
+            {
+              q: "Which one is correct about Osteogenesis imperfecta?",
+              options: [
+                { letter: "A", text: "abnormal synthesis of type IV collagen" },
+                { letter: "B", text: "joint hypomobility" },
+                {
+                  letter: "C",
+                  text: "The most common inherited disorder of connective tissue",
+                },
+                {
+                  letter: "D",
+                  text: "The fundamental abnormality in OI is too thick bone",
+                },
+              ],
+              correct: "C",
+              explanation:
+                '<strong>Answer: C — The most common inherited disorder of connective tissue</strong><br><br><strong>c is CORRECT:</strong> Osteogenesis Imperfecta (OI), also known as "brittle bone disease," is the most common inherited disorder of connective tissue (affecting ~1 in 10,000 to 20,000 individuals).<br><br><strong>Why the other options are FALSE:</strong><br><br><em>a is FALSE:</em> OI is caused by autosomal dominant mutations in COL1A1 or COL1A2, leading to defective synthesis of Type I Collagen (not Type IV; Type IV defects cause Alport syndrome).<br><br><em>b is FALSE:</em> Defective type I collagen in ligaments and skin causes joint hypermobility (laxity), not hypomobility.<br><br><em>d is FALSE:</em> The fundamental defect is "too little" bone (osteopenia / extreme cortical thinning and osteopenia), not "too thick" bone.',
+            },
+            {
+              q: "A 50-year-old on long-term steroids presents with hip pain worsened by weight-bearing. X-ray shows subchondral collapse. What is the underlying pathology?",
+              options: [
+                { letter: "A", text: "Osteonecrosis" },
+                { letter: "B", text: "Osteochondroma" },
+                { letter: "C", text: "Metastatic carcinoma" },
+                { letter: "D", text: "Paget disease" },
+              ],
+              correct: "A",
+              explanation:
+                '<strong>Answer: A — Osteonecrosis</strong><br><br><strong>a is CORRECT:</strong> Osteonecrosis (Avascular Necrosis / AVN) results from ischemia leading to bone marrow and trabecular cell death. The two most common non-traumatic causes are corticosteroid therapy and chronic alcohol abuse.<br><br><strong>Classic Presentation & Imaging:</strong> Pain in the hip aggravated by weight-bearing. Subchondral dead trabeculae fail under mechanical load, causing subchondral fracture and collapse of the femoral head (seen on X-ray as the pathognomonic "crescent sign").<br><br><strong>Why not other options?</strong><br><br><em>Osteochondroma:</em> Benign cartilage-capped bony outgrowth (exostosis) in adolescents, not linked to steroids.<br><br><em>Paget disease:</em> Shows cortical thickening, coarse trabeculae ("cotton-wool"), and mosaic bone pattern, not steroid-induced subchondral collapse.',
+            },
+            {
+              q: "A patient with Paget disease develops hearing loss and lion-like facies. What is the most feared complication?",
+              options: [
+                { letter: "A", text: "Pathologic fracture" },
+                { letter: "B", text: "Hypercalcemia" },
+                { letter: "C", text: "Osteosarcoma" },
+                { letter: "D", text: "Spinal cord compression" },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — Osteosarcoma</strong><br><br><strong>c is CORRECT:</strong> The most feared and catastrophic complication of Paget disease of bone (osteitis deformans) is malignant transformation into secondary Osteosarcoma (Pagetic Osteosarcoma) (or rarely fibrosarcoma/chondrosarcoma), which occurs in ~1% of patients with long-standing, polyostotic disease. Pagetic osteosarcoma is notoriously aggressive and carries a dismal prognosis.<br><br><strong>Why not other options?</strong><br><br><em>Pathologic fractures & Spinal cord compression:</em> These are well-recognized and common complications of Pagetic bone softening/expansion, but malignant degeneration into osteosarcoma is universally designated in pathology as the most feared outcome.<br><br><em>Hypercalcemia:</em> In Paget disease, serum calcium and phosphate are characteristically normal (while Alkaline Phosphatase is markedly elevated); hypercalcemia only occurs if the patient is acutely immobilized.",
+            },
+            {
+              q: "Which one of the following is the characteristic gross feature of osteosarcoma?",
+              options: [
+                {
+                  letter: "A",
+                  text: "often involves the metaphyses of long bones, usually around the knee (distal femur and proximal tibia).",
+                },
+                {
+                  letter: "B",
+                  text: "It produces a large, firm, white-tan mass with necrosis and hemorrhage.",
+                },
+                {
+                  letter: "C",
+                  text: "Microscopically, malignant cells producing osteoid and bone are the rule.",
+                },
+                {
+                  letter: "D",
+                  text: "primary osteosarcoma is more common in elderly patient",
+                },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — It produces a large, firm, white-tan mass with necrosis and hemorrhage.</strong><br><br><strong>Explanation:</strong><br><br>Pay close attention to the question: It specifically asks for a <strong>GROSS</strong> feature:<br><br><strong>b is a GROSS feature:</strong> On gross examination, Osteosarcoma characteristically presents as a large, bulky, gritty, gray-white to tan fleshy mass that expands and breaches the cortex, frequently displaying extensive areas of hemorrhage, cystic degeneration, and necrosis.<br><br><strong>Why the other options do not fit the stem:</strong><br><br><em>a:</em> Describes the classic anatomical location / site of involvement, not a gross morphological feature of the tumor itself.<br><br><em>c:</em> Describes a microscopic (histological) feature (malignant osteoblasts forming unmineralized osteoid matrix), not a gross feature.<br><br><em>d is a false statement:</em> Primary osteosarcoma has a bimodal distribution, but the primary peak is in children and adolescents (ages 10–20) (~75% of cases), whereas in the elderly, it is usually secondary (e.g., arising from Paget disease or prior irradiation).",
+            },
+            {
+              q: "A benign tumor arising from eccrine sweat glands is called:",
+              options: [
+                { letter: "A", text: "Cylindroma" },
+                { letter: "B", text: "Syringoma" },
+                { letter: "C", text: "Trichilemmoma" },
+                { letter: "D", text: "Sebaceous adenoma" },
+              ],
+              correct: "B",
+              explanation:
+                '<strong>Answer: B — Syringoma</strong><br><br><strong>b is CORRECT:</strong> A Syringoma is a benign adnexal neoplasm with eccrine sweat gland differentiation.<br><br><strong>Clinical Presentation:</strong> Classically appears as multiple, small (1–3 mm), skin-colored to yellowish papules typically located on the lower eyelids and periorbital area of young women.<br><br><strong>Histology:</strong> Distinctive small tubular ducts lined by two layers of epithelial cells with characteristic comma-like "tadpole" tails embedded in a dense fibrous stroma.<br><br><strong>Why not other options?</strong><br><br><em>Cylindroma:</em> Benign tumor with ductal/apocrine differentiation (classically on the scalp forming "turban tumors").<br><br><em>Trichilemmoma:</em> Benign tumor with hair follicle (outer root sheath) differentiation (associated with Cowden syndrome).<br><br><em>Sebaceous adenoma:</em> Benign tumor with sebaceous gland differentiation (associated with Muir-Torre syndrome).',
+            },
+            {
+              q: "A targetoid lesion with a pink border and pale center appears after penicillin use. This describes:",
+              options: [
+                { letter: "A", text: "Erythema multiforme" },
+                { letter: "B", text: "Urticaria" },
+                { letter: "C", text: "Pemphigus vulgaris" },
+                { letter: "D", text: "Dermatitis herpetiformis" },
+              ],
+              correct: "A",
+              explanation:
+                '<strong>Answer: A — Erythema multiforme</strong><br><br><strong>a is CORRECT:</strong> Erythema Multiforme (EM) is a self-limiting Type IV (cell-mediated) hypersensitivity reaction triggered by infections (most commonly Herpes Simplex Virus - HSV, Mycoplasma) or drugs (such as penicillin, sulfonamides, NSAIDs, antiepileptics).<br><br><strong>Clinical Hallmark:</strong> Pathognomonic "targetoid" or "iris" lesions consisting of three concentric zones:<br>A dark central blister, necrosis, or crust.<br>A pale, edematous middle ring.<br>An outer erythematous (pink/red) halo.<br><br><strong>Why not other options?</strong><br><br><em>Urticaria:</em> Causes transient, pruritic, edematous wheals that resolve within 24 hours without fixed targetoid morphology.<br><br><em>Pemphigus vulgaris & Dermatitis herpetiformis:</em> Blistering diseases with flaccid or grouped pruritic vesicles, not targetoid plaques.',
+            },
+            {
+              q: "A tense subepidermal blister in an elderly patient is most suggestive of:",
+              options: [
+                { letter: "A", text: "Pemphigus vulgaris" },
+                { letter: "B", text: "Bullous pemphigoid" },
+                { letter: "C", text: "Dermatitis herpetiformis" },
+                { letter: "D", text: "Epidermolysis bullosa" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Bullous pemphigoid</strong><br><br><strong>b is CORRECT:</strong> Bullous Pemphigoid (BP) is an autoimmune blistering disorder that typically affects elderly individuals (usually >60–70 years old).<br><br><strong>Pathophysiology:</strong> Caused by autoantibodies (IgG) directed against hemidesmosomes in the basement membrane (BP180 [type XVII collagen] and BP230).<br><br><strong>Key Distinction:</strong> Because hemidesmosomes anchor the basal keratinocytes to the basement membrane, antibody binding and complement activation cleanly detach the entire intact epidermis from the dermis, creating a thick-roofed, TENSE, subepidermal blister that does not easily rupture (Nikolsky sign is negative).<br><br><strong>Why not other options?</strong><br><br><em>Pemphigus vulgaris:</em> Autoantibodies target desmoglein 3/1 (desmosomes), causing intraepidermal acantholysis and fragile, flaccid blisters that easily rupture leaving painful erosions (Nikolsky positive).<br><br><em>Dermatitis herpetiformis:</em> Causes grouped microvesicles on extensor surfaces associated with Celiac disease (IgA at dermal papillae tips).",
+            },
+            {
+              q: "A patient with silvery-white scaly plaques on elbows has nail pitting. What is the most likely diagnosis?",
+              options: [
+                { letter: "A", text: "Psoriasis" },
+                { letter: "B", text: "Eczema" },
+                { letter: "C", text: "Lichen planus" },
+                { letter: "D", text: "Pityriasis rosea" },
+              ],
+              correct: "A",
+              explanation:
+                "<strong>Answer: A — Psoriasis</strong><br><br><strong>a is CORRECT:</strong> Psoriasis is a chronic inflammatory dermatosis driven by Th1/Th17 immune responses (IL-17, IL-23, TNF-α).<br><br><strong>Classic Clinical Triad:</strong><br>Well-demarcated salmon-pink plaques covered by loosely adherent, silvery-white (micaceous) scales.<br>Preferential distribution on extensor surfaces (elbows, knees, scalp, lumbosacral region).<br>Nail changes (~30–50%): Characteristic nail pitting (punctate depressions), oil-drop discoloration, subungual hyperkeratosis, and onycholysis.<br><br><strong>Classic Physical Signs:</strong><br><em>Auspitz sign:</em> Pinpoint bleeding when scales are scraped off (due to dilated, tortuous vessels in thinned dermal papillae).<br><em>Koebner phenomenon:</em> Lesions induced by local mechanical trauma.",
+            },
+            {
+              q: "A 3-year-old child with short-limbed dwarfism and macrocephaly is found to have a mutation in FGFR3. What is the key pathogenic mechanism?",
+              options: [
+                { letter: "A", text: "Impaired chondrocyte proliferation" },
+                { letter: "B", text: "Excessive osteoclast activity" },
+                { letter: "C", text: "Defective collagen cross-linking" },
+                { letter: "D", text: "Vitamin D resistance" },
+              ],
+              correct: "A",
+              explanation:
+                "<strong>Answer: A — Impaired chondrocyte proliferation</strong><br><br><strong>a is CORRECT:</strong> Achondroplasia (the most common cause of short-limbed dwarfism) is caused by a gain-of-function mutation in the FGFR3 gene (Fibroblast Growth Factor Receptor 3) on Chromosome 4p.<br><br><strong>Mechanism:</strong><br>FGFR3 normally acts as a negative regulator (inhibitor) of endochondral bone growth.<br>The constitutively active (overactive) FGFR3 receptor continuously signals to inhibit/impair chondrocyte proliferation and differentiation within the growth plate (physis).<br>Consequently, endochondral ossification is severely suppressed, stunting the longitudinal elongation of long bones (producing short limbs / rhizomelic dwarfism).<br><br>In contrast, membranous ossification (which forms flat bones of the skull) is completely unaffected, resulting in macrocephaly and frontal bossing with normal trunk length.",
+            },
+            {
+              q: "Which one is false about Osteoporosis?",
+              options: [
+                { letter: "A", text: "Is decreased bone mass (osteopenia)" },
+                { letter: "B", text: "histologically normal bone" },
+                {
+                  letter: "C",
+                  text: "primary causes include immobilization, endocrinopathies",
+                },
+                {
+                  letter: "D",
+                  text: "Patients may experience bone pain and fractures",
+                },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — primary causes include immobilization, endocrinopathies</strong><br><br><strong>c is FALSE (the correct choice to pick):</strong><br>Immobilization, endocrinopathies (e.g., Cushing syndrome, hyperparathyroidism, hyperthyroidism), and medications (e.g., corticosteroids) are classic SECONDARY causes of osteoporosis.<br><br>Primary osteoporosis refers to postmenopausal osteoporosis (Type I / estrogen deficiency) and senile/age-related osteoporosis (Type II).<br><br><strong>Why the other statements are TRUE:</strong><br><br><em>a is TRUE:</em> Osteoporosis is fundamentally characterized by reduced bone mineral density/mass (osteopenia) sufficient to increase fracture risk.<br><br><em>b is TRUE:</em> In osteoporosis, the bone that is present is mineralized normally and histologically normal (normal calcium-to-protein ratio); there is simply a quantitative deficiency of bone tissue. (In contrast, osteomalacia/rickets features histologically abnormal, unmineralized osteoid).<br><br><em>d is TRUE:</em> Fragility fractures (especially vertebral compression fractures, femoral neck, and distal radius) and bone pain are the clinical hallmarks.",
+            },
+            {
+              q: "A 30-year-old pregnant woman develops facial hyperpigmentation. Which condition is most likely?",
+              options: [
+                { letter: "A", text: "Albinism" },
+                { letter: "B", text: "Melasma" },
+                { letter: "C", text: "Lentigo" },
+                { letter: "D", text: "Vitiligo" },
+              ],
+              correct: "B",
+              explanation:
+                '<strong>Answer: B — Melasma</strong><br><br><strong>b is CORRECT:</strong> Melasma (also known as chloasma or the "mask of pregnancy") is an acquired, symmetric, blotchy hyperpigmentation of the sun-exposed face (cheeks, forehead, upper lip) commonly triggered by pregnancy and oral contraceptive pills due to estrogen and progesterone stimulating melanogenesis.<br><br><strong>Why not other options?</strong><br><br><em>Albinism:</em> An inherited, diffuse loss of melanin pigment (hypopigmentation) due to tyrosinase deficiency.<br><br><em>Lentigo:</em> Small, discrete, non-confluent tan-to-brown macules caused by linear proliferation of melanocytes, not typically tied to pregnancy.<br><br><em>Vitiligo:</em> Autoimmune destruction of melanocytes causing sharply demarcated, depigmented (chalk-white) patches.',
+            },
+            {
+              q: "A newborn presents with multiple fractures after minimal handling and has blue sclerae. Genetic testing reveals a mutation in COL1A1. What is the most likely diagnosis?",
+              options: [
+                { letter: "A", text: "Achondroplasia" },
+                { letter: "B", text: "Paget disease" },
+                { letter: "C", text: "Rickets" },
+                { letter: "D", text: "Osteogenesis imperfecta (Type I)" },
+              ],
+              correct: "D",
+              explanation:
+                '<strong>Answer: D — Osteogenesis imperfecta (Type I)</strong><br><br><strong>d is CORRECT:</strong> Osteogenesis Imperfecta (Type I) is the classic mild, non-lethal form of "brittle bone disease" inherited in an autosomal dominant fashion:<br><br><strong>Genetics:</strong> Mutations in the COL1A1 or COL1A2 genes disrupt the synthesis of Type I Collagen.<br><br><strong>Classic Triad / Features:</strong><br>Multiple bone fractures with minimal trauma.<br>Blue sclerae (thinning of scleral collagen exposes the underlying pigmented choroid veins).<br>Conductive hearing loss (otosclerosis/ossicular deformities) in early adulthood.<br><br><strong>Why not other options?</strong><br><br><em>Achondroplasia:</em> FGFR3 mutation; presents with rhizomelic short stature, not multiple fractures or blue sclerae.<br><br><em>Paget disease:</em> Disease of older adults with abnormal bone remodeling; does not affect newborns.<br><br><em>Rickets:</em> Defective mineralization due to vitamin D or phosphate deficiency, without COL1A1 mutation.',
+            },
+            {
+              q: "A patient with Pott disease has kyphosis and vertebral collapse. What is the causative organism?",
+              options: [
+                { letter: "A", text: "Treponema pallidum" },
+                { letter: "B", text: "Mycobacterium tuberculosis" },
+                { letter: "C", text: "Staphylococcus aureus" },
+                { letter: "D", text: "Borrelia burgdorferi" },
+              ],
+              correct: "B",
+              explanation:
+                '<strong>Answer: B — Mycobacterium tuberculosis</strong><br><br><strong>b is CORRECT:</strong> Pott disease is tuberculous spondylitis—extrapulmonary tuberculosis of the spine caused by Mycobacterium tuberculosis.<br><br><strong>Pathology:</strong> Hematogenous spread of M. tuberculosis to the anterior vertebral bodies (typically lower thoracic and lumbar spine), destroying intervertebral discs and vertebral bone. This causes vertebral collapse leading to progressive anterior wedging and severe angular kyphosis (gibbus deformity), and can track into surrounding tissue as a psoas "cold" abscess.<br><br><strong>Why not other options?</strong><br><br><em>Treponema pallidum:</em> Causes syphilis (associated with Charcot neuropathic joints and gummas, not classic Pott disease).<br><br><em>Staphylococcus aureus:</em> The most common cause of pyogenic osteomyelitis and discitis (presents with acute, high fever and rapid bone destruction), not Pott disease.<br><br><em>Borrelia burgdorferi:</em> Causes Lyme disease (manifesting as migratory oligoarthritis, typically of the knee).',
+            },
+            {
+              q: "A newborn with respiratory distress and hypotonia improves with pyridostigmine. Genetic testing reveals a mutation in the ε-subunit of AChR. This is most consistent with:",
+              options: [
+                { letter: "A", text: "Myasthenia gravis" },
+                { letter: "B", text: "Congenital myasthenic syndrome" },
+                { letter: "C", text: "Botulism" },
+                { letter: "D", text: "Lambert-Eaton syndrome" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — Congenital myasthenic syndrome</strong><br><br><strong>b is CORRECT:</strong> Congenital Myasthenic Syndromes (CMS) are a heterogeneous group of rare inherited genetic disorders of the neuromuscular junction (NMJ), characterized by neonatal-onset or infantile hypotonia, muscle weakness, ptosis, and respiratory distress:<br><br><strong>Genetics:</strong> The most common forms involve loss-of-function mutations in the genes encoding acetylcholine receptor subunits—specifically the ε-subunit (CHRNE gene) of the postsynaptic nicotinic AChR.<br><br><strong>Treatment:</strong> Acetylcholinesterase inhibitors like pyridostigmine increase the concentration of acetylcholine at the synaptic cleft, improving neuromuscular transmission and muscle tone.<br><br><strong>Why not other options?</strong><br><br><em>Myasthenia Gravis (MG):</em> An acquired autoimmune disorder caused by autoantibodies directed against AChR (not a genetic mutation in the ε-subunit). Neonatal transient MG can occur from transplacental transfer of maternal IgG autoantibodies, but genetic testing is normal.<br><br><em>Botulism:</em> Caused by an environmental bacterial toxin (Clostridium botulinum) that cleaves SNARE proteins to prevent presynaptic acetylcholine release; it is not a genetic disorder.<br><br><em>Lambert-Eaton syndrome:</em> An autoimmune (often paraneoplastic, e.g., small cell lung cancer) disorder with autoantibodies against presynaptic voltage-gated calcium channels.",
+            },
+            {
+              q: "Which one is incorrect about Pyogenic osteomyelitis?",
+              options: [
+                {
+                  letter: "A",
+                  text: "The most common infecting organism is S. aureus",
+                },
+                {
+                  letter: "B",
+                  text: "The most common route of infection is direct inoculation from adjacent infection",
+                },
+                {
+                  letter: "C",
+                  text: "characterized by fever and leukocytosis; and localized pain, erythema, and swelling.",
+                },
+                {
+                  letter: "D",
+                  text: "X-ray studies may be normal for up to 2 weeks",
+                },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — The most common route of infection is direct inoculation from adjacent infection</strong><br><br><strong>b is INCORRECT (the correct choice to pick):</strong> According to Robbins, the most common overall route of pyogenic osteomyelitis is hematogenous seeding/spread (bacteria traveling through the bloodstream to seed the bone). Direct inoculation (from open fractures, surgery) or contiguous spread (from diabetic foot ulcers) are also common, but hematogenous spread remains the classic primary route, especially in pediatric patients.<br><br><strong>Why the other options are correct statements:</strong><br><br><em>a is TRUE:</em> Staphylococcus aureus is responsible for 80–90% of all culture-positive cases of pyogenic osteomyelitis.<br><br><em>c is TRUE:</em> Typical systemic symptoms include high fever, chills, and leukocytosis, along with localized signs of acute inflammation (pain, warmth, erythema, swelling).<br><br><em>d is TRUE:</em> Standard radiographs are notoriously insensitive in early osteomyelitis; lytic lesions may not be visible on X-ray for up to 10 to 14 days (or until 30–50% of bone mineral density has been destroyed).",
+            },
+            {
+              q: "A 20-year-old with milder limb-girdle weakness has partial dystrophin staining on immunohistochemistry. This is most consistent with:",
+              options: [
+                { letter: "A", text: "Duchenne muscular dystrophy" },
+                { letter: "B", text: "Emery-Dreifuss dystrophy" },
+                { letter: "C", text: "Myotonic dystrophy" },
+                { letter: "D", text: "Becker muscular dystrophy" },
+              ],
+              correct: "D",
+              explanation:
+                "<strong>Answer: D — Becker muscular dystrophy</strong><br><br><strong>d is CORRECT:</strong> Becker Muscular Dystrophy (BMD) is a milder, more slowly progressive X-linked muscular dystrophy:<br><br><strong>Pathogenesis:</strong> Caused by non-frameshift mutations in the dystrophin gene (usually in-frame deletions) that lead to the synthesis of a truncated but partially functional dystrophin protein.<br><br><strong>Histology/IHC:</strong> Immunohistochemistry shows patchy, partial, or reduced dystrophin staining at the sarcolemma (unlike DMD, which shows a complete absence of dystrophin staining).<br><br><strong>Clinical:</strong> Onset occurs in late childhood or adolescence (e.g., age 20), patients remain ambulatory into adulthood, and have a near-normal life expectancy.<br><br><strong>Why not Duchenne Muscular Dystrophy (DMD)?</strong> DMD is caused by frameshift mutations leading to a complete absence of dystrophin, resulting in a much more severe clinical course with wheelchair dependence by age 12 and death in early adulthood.",
+            },
+            {
+              q: "A patient with NF1 develops a plexiform neurofibroma. What is the risk of malignant transformation?",
+              options: [
+                { letter: "A", text: "<1%" },
+                { letter: "B", text: "5–10%" },
+                { letter: "C", text: "25%" },
+                { letter: "D", text: "50%" },
+              ],
+              correct: "B",
+              explanation:
+                "<strong>Answer: B — 5–10%</strong><br><br><strong>b is CORRECT:</strong> A plexiform neurofibroma is a pathognomonic benign tumor of Neurofibromatosis Type 1 (NF1). Unlike superficial cutaneous neurofibromas, plexiform neurofibromas carry a significant 5% to 10% lifetime risk of malignant transformation into a highly aggressive Malignant Peripheral Nerve Sheath Tumor (MPNST).",
+            },
+            {
+              q: "A 60-year-old fair-skinned man has a variegated, irregularly bordered pigmented lesion on his back. Biopsy reveals malignant melanocytes invading the dermis. Which growth phase is this?",
+              options: [
+                { letter: "A", text: "Radial growth phase" },
+                { letter: "B", text: "Lentiginous phase" },
+                { letter: "C", text: "Junctional phase" },
+                { letter: "D", text: "Vertical growth phase" },
+              ],
+              correct: "D",
+              explanation:
+                "<strong>Answer: D — Vertical growth phase</strong><br><br><strong>d is CORRECT:</strong> Melanoma progresses through two clinical-pathological phases:<br><br><strong>Radial Growth Phase:</strong> Early phase where malignant melanocytes spread horizontally (laterally) within the epidermis and superficial papillary dermis. These tumors do not have the capacity to metastasize.<br><br><strong>Vertical Growth Phase (Invasive):</strong> Characterized by downward invasion of malignant melanocytes into the deeper dermal layers. The onset of the vertical growth phase is clinically marked by the emergence of a raised nodule and directly correlates with metastatic potential (measured by Breslow depth).<br><br><strong>Why not other options?</strong> Junctional and lentiginous refer to early intraepidermal patterns of melanocyte placement along the basement membrane before dermal invasion.",
+            },
+            {
+              q: "Which of the following is not true about Ewing sarcoma?",
+              options: [
+                {
+                  letter: "A",
+                  text: "most cases in teenage years (ages 5–20)",
+                },
+                {
+                  letter: "B",
+                  text: "Clinically, patients present with pain, swelling, and tenderness",
+                },
+                {
+                  letter: "C",
+                  text: "Grossly, often affects the metaphysis of long bones, with the most common sites being the femur, pelvis, and tibia.",
+                },
+                {
+                  letter: "D",
+                  text: "Microscopically, Ewing sarcoma is characterized by sheets of undifferentiated small, round, blue cells resembling lymphocytes, which may form Homer Wright pseudorosettes",
+                },
+              ],
+              correct: "C",
+              explanation:
+                "<strong>Answer: C — Grossly, often affects the metaphysis of long bones, with the most common sites being the femur, pelvis, and tibia.</strong><br><br><strong>c is INCORRECT (the correct choice to pick):</strong> Ewing Sarcoma characteristically arises in the diaphysis (the mid-shaft) of long bones, or in flat bones of the pelvis. In contrast, Osteosarcoma is the bone tumor that classically arises in the metaphysis (typically around the knee).<br><br><strong>Why the other options are correct statements:</strong><br><br><em>a & b are TRUE:</em> Ewing sarcoma is a disease of children and teenagers (most cases between ages 5 and 20) presenting with localized pain, swelling, and systemic inflammatory signs.<br><br><em>d is TRUE:</em> It is classified as a primitive neuroectodermal tumor (PNET) characterized by sheets of uniform small round blue cells that can cluster around central fibrillary spaces to form Homer Wright pseudorosettes.",
+            },
+            {
+              q: "A 70-year-old man has quadriceps weakness and dysphagia. Biopsy shows rimmed vacuoles. What is the most likely condition?",
+              options: [
+                { letter: "A", text: "Inclusion body myositis" },
+                { letter: "B", text: "Duchenne muscular dystrophy" },
+                { letter: "C", text: "Mitochondrial myopathy" },
+                { letter: "D", text: "Sarcoidosis" },
+              ],
+              correct: "A",
+              explanation:
+                '<strong>Answer: A — Inclusion body myositis</strong><br><br><strong>a is CORRECT:</strong> Inclusion Body Myositis (IBM) is the most common inflammatory myopathy in older adults (>50 years of age).<br><br><strong>Clinical Presentation:</strong> Asymmetric, progressive proximal and distal muscle weakness, classically involving quadriceps weakness (difficulty rising from a chair) and forearm flexors, frequently accompanied by dysphagia (swallowing difficulties).<br><br><strong>Pathognomonic Histology:</strong> Muscle biopsy reveals "rimmed vacuoles" (clear, intracellular vacuoles outlined by blue-purple granules on H&E) containing accumulations of abnormal proteins (including amyloid-beta, hyperphosphorylated tau, and ubiquitin), reflecting a combined degenerative and inflammatory pathology.',
             },
           ],
         },
+
         {
           id: "msk-patho-2018",
           subject: "MSK Pathology",
@@ -2382,20 +2946,20 @@
       /* ---------- TOPBAR ---------- */
       function topbar() {
         return `
-                <div class="topbar">
-                  <div class="logo-badge">🦴</div>
-                  <div>
-                    <div class="logo-text">MSK</div>
-                    <div class="logo-sub">Past Year Exams</div>
-                  </div>
-                  <div class="topbar-spacer"></div>
-                  <a class="icon-btn" href="${TELEGRAM_URL}" target="_blank" rel="noopener" title="Telegram">✈️</a>
-                  <button class="icon-btn" id="navNotes" title="Notes">📝</button>
-                  <button class="icon-btn" id="navPpts" title="PowerPoints">📊</button>
-                  <button class="icon-btn" id="navBookmarks" title="Bookmarks">⭐</button>
-                  <div class="avatar">MSK</div>
-                </div>
-              `;
+                      <div class="topbar">
+                        <div class="logo-badge">🦴</div>
+                        <div>
+                          <div class="logo-text">MSK</div>
+                          <div class="logo-sub">Past Year Exams</div>
+                        </div>
+                        <div class="topbar-spacer"></div>
+                        <a class="icon-btn" href="${TELEGRAM_URL}" target="_blank" rel="noopener" title="Telegram">✈️</a>
+                        <button class="icon-btn" id="navNotes" title="Notes">📝</button>
+                        <button class="icon-btn" id="navPpts" title="PowerPoints">📊</button>
+                        <button class="icon-btn" id="navBookmarks" title="Bookmarks">⭐</button>
+                        <div class="avatar">MSK</div>
+                      </div>
+                    `;
       }
       function bindTopbar() {
         const n = document.getElementById("navNotes");
@@ -2448,54 +3012,54 @@
 
         const app = document.getElementById("app");
         app.innerHTML = `
-                    ${topbar()}
-                <div class="wrap">
-                  <div class="search-wrap">
-                    <input id="searchInput" type="text" placeholder="Search courses, years, topics…" value="${escapeHtml(state.search)}" />
-                  </div>
-
-                  ${
-                    PPTS_DATA.length
-                      ? `
-                    <div class="section-title">PowerPoints</div>
-                    <div class="list">
-                      <button class="course-card" id="quickPpts"
-                        style="--course-color:#f5b800;--course-color-2:#ff6d00;--course-bg:rgba(245,184,0,0.12);--course-border:rgba(245,184,0,0.3);">
-                        <div class="course-thumb">📊</div>
-                        <div class="course-info">
-                          <div class="course-name">Open PowerPoints</div>
-                          <div class="course-meta"><span>${PPTS_DATA.length} subjects</span></div>
+                          ${topbar()}
+                      <div class="wrap">
+                        <div class="search-wrap">
+                          <input id="searchInput" type="text" placeholder="Search courses, years, topics…" value="${escapeHtml(state.search)}" />
                         </div>
-                        <div class="course-arrow">›</div>
-                      </button>
-                    </div>
-                  `
-                      : ""
-                  }
 
-                  ${
-                    NOTES_DATA.length
-                      ? `
-                    <div class="section-title">Notes</div>
-                    <div class="list">
-                      <button class="course-card" id="quickNotes"
-                        style="--course-color:#7c4dff;--course-color-2:#4d9fff;--course-bg:rgba(124,77,255,0.12);--course-border:rgba(124,77,255,0.3);">
-                        <div class="course-thumb">📝</div>
-                        <div class="course-info">
-                          <div class="course-name">Open Notes</div>
-                          <div class="course-meta"><span>${NOTES_DATA.length} notes</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      </button>
-                    </div>
-                  `
-                      : ""
-                  }
+                        ${
+                          PPTS_DATA.length
+                            ? `
+                          <div class="section-title">PowerPoints</div>
+                          <div class="list">
+                            <button class="course-card" id="quickPpts"
+                              style="--course-color:#f5b800;--course-color-2:#ff6d00;--course-bg:rgba(245,184,0,0.12);--course-border:rgba(245,184,0,0.3);">
+                              <div class="course-thumb">📊</div>
+                              <div class="course-info">
+                                <div class="course-name">Open PowerPoints</div>
+                                <div class="course-meta"><span>${PPTS_DATA.length} subjects</span></div>
+                              </div>
+                              <div class="course-arrow">›</div>
+                            </button>
+                          </div>
+                        `
+                            : ""
+                        }
 
-                  <div class="section-title">MSK Courses</div>
-                  <div class="list" id="courseList"></div>
-                </div>
-              `;
+                        ${
+                          NOTES_DATA.length
+                            ? `
+                          <div class="section-title">Notes</div>
+                          <div class="list">
+                            <button class="course-card" id="quickNotes"
+                              style="--course-color:#7c4dff;--course-color-2:#4d9fff;--course-bg:rgba(124,77,255,0.12);--course-border:rgba(124,77,255,0.3);">
+                              <div class="course-thumb">📝</div>
+                              <div class="course-info">
+                                <div class="course-name">Open Notes</div>
+                                <div class="course-meta"><span>${NOTES_DATA.length} notes</span></div>
+                              </div>
+                              <div class="course-arrow">›</div>
+                            </button>
+                          </div>
+                        `
+                            : ""
+                        }
+
+                        <div class="section-title">MSK Courses</div>
+                        <div class="list" id="courseList"></div>
+                      </div>
+                    `;
 
         bindTopbar();
 
@@ -2526,11 +3090,11 @@
         const list = document.getElementById("courseList");
         if (!filtered.length) {
           list.innerHTML = `
-                  <div class="empty-state">
-                    <div class="emoji">📚</div>
-                    <div class="title">No quiz exams yet</div>
-                    <div class="sub">Add entries to QUIZ_DATA to see them here.<br>PowerPoints and Notes are available in the top bar.</div>
-                  </div>`;
+                        <div class="empty-state">
+                          <div class="emoji">📚</div>
+                          <div class="title">No quiz exams yet</div>
+                          <div class="sub">Add entries to QUIZ_DATA to see them here.<br>PowerPoints and Notes are available in the top bar.</div>
+                        </div>`;
         } else {
           filtered.forEach((c) => {
             const st = styleFor(c);
@@ -2542,18 +3106,18 @@
             btn.style.setProperty("--course-bg", st.bg);
             btn.style.setProperty("--course-border", st.border);
             btn.innerHTML = `
-                    <div class="course-thumb">${st.icon}</div>
-                    <div class="course-info">
-                      <div class="course-name">${escapeHtml(c)}</div>
-                      <div class="course-meta">
-                        <span>${pr.examsCount} exam${pr.examsCount === 1 ? "" : "s"}</span>
-                        <span>·</span>
-                        <span>${pr.total} questions</span>
-                      </div>
-                      <div class="progress-bar"><div class="progress-fill" style="width:${pr.total ? Math.round((pr.answered / pr.total) * 100) : 0}%"></div></div>
-                    </div>
-                    <div class="course-arrow">›</div>
-                  `;
+                          <div class="course-thumb">${st.icon}</div>
+                          <div class="course-info">
+                            <div class="course-name">${escapeHtml(c)}</div>
+                            <div class="course-meta">
+                              <span>${pr.examsCount} exam${pr.examsCount === 1 ? "" : "s"}</span>
+                              <span>·</span>
+                              <span>${pr.total} questions</span>
+                            </div>
+                            <div class="progress-bar"><div class="progress-fill" style="width:${pr.total ? Math.round((pr.answered / pr.total) * 100) : 0}%"></div></div>
+                          </div>
+                          <div class="course-arrow">›</div>
+                        `;
             btn.onclick = () => {
               state.course = c;
               state.view = "years";
@@ -2571,13 +3135,13 @@
           bm.style.setProperty("--course-bg", "rgba(245,184,0,0.12)");
           bm.style.setProperty("--course-border", "rgba(245,184,0,0.3)");
           bm.innerHTML = `
-                  <div class="course-thumb">⭐</div>
-                  <div class="course-info">
-                    <div class="course-name">Bookmarked Questions</div>
-                    <div class="course-meta"><span>${bookmarkCount} saved</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">⭐</div>
+                        <div class="course-info">
+                          <div class="course-name">Bookmarked Questions</div>
+                          <div class="course-meta"><span>${bookmarkCount} saved</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           bm.onclick = () => {
             state.view = "bookmarks";
             render();
@@ -2596,19 +3160,19 @@
 
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <button class="icon-btn" id="backBtn" title="Back">←</button>
-                    <div>
-                      <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">${escapeHtml(subject)}</div>
-                      <div style="font-size:11px;color:var(--text-dim);">${exams.length} ${exams.length === 1 ? "exam" : "exams"} available</div>
-                    </div>
-                  </div>
-                  <div class="section-title">${escapeHtml(subject)} — Exams</div>
-                  <div class="list" id="yearList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                          <button class="icon-btn" id="backBtn" title="Back">←</button>
+                          <div>
+                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">${escapeHtml(subject)}</div>
+                            <div style="font-size:11px;color:var(--text-dim);">${exams.length} ${exams.length === 1 ? "exam" : "exams"} available</div>
+                          </div>
+                        </div>
+                        <div class="section-title">${escapeHtml(subject)} — Exams</div>
+                        <div class="list" id="yearList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("backBtn").onclick = () => {
           state.view = "courses";
@@ -2618,11 +3182,11 @@
         const list = document.getElementById("yearList");
         if (!exams.length) {
           list.innerHTML = `
-                  <div class="empty-state">
-                    <div class="emoji">📭</div>
-                    <div class="title">No exams yet</div>
-                    <div class="sub">Add exams to QUIZ_DATA to see them here.</div>
-                  </div>`;
+                        <div class="empty-state">
+                          <div class="emoji">📭</div>
+                          <div class="title">No exams yet</div>
+                          <div class="sub">Add exams to QUIZ_DATA to see them here.</div>
+                        </div>`;
           return;
         }
 
@@ -2643,17 +3207,17 @@
           btn.style.setProperty("--course-bg", st.bg);
           btn.style.setProperty("--course-border", st.border);
           btn.innerHTML = `
-                  <div class="course-thumb">${escapeHtml(exam.icon || st.icon)}</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(exam.title)}</div>
-                    <div class="course-meta">
-                      <span class="badge-year">${exam.year}</span>
-                      <span>${pr.total} questions</span>
-                    </div>
-                    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-                  </div>
-                  <div class="year-status ${status.cls}">${status.label}</div>
-                `;
+                        <div class="course-thumb">${escapeHtml(exam.icon || st.icon)}</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(exam.title)}</div>
+                          <div class="course-meta">
+                            <span class="badge-year">${exam.year}</span>
+                            <span>${pr.total} questions</span>
+                          </div>
+                          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+                        </div>
+                        <div class="year-status ${status.cls}">${status.label}</div>
+                      `;
           btn.onclick = () => openExam(exam);
           list.appendChild(btn);
         });
@@ -2703,83 +3267,83 @@
 
         const app = document.getElementById("app");
         app.innerHTML = `
-                <div class="quiz-header">
-                  <button class="icon-btn" id="quizBack">←</button>
-                  <div style="flex:1;min-width:0;overflow:hidden">
-                    <div style="font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(exam.title)}</div>
-                    <div style="font-size:11px;color:var(--text-dim)">Question ${state.qIndex + 1} of ${exam.questions.length}</div>
-                  </div>
-                  <button class="icon-btn" id="quizBookmark" title="Bookmark">${isBookmarked ? "⭐" : "☆"}</button>
-                  <button class="icon-btn" id="quizClose" title="Exit">✕</button>
-                </div>
-                <div class="quiz-progress"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-
-                <div class="quiz-body">
-                  <div class="crumbs">
-                    <span class="crumb">${escapeHtml(exam.subject)}</span>
-                    <span>›</span>
-                    <span class="crumb">${exam.year}</span>
-                    <span>›</span>
-                    <span class="crumb active">MSK PAST YEAR QUIZ</span>
-                  </div>
-
-                  <div class="quiz-title">${escapeHtml(exam.title)}</div>
-                  <div class="quiz-sub">${escapeHtml(exam.section || "")}</div>
-
-                  <div class="q-meta">
-                    <span class="q-num">Q${state.qIndex + 1}</span>
-                    ${exam.topic ? `<span class="topic-badge">${escapeHtml(exam.topic)}</span>` : ""}
-                    ${state.streak > 1 ? `<span class="streak-badge">🔥 ${state.streak}</span>` : ""}
-                  </div>
-
-                  <div class="q-text">${escapeHtml(q.q)}</div>
-                  <div class="options" id="options"></div>
-
-                  ${
-                    answered
-                      ? `
-                    <div class="result-row ${isCorrect ? "correct" : "wrong"}">
-                      ${isCorrect ? "✅ Correct!" : "❌ Incorrect — correct answer is " + escapeHtml(q.correct)}
-                    </div>
-                             <button id="toggleExp" style="
-                      display:inline-flex;align-items:center;gap:6px;
-                      padding:10px 18px;margin-top:12px;
-                      border-radius:999px;
-                      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-                      color:#fff;font-size:13px;font-weight:700;
-                      border:none;cursor:pointer;
-                      box-shadow:0 4px 14px rgba(0,191,165,0.35);
-                      transition:transform .15s,box-shadow .15s;
-                    ">
-                      ${state.showExplanation ? "Hide Explanation" : "Show Explanation"}
-                    </button>
-                    ${
-                      state.showExplanation
-                        ? `
-                      <div class="explanation">
-                        <div class="explanation-label">Explanation</div>
-                        <div class="explanation-text">${q.explanation || ""}</div>
+                      <div class="quiz-header">
+                        <button class="icon-btn" id="quizBack">←</button>
+                        <div style="flex:1;min-width:0;overflow:hidden">
+                          <div style="font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(exam.title)}</div>
+                          <div style="font-size:11px;color:var(--text-dim)">Question ${state.qIndex + 1} of ${exam.questions.length}</div>
+                        </div>
+                        <button class="icon-btn" id="quizBookmark" title="Bookmark">${isBookmarked ? "⭐" : "☆"}</button>
+                        <button class="icon-btn" id="quizClose" title="Exit">✕</button>
                       </div>
-                    `
-                        : ""
-                    }
-                  `
-                      : ""
-                  }
+                      <div class="quiz-progress"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
 
-                  <div class="section-title">All questions</div>
-                  <div class="q-nav" id="qNav"></div>
-                </div>
+                      <div class="quiz-body">
+                        <div class="crumbs">
+                          <span class="crumb">${escapeHtml(exam.subject)}</span>
+                          <span>›</span>
+                          <span class="crumb">${exam.year}</span>
+                          <span>›</span>
+                          <span class="crumb active">MSK PAST YEAR QUIZ</span>
+                        </div>
 
-                <div class="nav-actions">
-                  <button class="nav-btn" id="btnPrev" ${state.qIndex === 0 ? "disabled" : ""}>← Prev</button>
-                  ${
-                    state.qIndex === exam.questions.length - 1
-                      ? `<button class="nav-btn primary" id="btnFinish">Finish</button>`
-                      : `<button class="nav-btn primary" id="btnNext">Next →</button>`
-                  }
-                </div>
-              `;
+                        <div class="quiz-title">${escapeHtml(exam.title)}</div>
+                        <div class="quiz-sub">${escapeHtml(exam.section || "")}</div>
+
+                        <div class="q-meta">
+                          <span class="q-num">Q${state.qIndex + 1}</span>
+                          ${exam.topic ? `<span class="topic-badge">${escapeHtml(exam.topic)}</span>` : ""}
+                          ${state.streak > 1 ? `<span class="streak-badge">🔥 ${state.streak}</span>` : ""}
+                        </div>
+
+                        <div class="q-text">${escapeHtml(q.q)}</div>
+                        <div class="options" id="options"></div>
+
+                        ${
+                          answered
+                            ? `
+                          <div class="result-row ${isCorrect ? "correct" : "wrong"}">
+                            ${isCorrect ? "✅ Correct!" : "❌ Incorrect — correct answer is " + escapeHtml(q.correct)}
+                          </div>
+                                   <button id="toggleExp" style="
+                            display:inline-flex;align-items:center;gap:6px;
+                            padding:10px 18px;margin-top:12px;
+                            border-radius:999px;
+                            background:linear-gradient(135deg,var(--accent),var(--accent-2));
+                            color:#fff;font-size:13px;font-weight:700;
+                            border:none;cursor:pointer;
+                            box-shadow:0 4px 14px rgba(0,191,165,0.35);
+                            transition:transform .15s,box-shadow .15s;
+                          ">
+                            ${state.showExplanation ? "Hide Explanation" : "Show Explanation"}
+                          </button>
+                          ${
+                            state.showExplanation
+                              ? `
+                            <div class="explanation">
+                              <div class="explanation-label">Explanation</div>
+                              <div class="explanation-text">${q.explanation || ""}</div>
+                            </div>
+                          `
+                              : ""
+                          }
+                        `
+                            : ""
+                        }
+
+                        <div class="section-title">All questions</div>
+                        <div class="q-nav" id="qNav"></div>
+                      </div>
+
+                      <div class="nav-actions">
+                        <button class="nav-btn" id="btnPrev" ${state.qIndex === 0 ? "disabled" : ""}>← Prev</button>
+                        ${
+                          state.qIndex === exam.questions.length - 1
+                            ? `<button class="nav-btn primary" id="btnFinish">Finish</button>`
+                            : `<button class="nav-btn primary" id="btnNext">Next →</button>`
+                        }
+                      </div>
+                    `;
 
         bindTopbar();
         document.getElementById("quizBack").onclick = () => {
@@ -2812,9 +3376,9 @@
             else if (opt.letter === p.chosen) el.classList.add("wrong");
           }
           el.innerHTML = `
-                  <div class="letter">${escapeHtml(opt.letter)}</div>
-                  <div class="option-text">${escapeHtml(opt.text)}</div>
-                `;
+                        <div class="letter">${escapeHtml(opt.letter)}</div>
+                        <div class="option-text">${escapeHtml(opt.text)}</div>
+                      `;
           if (!answered) el.onclick = () => pickAnswer(opt.letter);
           optsEl.appendChild(el);
         });
@@ -2906,23 +3470,23 @@
 
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="finish-wrap">
-                  <div class="finish-card">
-                    <div class="finish-emoji">${emoji}</div>
-                    <div class="finish-score">${pct}%</div>
-                    <div class="finish-sub">
-                      ${pr.correct} of ${pr.total} correct
-                      ${elapsed ? ` · ${mm}m ${ss}s` : ""}
-                    </div>
-                    <div class="finish-btns">
-                      <button class="nav-btn primary" id="fReview">Review Answers</button>
-                      <button class="nav-btn" id="fBack">Back to Years</button>
-                      <button class="nav-btn" id="fRetry">Retry Exam</button>
-                    </div>
-                  </div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="finish-wrap">
+                        <div class="finish-card">
+                          <div class="finish-emoji">${emoji}</div>
+                          <div class="finish-score">${pct}%</div>
+                          <div class="finish-sub">
+                            ${pr.correct} of ${pr.total} correct
+                            ${elapsed ? ` · ${mm}m ${ss}s` : ""}
+                          </div>
+                          <div class="finish-btns">
+                            <button class="nav-btn primary" id="fReview">Review Answers</button>
+                            <button class="nav-btn" id="fBack">Back to Years</button>
+                            <button class="nav-btn" id="fRetry">Retry Exam</button>
+                          </div>
+                        </div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("fReview").onclick = () => {
           state.qIndex = 0;
@@ -2950,17 +3514,17 @@
         const subjects = [...new Set(NOTES_DATA.map((n) => n.subject))];
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                  <div class="crumbs">
-                    <span class="crumb link" id="crumbHome">Home</span>
-                    <span>›</span>
-                    <span class="crumb active">Notes</span>
-                  </div>
-                  <div class="section-title">Notes Library</div>
-                  <div class="list" id="notesList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                        <div class="crumbs">
+                          <span class="crumb link" id="crumbHome">Home</span>
+                          <span>›</span>
+                          <span class="crumb active">Notes</span>
+                        </div>
+                        <div class="section-title">Notes Library</div>
+                        <div class="list" id="notesList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("crumbHome").onclick = () => {
           state.view = "courses";
@@ -2970,11 +3534,11 @@
         const list = document.getElementById("notesList");
         if (!subjects.length) {
           list.innerHTML = `
-                  <div class="empty-state">
-                    <div class="emoji">📝</div>
-                    <div class="title">No notes yet</div>
-                    <div class="sub">Add entries to NOTES_DATA to see them here.</div>
-                  </div>`;
+                        <div class="empty-state">
+                          <div class="emoji">📝</div>
+                          <div class="title">No notes yet</div>
+                          <div class="sub">Add entries to NOTES_DATA to see them here.</div>
+                        </div>`;
           return;
         }
 
@@ -2988,13 +3552,13 @@
           btn.style.setProperty("--course-bg", st.bg);
           btn.style.setProperty("--course-border", st.border);
           btn.innerHTML = `
-                  <div class="course-thumb">${st.icon}</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(sub)}</div>
-                    <div class="course-meta"><span>${count} note${count === 1 ? "" : "s"}</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">${st.icon}</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(sub)}</div>
+                          <div class="course-meta"><span>${count} note${count === 1 ? "" : "s"}</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           btn.onclick = () => {
             state.noteSubject = sub;
             state.view = "note";
@@ -3010,17 +3574,17 @@
         const notes = NOTES_DATA.filter((n) => n.subject === sub);
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                  <div class="crumbs">
-                    <span class="crumb link" id="crumbNotes">Notes</span>
-                    <span>›</span>
-                    <span class="crumb active">${escapeHtml(sub)}</span>
-                  </div>
-                  <div class="section-title">${escapeHtml(sub)} — Notes</div>
-                  <div class="list" id="noteList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                        <div class="crumbs">
+                          <span class="crumb link" id="crumbNotes">Notes</span>
+                          <span>›</span>
+                          <span class="crumb active">${escapeHtml(sub)}</span>
+                        </div>
+                        <div class="section-title">${escapeHtml(sub)} — Notes</div>
+                        <div class="list" id="noteList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("crumbNotes").onclick = () => {
           state.view = "notes";
@@ -3039,13 +3603,13 @@
           a.style.setProperty("--course-bg", st.bg);
           a.style.setProperty("--course-border", st.border);
           a.innerHTML = `
-                  <div class="course-thumb">${n.icon || st.icon}</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(n.title)}</div>
-                    <div class="course-meta"><span>Open document →</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">${n.icon || st.icon}</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(n.title)}</div>
+                          <div class="course-meta"><span>Open document →</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           list.appendChild(a);
         });
       }
@@ -3064,19 +3628,19 @@
         );
 
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <button class="icon-btn" id="backBtn" title="Back">←</button>
-                    <div>
-                      <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">PPTs</div>
-                      <div style="font-size:11px;color:var(--text-dim);">${totalSlides} slides · ${totalSections} sections</div>
-                    </div>
-                  </div>
-                  <div class="section-title">PowerPoint Library</div>
-                  <div class="list" id="pptList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                          <button class="icon-btn" id="backBtn" title="Back">←</button>
+                          <div>
+                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">PPTs</div>
+                            <div style="font-size:11px;color:var(--text-dim);">${totalSlides} slides · ${totalSections} sections</div>
+                          </div>
+                        </div>
+                        <div class="section-title">PowerPoint Library</div>
+                        <div class="list" id="pptList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("backBtn").onclick = () => {
           state.view = "courses";
@@ -3086,11 +3650,11 @@
         const list = document.getElementById("pptList");
         if (!PPTS_DATA.length) {
           list.innerHTML = `
-                  <div class="empty-state">
-                    <div class="emoji">📊</div>
-                    <div class="title">No slides yet</div>
-                    <div class="sub">Add entries to PPTS_DATA to see them here.</div>
-                  </div>`;
+                        <div class="empty-state">
+                          <div class="emoji">📊</div>
+                          <div class="title">No slides yet</div>
+                          <div class="sub">Add entries to PPTS_DATA to see them here.</div>
+                        </div>`;
           return;
         }
 
@@ -3107,17 +3671,17 @@
           btn.style.setProperty("--course-bg", st.bg);
           btn.style.setProperty("--course-border", st.border);
           btn.innerHTML = `
-                  <div class="course-thumb">${sub.emoji || st.icon}</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(sub.subject)}</div>
-                    <div class="course-meta">
-                      <span>${sub.teachers.length} section${sub.teachers.length === 1 ? "" : "s"}</span>
-                      <span>·</span>
-                      <span>${totalFiles} files</span>
-                    </div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">${sub.emoji || st.icon}</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(sub.subject)}</div>
+                          <div class="course-meta">
+                            <span>${sub.teachers.length} section${sub.teachers.length === 1 ? "" : "s"}</span>
+                            <span>·</span>
+                            <span>${totalFiles} files</span>
+                          </div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           btn.onclick = () => {
             state.pptSubject = sub.subject;
             state.view = "ppt-teachers";
@@ -3136,24 +3700,24 @@
         const st = styleFor(sub.subject);
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <button class="icon-btn" id="backBtn" title="Back">←</button>
-                    <div>
-                      <div style="font-size:16px;font-weight:700;">${escapeHtml(sub.subject)}</div>
-                      <div style="font-size:11px;color:var(--text-dim);">${sub.teachers.length} sections</div>
-                    </div>
-                  </div>
-                  <div class="crumbs">
-                    <span class="crumb link" id="crumbPpts">PowerPoints</span>
-                    <span>›</span>
-                    <span class="crumb active">${escapeHtml(sub.subject)}</span>
-                  </div>
-                  <div class="section-title">${escapeHtml(sub.subject)} — Sections</div>
-                  <div class="list" id="teacherList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                          <button class="icon-btn" id="backBtn" title="Back">←</button>
+                          <div>
+                            <div style="font-size:16px;font-weight:700;">${escapeHtml(sub.subject)}</div>
+                            <div style="font-size:11px;color:var(--text-dim);">${sub.teachers.length} sections</div>
+                          </div>
+                        </div>
+                        <div class="crumbs">
+                          <span class="crumb link" id="crumbPpts">PowerPoints</span>
+                          <span>›</span>
+                          <span class="crumb active">${escapeHtml(sub.subject)}</span>
+                        </div>
+                        <div class="section-title">${escapeHtml(sub.subject)} — Sections</div>
+                        <div class="list" id="teacherList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("crumbPpts").onclick = () => {
           state.view = "ppts";
@@ -3173,13 +3737,13 @@
           btn.style.setProperty("--course-bg", st.bg);
           btn.style.setProperty("--course-border", st.border);
           btn.innerHTML = `
-                  <div class="course-thumb">${sub.emoji || st.icon}</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(t.name)}</div>
-                    <div class="course-meta"><span>${t.files.length} file${t.files.length === 1 ? "" : "s"}</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">${sub.emoji || st.icon}</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(t.name)}</div>
+                          <div class="course-meta"><span>${t.files.length} file${t.files.length === 1 ? "" : "s"}</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           btn.onclick = () => {
             state.pptTeacher = t.name;
             state.view = "ppt-files";
@@ -3200,26 +3764,26 @@
         const st = styleFor(sub.subject);
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <button class="icon-btn" id="backBtn" title="Back">←</button>
-                    <div>
-                      <div style="font-size:16px;font-weight:700;">${escapeHtml(teacher.name)}</div>
-                      <div style="font-size:11px;color:var(--text-dim);">${teacher.files.length} files</div>
-                    </div>
-                  </div>
-                  <div class="crumbs">
-                    <span class="crumb link" id="crumbPpts">PowerPoints</span>
-                    <span>›</span>
-                    <span class="crumb link" id="crumbSub">${escapeHtml(sub.subject)}</span>
-                    <span>›</span>
-                    <span class="crumb active">${escapeHtml(teacher.name)}</span>
-                  </div>
-                  <div class="section-title">${escapeHtml(teacher.name)} — Files</div>
-                  <div class="list" id="fileList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                            <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                          <button class="icon-btn" id="backBtn" title="Back">←</button>
+                          <div>
+                            <div style="font-size:16px;font-weight:700;">${escapeHtml(teacher.name)}</div>
+                            <div style="font-size:11px;color:var(--text-dim);">${teacher.files.length} files</div>
+                          </div>
+                        </div>
+                        <div class="crumbs">
+                          <span class="crumb link" id="crumbPpts">PowerPoints</span>
+                          <span>›</span>
+                          <span class="crumb link" id="crumbSub">${escapeHtml(sub.subject)}</span>
+                          <span>›</span>
+                          <span class="crumb active">${escapeHtml(teacher.name)}</span>
+                        </div>
+                        <div class="section-title">${escapeHtml(teacher.name)} — Files</div>
+                        <div class="list" id="fileList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("crumbPpts").onclick = () => {
           state.view = "ppts";
@@ -3246,13 +3810,13 @@
           a.style.setProperty("--course-bg", st.bg);
           a.style.setProperty("--course-border", st.border);
           a.innerHTML = `
-                  <div class="course-thumb">📄</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(f.title)}</div>
-                    <div class="course-meta"><span>Open PDF →</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">📄</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(f.title)}</div>
+                          <div class="course-meta"><span>Open PDF →</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           list.appendChild(a);
         });
       }
@@ -3271,19 +3835,19 @@
         });
         const app = document.getElementById("app");
         app.innerHTML = `
-                ${topbar()}
-                <div class="wrap">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                    <button class="icon-btn" id="backBtn" title="Back">←</button>
-                    <div>
-                      <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">Bookmarks</div>
-                      <div style="font-size:11px;color:var(--text-dim);">${items.length} saved</div>
-                    </div>
-                  </div>
-                  <div class="section-title">Saved Questions</div>
-                  <div class="list" id="bmList"></div>
-                </div>
-              `;
+                      ${topbar()}
+                      <div class="wrap">
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+                          <button class="icon-btn" id="backBtn" title="Back">←</button>
+                          <div>
+                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">Bookmarks</div>
+                            <div style="font-size:11px;color:var(--text-dim);">${items.length} saved</div>
+                          </div>
+                        </div>
+                        <div class="section-title">Saved Questions</div>
+                        <div class="list" id="bmList"></div>
+                      </div>
+                    `;
         bindTopbar();
         document.getElementById("backBtn").onclick = () => {
           state.view = "courses";
@@ -3293,11 +3857,11 @@
         const list = document.getElementById("bmList");
         if (!items.length) {
           list.innerHTML = `
-                  <div class="empty-state">
-                    <div class="emoji">⭐</div>
-                    <div class="title">No bookmarks yet</div>
-                    <div class="sub">Tap ☆ on any question to save it here.</div>
-                  </div>`;
+                        <div class="empty-state">
+                          <div class="emoji">⭐</div>
+                          <div class="title">No bookmarks yet</div>
+                          <div class="sub">Tap ☆ on any question to save it here.</div>
+                        </div>`;
           return;
         }
 
@@ -3310,13 +3874,13 @@
           btn.style.setProperty("--course-bg", st.bg);
           btn.style.setProperty("--course-border", st.border);
           btn.innerHTML = `
-                  <div class="course-thumb">⭐</div>
-                  <div class="course-info">
-                    <div class="course-name">${escapeHtml(item.question.q).slice(0, 90)}${item.question.q.length > 90 ? "…" : ""}</div>
-                    <div class="course-meta"><span>${escapeHtml(item.exam.title)}</span><span>·</span><span>Q${item.qIdx + 1}</span></div>
-                  </div>
-                  <div class="course-arrow">›</div>
-                `;
+                        <div class="course-thumb">⭐</div>
+                        <div class="course-info">
+                          <div class="course-name">${escapeHtml(item.question.q).slice(0, 90)}${item.question.q.length > 90 ? "…" : ""}</div>
+                          <div class="course-meta"><span>${escapeHtml(item.exam.title)}</span><span>·</span><span>Q${item.qIdx + 1}</span></div>
+                        </div>
+                        <div class="course-arrow">›</div>
+                      `;
           btn.onclick = () => {
             state.exam = item.exam;
             state.qIndex = item.qIdx;
