@@ -1,0 +1,3068 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSK — Musculoskeletal Past Year Exams</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦴</text></svg>"
+    />
+    <style>
+      :root {
+        --bg: #0a0e14;
+        --bg-2: #10151d;
+        --bg-3: #171d28;
+        --card: #121821;
+        --card-hover: #1a2130;
+        --border: #1f2836;
+        --border-2: #2b3648;
+        --text: #e6edf3;
+        --text-dim: #8b949e;
+        --text-faint: #5a6472;
+        --accent: #e91e63;
+        --accent-2: #7c4dff;
+        --green: #2ecc71;
+        --green-bg: #123a25;
+        --green-border: #1e5c3a;
+        --red: #e74c3c;
+        --red-bg: #3a1818;
+        --red-border: #5c2424;
+        --blue: #4d9fff;
+        --yellow: #f5b800;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --radius-xs: 8px;
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        overscroll-behavior-y: none;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: inherit;
+        font-size: inherit;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-2);
+        border-radius: 4px;
+      }
+
+      #app {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 24px;
+      }
+
+      /* ========== TOP BAR ========== */
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 18px 10px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: linear-gradient(180deg, var(--bg) 75%, transparent);
+        backdrop-filter: blur(10px);
+      }
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+      }
+      .logo-badge {
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent-2), var(--blue));
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        font-size: 12px;
+        color: #fff;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 14px rgba(124, 77, 255, 0.35);
+      }
+      .logo-text {
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.3px;
+      }
+      .logo-sub {
+        font-size: 11px;
+        color: var(--text-dim);
+        font-weight: 500;
+      }
+      .avatar {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: var(--bg-3);
+        border: 1px solid var(--border-2);
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+      }
+
+      /* ========== BREADCRUMB ========== */
+      .crumbs {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 18px 14px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-dim);
+        flex-wrap: wrap;
+      }
+      .crumb {
+        color: var(--text-dim);
+        transition: color 0.15s;
+        padding: 2px 0;
+      }
+      .crumb.link {
+        cursor: pointer;
+      }
+      .crumb.link:hover {
+        color: var(--accent);
+      }
+      .crumb.current {
+        color: var(--text);
+        font-weight: 700;
+      }
+      .crumb-sep {
+        opacity: 0.35;
+      }
+
+      /* ========== SEARCH ========== */
+      .search-wrap {
+        margin: 4px 18px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 13px 15px;
+        transition: border-color 0.2s;
+      }
+      .search-wrap:focus-within {
+        border-color: var(--accent-2);
+      }
+      .search-wrap svg {
+        flex-shrink: 0;
+        opacity: 0.55;
+      }
+      .search-wrap input {
+        flex: 1;
+        background: none;
+        border: none;
+        outline: none;
+        color: var(--text);
+        font-size: 14px;
+      }
+      .search-wrap input::placeholder {
+        color: var(--text-faint);
+      }
+
+      /* ========== HERO / WELCOME ========== */
+      .hero {
+        margin: 0 18px 20px;
+        padding: 22px 20px;
+        border-radius: 18px;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.12),
+          rgba(124, 77, 255, 0.12)
+        );
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -40px;
+        right: -40px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(124, 77, 255, 0.25),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+      }
+      .hero-sub {
+        font-size: 13px;
+        color: var(--text-dim);
+        line-height: 1.55;
+      }
+
+      /* ========== CONTINUE CARD ========== */
+      .continue-card {
+        margin: 0 18px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 14px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+        width: calc(100% - 36px);
+      }
+      .continue-card:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+        border-left-color: var(--accent);
+        transform: translateY(-1px);
+      }
+      .continue-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--bg-3);
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .continue-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .continue-label {
+        font-size: 10px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+      }
+      .continue-title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .continue-meta {
+        font-size: 11.5px;
+        color: var(--text-dim);
+        margin-top: 2px;
+      }
+
+      /* ========== SECTION TITLE ========== */
+      .section-title {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        padding: 0 18px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .section-title .count {
+        background: var(--bg-3);
+        color: var(--text-dim);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      /* ========== COURSE LIST ========== */
+      .list {
+        padding: 0 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .course-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        text-align: left;
+        width: 100%;
+        transition:
+          transform 0.15s,
+          border-color 0.2s,
+          background 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .course-card::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: var(--course-color, var(--accent));
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .course-card:hover::before {
+        opacity: 1;
+      }
+      .course-card:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+      }
+      .course-card:active {
+        transform: scale(0.985);
+      }
+
+      .course-thumb {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        font-size: 24px;
+        background: var(--course-bg, rgba(233, 30, 99, 0.12));
+        border: 1px solid var(--course-border, rgba(233, 30, 99, 0.3));
+      }
+      .course-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .course-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 4px;
+        letter-spacing: -0.2px;
+      }
+      .course-meta {
+        font-size: 12px;
+        color: var(--text-dim);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .course-meta .dot {
+        opacity: 0.4;
+      }
+      .progress-bar {
+        margin-top: 10px;
+        height: 5px;
+        background: var(--bg-3);
+        border-radius: 3px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: linear-gradient(
+          90deg,
+          var(--course-color, var(--accent)),
+          var(--course-color-2, var(--accent-2))
+        );
+        transition: width 0.4s ease;
+      }
+      .course-arrow {
+        color: var(--text-faint);
+        flex-shrink: 0;
+      }
+
+      /* ========== YEAR CARD ========== */
+      .year-list {
+        padding: 0 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .year-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px 16px;
+        text-align: left;
+        width: 100%;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .year-card:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+        transform: translateY(-1px);
+      }
+      .year-card:active {
+        transform: scale(0.985);
+      }
+      .year-card .badge-year {
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        padding: 8px 14px;
+        border-radius: 11px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        color: var(--text);
+        flex-shrink: 0;
+        min-width: 68px;
+        text-align: center;
+      }
+      .year-card .year-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .year-card .year-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .year-card .year-meta {
+        font-size: 11.5px;
+        color: var(--text-dim);
+      }
+      .year-card .year-status {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .year-status.new {
+        color: var(--blue);
+        background: rgba(77, 159, 255, 0.14);
+      }
+      .year-status.progress {
+        color: var(--yellow);
+        background: rgba(245, 184, 0, 0.14);
+      }
+      .year-status.done {
+        color: var(--green);
+        background: var(--green-bg);
+      }
+
+      /* ========== EMPTY STATE ========== */
+      .empty-state {
+        text-align: center;
+        padding: 60px 24px;
+        color: var(--text-dim);
+        font-size: 14px;
+      }
+      .empty-state .emoji {
+        font-size: 44px;
+        margin-bottom: 14px;
+        display: block;
+        opacity: 0.6;
+      }
+      .empty-state .title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .empty-state .desc {
+        font-size: 13px;
+        color: var(--text-dim);
+        max-width: 300px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      /* ========== QUIZ VIEW ========== */
+      .quiz-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(10, 14, 20, 0.94);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--border);
+      }
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+      .icon-btn:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+      }
+      .icon-btn:active {
+        transform: scale(0.95);
+      }
+      .quiz-header-info {
+        flex: 1;
+        text-align: center;
+        min-width: 0;
+      }
+      .quiz-header-title {
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .quiz-header-count {
+        font-size: 11px;
+        color: var(--text-dim);
+        margin-top: 1px;
+        font-weight: 600;
+      }
+
+      .quiz-progress {
+        height: 3px;
+        background: var(--bg-3);
+        position: sticky;
+        top: 65px;
+        z-index: 19;
+      }
+      .quiz-progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        transition: width 0.3s ease;
+      }
+
+      .quiz-body {
+        padding: 20px 18px 30px;
+        flex: 1;
+      }
+      .breadcrumb {
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .breadcrumb .dot {
+        color: var(--accent);
+        margin: 0 7px;
+      }
+      .quiz-title {
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
+      }
+      .quiz-section {
+        font-size: 13px;
+        color: var(--text-dim);
+        font-style: italic;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 22px;
+      }
+
+      .q-tag-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .q-number {
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-faint);
+        letter-spacing: 0.5px;
+      }
+      .q-topic {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        color: var(--blue);
+        background: rgba(77, 159, 255, 0.14);
+        text-transform: uppercase;
+        margin-left: 9px;
+      }
+      .q-meta-badges {
+        display: flex;
+        gap: 6px;
+      }
+      .meta-badge {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .meta-badge.streak {
+        color: var(--yellow);
+        background: rgba(245, 184, 0, 0.14);
+      }
+
+      .q-text {
+        font-size: 17px;
+        font-weight: 600;
+        line-height: 1.55;
+        margin-bottom: 22px;
+        letter-spacing: -0.2px;
+      }
+
+      .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 22px;
+      }
+      .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 13px;
+        background: var(--card);
+        border: 1.5px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px 16px;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text);
+        transition: all 0.18s;
+        width: 100%;
+      }
+      .option:hover:not(.locked) {
+        border-color: var(--accent-2);
+        background: var(--card-hover);
+      }
+      .option:active:not(.locked) {
+        transform: scale(0.99);
+      }
+      .option .letter {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        display: grid;
+        place-items: center;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-dim);
+        flex-shrink: 0;
+        transition: all 0.2s;
+      }
+      .option.correct {
+        background: var(--green-bg);
+        border-color: var(--green-border);
+      }
+      .option.correct .letter {
+        background: var(--green);
+        color: #fff;
+        border-color: var(--green);
+      }
+      .option.wrong {
+        background: var(--red-bg);
+        border-color: var(--red-border);
+      }
+      .option.wrong .letter {
+        background: var(--red);
+        color: #fff;
+        border-color: var(--red);
+      }
+      .option.locked {
+        cursor: default;
+      }
+
+      .result-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 800;
+        margin-bottom: 18px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        letter-spacing: 0.2px;
+        animation: slideDown 0.25s ease;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .result-row.correct {
+        color: var(--green);
+        background: rgba(46, 204, 113, 0.08);
+        border: 1px solid var(--green-border);
+      }
+      .result-row.wrong {
+        color: var(--red);
+        background: rgba(231, 76, 60, 0.08);
+        border: 1px solid var(--red-border);
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .action-btn {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        font-size: 13px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.2s;
+      }
+      .action-btn:hover {
+        border-color: var(--border-2);
+        background: var(--card-hover);
+      }
+      .action-btn.active {
+        background: var(--accent-2);
+        border-color: var(--accent-2);
+        color: #fff;
+      }
+
+      .explanation {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--blue);
+        border-radius: var(--radius);
+        padding: 18px;
+        margin-bottom: 20px;
+        animation: slideDown 0.25s ease;
+      }
+      .explanation-label {
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        color: var(--blue);
+        text-transform: uppercase;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .explanation-text {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #c9d1d9;
+      }
+      .explanation-text strong {
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .q-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 22px;
+        padding: 16px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+      }
+      .q-nav-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-dim);
+        transition: all 0.15s;
+      }
+      .q-nav-btn:hover {
+        border-color: var(--border-2);
+        color: var(--text);
+      }
+      .q-nav-btn.current {
+        background: var(--accent-2);
+        color: #fff;
+        border-color: var(--accent-2);
+        transform: scale(1.05);
+      }
+      .q-nav-btn.answered-correct {
+        background: var(--green-bg);
+        color: var(--green);
+        border-color: var(--green-border);
+      }
+      .q-nav-btn.answered-wrong {
+        background: var(--red-bg);
+        color: var(--red);
+        border-color: var(--red-border);
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .nav-btn {
+        flex: 1;
+        padding: 15px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-weight: 800;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+        letter-spacing: 0.2px;
+      }
+      .nav-btn:hover:not(:disabled) {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+      }
+      .nav-btn.primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(233, 30, 99, 0.3);
+      }
+      .nav-btn.primary:hover:not(:disabled) {
+        box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        transform: translateY(-1px);
+      }
+      .nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      /* ========== FINISH SCREEN ========== */
+      .finish-card {
+        margin: 20px 18px;
+        padding: 32px 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(233, 30, 99, 0.08),
+          rgba(124, 77, 255, 0.08)
+        );
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        text-align: center;
+      }
+      .finish-emoji {
+        font-size: 56px;
+        margin-bottom: 12px;
+        display: block;
+      }
+      .finish-title {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 8px;
+        letter-spacing: -0.4px;
+      }
+      .finish-sub {
+        font-size: 14px;
+        color: var(--text-dim);
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+      .finish-score {
+        font-size: 52px;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .finish-score-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 26px;
+      }
+      .finish-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      /* ========== TOAST ========== */
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: var(--bg-3);
+        border: 1px solid var(--border-2);
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+        z-index: 100;
+        white-space: nowrap;
+        box-shadow: var(--shadow);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ========== RESPONSIVE ========== */
+      @media (min-width: 700px) {
+        #app {
+          max-width: 680px;
+          margin: 0 auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div class="toast" id="toast"></div>
+
+    <script>
+      /* =====================================================================
+                 NOTES DATA — MSK MODULE
+                 (Your existing PDF files)
+                 ===================================================================== */
+
+      const NOTES_DATA = [
+        {
+          id: "msk-pathology-note",
+          subject: "MSK Pathology",
+          title: "Pathology MSK Note",
+          icon: "🔬",
+          file: "Notes/Pathology MSK Note.pdf",
+        },
+      ];
+
+      /* =====================================================================
+                 PPTS DATA — MSK MODULE (flattened PDFs)
+                 ===================================================================== */
+      const PPTS_DATA = [
+        {
+          subject: "Anatomy",
+          emoji: "🦴",
+          teachers: [
+            {
+              name: "Adel Bondok / BRS / Dr. JALAL / MCQs",
+              files: [
+                {
+                  title: "Adel Bondok — Upper Limb (@Medicine_Way2)",
+                  file: "PPTS/Musculo_Anatomy_Adel Bondok - Upper_Limb  - @Medicine_Way2.pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — BRS Gross",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_BRS Gross.pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — Dr. Adel Bondok MCQ Lower (2)",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_Dr.Adel bondok mcq lower (2).pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — Lower Limb MCQ by Dr. JALAL (2)",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_Lower Limb MCQ by Dr.JALAL (2).pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — Lower limb MCQ",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_Lower limb MCQ.pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — MCQ Upper limb Anatomy",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_MCQ Upper limb Anatomy.pdf",
+                },
+                {
+                  title: "Anatomy 4 zip — Upper Limb MCQ by Dr. JALAL (2)",
+                  file: "PPTS/Musculo_Anatomy_Anatomy 4 zip_Upper Limb MCQ by Dr.JALAL (2).pdf",
+                },
+              ],
+            },
+            {
+              name: "Embryology",
+              files: [
+                {
+                  title: "Development of Muscular System (Dil)",
+                  file: "PPTS/Musculo_Anatomy_Embryology_Development  of muscular system Dil.pdf",
+                },
+                {
+                  title: "Development of Skeletal System (Dil)",
+                  file: "PPTS/Musculo_Anatomy_Embryology_Development of skeletal system Dil.pdf",
+                },
+                {
+                  title: "Development of Musculoskeletal System (Mr. Teka)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_Development of Musculoskeletal system4PC@2025.pdf",
+                },
+                {
+                  title: "Development of Skeletal System (Mr. Solomon)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Development of Skeletal System.pdf",
+                },
+              ],
+            },
+            {
+              name: "Histology",
+              files: [
+                {
+                  title: "Cartilage and Bone — Mr. Asfaw (AU) (2)",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Asfaw_Cartilage and bone-AU (2).pdf",
+                },
+                {
+                  title: "Histology of Integumentary — Mr. Asfaw",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Asfaw_Histology of Integumentary.pdf",
+                },
+                {
+                  title: "Muscle Tissue Basic Tissues Lecture — Mr. Asfaw",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Asfaw_Muscel tissue Basic tissues lecture.pdf",
+                },
+                {
+                  title: "Histology of Integumentary System — Mr. Tilahun",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Tilahun_Histology_of_Integumentary_system_pptx_for_presentation_fot_preclerkship.pdf",
+                },
+                {
+                  title: "Skeletal Tissues 1a — Mr. Tilahun",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Tilahun_skeletal tissues 1a.pdf",
+                },
+                {
+                  title: "Skeletal Tissues 2 and Muscle Tissues — Mr. Tilahun",
+                  file: "PPTS/Musculo_Anatomy_Histology_Mr. Tilahun_skeletal tissues 2 and muscle tissues.pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Rebuma",
+              files: [
+                {
+                  title: "Anatomy of Upper limb for PC 2022",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Anatomy of Upper limb  for PC 2022.pdf",
+                },
+                {
+                  title: "Brachial Plexus",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Brachial plexus.pdf",
+                },
+                {
+                  title: "Clinical Anatomy UL",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Clininical Anatomy UL.pdf",
+                },
+                {
+                  title: "Foot",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Foot.pdf",
+                },
+                {
+                  title: "Introduction to Musculoskeletal and Integumentary",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Introduction to Musculoskeletal and Integumentary.pdf",
+                },
+                {
+                  title: "Joints",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_joints.pdf",
+                },
+                {
+                  title: "Leg and Popliteal Fossa",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Leg and Popliteal fossa.pdf",
+                },
+                {
+                  title: "LL (Lower Limb)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_LL.pdf",
+                },
+                {
+                  title: "Thigh and Gluteal Region",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_Thigh and gluteal region.pdf",
+                },
+                {
+                  title: "UL (Upper Limb)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Rebuma_UL.pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Solomon",
+              files: [
+                {
+                  title: "Anatomy of the Lower Limb 2025",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Anatomy of the lower limb  2025.pdf",
+                },
+                {
+                  title: "Development of Skeletal System",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Development of Skeletal System.pdf",
+                },
+                {
+                  title: "Lower Limb Final Lecture 2025",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Lower limb final lecture 2025.pdf",
+                },
+                {
+                  title: "Lower Limb Lecture 1(1)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Lower Limb lecture 1(1).pdf",
+                },
+                {
+                  title: "Voice Transcription — Lecture 1 LL by Mr. Socrates",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Mr. Solomon class lecture Voice Transcription_Lecture 1 ANATOMY OF LL By Mr. Socrates.pdf",
+                },
+                {
+                  title: "Voice Transcription — Lecture 2 LL by Mr. Socrates (Solomon)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Mr. Solomon class lecture Voice Transcription_Lecture 2 ANATOMY LL By Mr. Socrates(Solomon)f.pdf",
+                },
+                {
+                  title: "Voice Transcription — Lecture 3 LL by Mr. Socrates",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Mr. Solomon class lecture Voice Transcription_LECTURE 3 of LL Mr. Socrates.pdf",
+                },
+                {
+                  title: "Voice Transcription — Lecture 4 LL by Mr. Socrates (Solomon)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Mr. Solomon class lecture Voice Transcription_Lecture 4 ANATOMY LL By Mr. Socrates(Solomon).pdf",
+                },
+                {
+                  title: "Voice Transcription — Lecture 5 LL by Mr. Socrates (Solomon)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Solomon_Mr. Solomon class lecture Voice Transcription_Lecture 5 ANATOMY LL By Mr. Socrates(Solomon).pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Teka",
+              files: [
+                {
+                  title: "Lower limb final lecture 2025",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_Lower limb final lecture 2025.pdf",
+                },
+                {
+                  title: "Musculoskeletal System 4PC@2025(1)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_Musculoskeletal system4PC@2025(1).pdf",
+                },
+                {
+                  title: "Musculoskeletal System 4PC@2025(2) (1)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_Musculoskeletal system4PC@2025(2) (1).pdf",
+                },
+                {
+                  title: "Musculoskeletal System 4PC@2025(3)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_Musculoskeletal system4PC@2025(3).pdf",
+                },
+                {
+                  title: "UpperLimb — Musculoskeletal System 4PC@2025(1)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_UpperLimb_Musculoskeletal system4PC@2025(1).pdf",
+                },
+                {
+                  title: "UpperLimb — Musculoskeletal System 4PC@2025(2)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_UpperLimb_Musculoskeletal system4PC@2025(2).pdf",
+                },
+                {
+                  title: "UpperLimb — Musculoskeletal System 4PC@2025(3)",
+                  file: "PPTS/Musculo_Anatomy_Mr. Teka_UpperLimb_Musculoskeletal system4PC@2025(3).pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          subject: "Biochemistry",
+          emoji: "🧬",
+          teachers: [
+            {
+              name: "Mr. Bati",
+              files: [
+                {
+                  title: "Biochemistry of Bone and Muscle",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Bati_Biochemistry of Bone and muscle.pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Henok",
+              files: [
+                {
+                  title: "Bone Metabolism",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Henok_Bone metabolism.pdf",
+                },
+                {
+                  title: "Muscle Metabolism",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Henok_Muscle metabolism.pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Mengestu",
+              files: [
+                {
+                  title: "Collagen MM 2016",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Mengestu_collagen mm 2016.pdf",
+                },
+                {
+                  title: "Muscle Metabolism M",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Mengestu_muscle metab m.pdf",
+                },
+                {
+                  title: "PPT of Ca (Calcium)",
+                  file: "PPTS/Musculo_Biochemistry_Mr. Mengestu_Ppt of ca.pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          subject: "Microbiology",
+          emoji: "🦠",
+          teachers: [
+            {
+              name: "Mr. Abdurezak",
+              files: [
+                {
+                  title: "Skin and Soft Tissue Infection PPT M",
+                  file: "PPTS/Musculo_Microbiology_Mr. Abdurezak_Skin and soft tissue infection PPT M.pdf",
+                },
+              ],
+            },
+            {
+              name: "Mr. Zewdneh",
+              files: [
+                {
+                  title: "Microbial Diseases of Integumentary & Musculoskeletal Systems",
+                  file: "PPTS/Musculo_Microbiology_Mr. Zewdneh_Microbial_Diseases_of_Integumentary_Musculoskeletal_Systems.pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          subject: "Pathology",
+          emoji: "🔬",
+          teachers: [
+            {
+              name: "Dr. Gebi",
+              files: [
+                {
+                  title: "Bone, Joint & Soft Tissue Disorders",
+                  file: "PPTS/Musculo_Pathology_Dr. Gebi_bone,joint   soft tissue disorders.pdf",
+                },
+                {
+                  title: "Muscle Disorders",
+                  file: "PPTS/Musculo_Pathology_Dr. Gebi_muscle disorders.pdf",
+                },
+                {
+                  title: "Skin Pathology",
+                  file: "PPTS/Musculo_Pathology_Dr. Gebi_Skin pathology.pdf",
+                },
+              ],
+            },
+            {
+              name: "Dr. Melese",
+              files: [
+                {
+                  title: "Bone & Joint Pathology",
+                  file: "PPTS/Musculo_Pathology_Dr. Melese_bone & joint pathology.pdf",
+                },
+                {
+                  title: "Diseases of Skeletal Muscle",
+                  file: "PPTS/Musculo_Pathology_Dr. Melese_DISEASES OF SKELETAL MUSCLE.pdf",
+                },
+                {
+                  title: "Diseases of the Skin",
+                  file: "PPTS/Musculo_Pathology_Dr. Melese_Diseases of the Skin.pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          subject: "Pharmacology",
+          emoji: "💊",
+          teachers: [
+            {
+              name: "Mr. Ayana",
+              files: [
+                {
+                  title: "Musculoskeletal Pharmacology",
+                  file: "PPTS/Musculo_Pharmacology_Mr. Ayana_musculoskeletal Pharmacology.pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          subject: "Physiology",
+          emoji: "💪",
+          teachers: [
+            {
+              name: "Mr. Tewodroas",
+              files: [
+                {
+                  title: "Physiology of Musculoskeletal System",
+                  file: "PPTS/Musculo_Physiology_Mr. Tewodroas_Physiology of Musculoskeletal System.pdf",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      /* =====================================================================
+                 QUIZ DATA — MSK EXAMS
+                 (Your quiz data will go here — paste it later)
+                 ===================================================================== */
+
+      const QUIZ_DATA = [
+        /* ⬇️ PASTE YOUR MSK EXAM QUESTIONS HERE. 
+           Follow the same structure as the CVS example:
+           {
+             id: "msk-anatomy-2024",
+             subject: "MSK Anatomy",
+             topic: "Upper Limb",
+             year: 2024,
+             title: "MSK Anatomy 2024",
+             icon: "🦴",
+             section: "Musculoskeletal System Module — Pre-clerkship",
+             questions: [ ... ]
+           }
+        */
+      ];
+
+      const TELEGRAM_URL = "https://t.me/+t_UlN4sHt7FkYWQ0";
+
+      /* =====================================================================
+                 ⚙️  APP LOGIC
+                 ===================================================================== */
+
+      const COURSE_STYLE = {
+        "MSK Anatomy": {
+          icon: "🦴",
+          color: "#e91e63",
+          color2: "#7c4dff",
+          bg: "rgba(233,30,99,0.12)",
+          border: "rgba(233,30,99,0.3)",
+        },
+        "MSK Physiology": {
+          icon: "💪",
+          color: "#ff5252",
+          color2: "#e91e63",
+          bg: "rgba(255,82,82,0.12)",
+          border: "rgba(255,82,82,0.3)",
+        },
+        "MSK Pathology": {
+          icon: "🔬",
+          color: "#4d9fff",
+          color2: "#7c4dff",
+          bg: "rgba(77,159,255,0.12)",
+          border: "rgba(77,159,255,0.3)",
+        },
+        "MSK Pharmacology": {
+          icon: "💊",
+          color: "#9c27b0",
+          color2: "#e91e63",
+          bg: "rgba(156,39,176,0.12)",
+          border: "rgba(156,39,176,0.3)",
+        },
+        "MSK Microbiology": {
+          icon: "🦠",
+          color: "#f5b800",
+          color2: "#ff6d00",
+          bg: "rgba(245,184,0,0.12)",
+          border: "rgba(245,184,0,0.3)",
+        },
+        "MSK Biochemistry": {
+          icon: "🧬",
+          color: "#00c853",
+          color2: "#00bfa5",
+          bg: "rgba(0,200,83,0.12)",
+          border: "rgba(0,200,83,0.3)",
+        },
+      };
+
+      function getCourseStyle(subject) {
+        return (
+          COURSE_STYLE[subject] || {
+            icon: "🦴",
+            color: "#e91e63",
+            color2: "#7c4dff",
+            bg: "rgba(233,30,99,0.12)",
+            border: "rgba(233,30,99,0.3)",
+          }
+        );
+      }
+
+      /* ---- Storage Keys ---- */
+      const STORAGE_KEY = "msk_module_progress_v1";
+      const BOOKMARK_KEY = "msk_bookmarks_v1";
+
+      /* ---- Storage Helper Functions ---- */
+      function loadProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch {
+          return {};
+        }
+      }
+      function saveProgress() {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+        } catch {}
+      }
+
+      function loadBookmarks() {
+        try {
+          return JSON.parse(localStorage.getItem(BOOKMARK_KEY)) || {};
+        } catch {
+          return {};
+        }
+      }
+
+      function saveBookmarks() {
+        try {
+          localStorage.setItem(BOOKMARK_KEY, JSON.stringify(state.bookmarks));
+        } catch {}
+      }
+
+      /* ---- App State ---- */
+      const state = {
+        view: "courses",
+        search: "",
+        course: null,
+        noteSubject: null,
+        pptSubject: null,
+        pptTeacher: null,
+        activeNote: null,
+        exam: null,
+        qIndex: 0,
+        showExplanation: false,
+        streak: 0,
+        startTime: null,
+        progress: loadProgress(),
+        bookmarks: loadBookmarks(),
+      };
+
+      function isBookmarked(examId, qIdx) {
+        return !!(state.bookmarks[examId] && state.bookmarks[examId][qIdx]);
+      }
+
+      function toggleBookmark(examId, qIdx) {
+        if (!state.bookmarks[examId]) state.bookmarks[examId] = {};
+        if (state.bookmarks[examId][qIdx]) {
+          delete state.bookmarks[examId][qIdx];
+          if (Object.keys(state.bookmarks[examId]).length === 0)
+            delete state.bookmarks[examId];
+          showToast("Bookmark removed");
+        } else {
+          state.bookmarks[examId][qIdx] = true;
+          showToast("⭐ Question bookmarked");
+        }
+        saveBookmarks();
+      }
+
+      function getExamProgress(exam) {
+        const p = state.progress[exam.id] || {};
+        const answered = Object.keys(p).length;
+        const correct = Object.values(p).filter((v) => v.correct).length;
+        return { answered, correct, total: exam.questions.length };
+      }
+      function getCourseProgress(subject) {
+        const exams = QUIZ_DATA.filter((e) => e.subject === subject);
+        const total = exams.reduce((s, e) => s + e.questions.length, 0);
+        const answered = exams.reduce(
+          (s, e) => s + Object.keys(state.progress[e.id] || {}).length,
+          0,
+        );
+        const correct = exams.reduce(
+          (s, e) =>
+            s +
+            Object.values(state.progress[e.id] || {}).filter((v) => v.correct)
+              .length,
+          0,
+        );
+        return { answered, correct, total, examsCount: exams.length };
+      }
+      function escapeHtml(s) {
+        return String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      }
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => t.classList.remove("show"), 1800);
+      }
+      function getCourses() {
+        return [...new Set(QUIZ_DATA.map((e) => e.subject))];
+      }
+
+      function render() {
+        if (state.view === "quiz") return renderQuiz();
+        if (state.view === "finish") return renderFinish();
+        if (state.view === "years") return renderYears();
+        if (state.view === "notes") return renderNotesCourses();
+        if (state.view === "note") return renderNoteDetail();
+        if (state.view === "ppts") return renderPptsCourses();
+        if (state.view === "ppt-teachers") return renderPptsTeachers();
+        if (state.view === "ppt-files") return renderPptsFiles();
+        if (state.view === "bookmarks") return renderBookmarks();
+        renderCourses();
+      }
+
+      /* =====================================================================
+                 COURSES VIEW (home)
+                 ===================================================================== */
+      function renderCourses() {
+        const courses = getCourses();
+        const totalQuestions = QUIZ_DATA.reduce(
+          (s, e) => s + e.questions.length,
+          0,
+        );
+        const totalAnswered = QUIZ_DATA.reduce(
+          (s, e) => s + Object.keys(state.progress[e.id] || {}).length,
+          0,
+        );
+
+        let continueExam = null,
+          continueTime = 0;
+        QUIZ_DATA.forEach((e) => {
+          const p = state.progress[e.id];
+          if (p && Object.keys(p).length > 0) {
+            const lastKey = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => b - a)[0];
+            const t = p[lastKey]?.t || 0;
+            if (t > continueTime) {
+              continueTime = t;
+              continueExam = e;
+            }
+          }
+        });
+
+        const filtered = courses.filter((c) => {
+          if (!state.search) return true;
+          const s = state.search.toLowerCase();
+          return (
+            c.toLowerCase().includes(s) ||
+            QUIZ_DATA.filter((e) => e.subject === c).some(
+              (e) =>
+                String(e.year).includes(s) || e.topic.toLowerCase().includes(s),
+            )
+          );
+        });
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <div class="logo-badge">MSK</div>
+                      <div>
+                        <div class="logo-text">MSK</div>
+                        <div class="logo-sub">Musculoskeletal Past Year Exams</div>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:8px;">
+                      <a class="icon-btn" id="telegramBtn" href="${TELEGRAM_URL}" target="_blank" rel="noopener" title="Videos on Telegram" style="text-decoration:none;background:linear-gradient(135deg,#2AABEE,#229ED9);border-color:#2AABEE;color:#fff;box-shadow:0 3px 12px rgba(42,171,238,0.4);">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M21.5 3.5L2.5 10.5l5 2 2 6 3.5-4.5 5.5 4 3-14.5z"/>
+                        </svg>
+                      </a>
+                      <button class="icon-btn" id="resetBtn" title="Reset all progress">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/>
+                  <path d="M3 3v5h5"/>
+                </svg>
+              </button>
+                      <div class="avatar">MSK</div>
+                    </div>
+                  </header>
+
+              ${
+                QUIZ_DATA.length > 0
+                  ? `
+                <div class="hero">
+                  <div class="hero-title">MSK Module 👋</div>
+                  <div class="hero-sub">${totalQuestions} questions across ${courses.length} courses · ${totalAnswered} answered so far</div>
+                  ${
+                    totalAnswered > 0
+                      ? `
+                    <div style="margin-top:14px;">
+                      <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">
+                        <span>Overall Progress</span>
+                        <span>${Math.round((totalAnswered / totalQuestions) * 100)}%</span>
+                      </div>
+                      <div class="progress-bar" style="height:8px;">
+                        <div class="progress-fill" style="width:${(totalAnswered / totalQuestions) * 100}%;background:linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+                      </div>
+                    </div>
+                  `
+                      : ""
+                  }
+                </div>
+              `
+                  : ""
+              }
+
+                  <div class="search-wrap">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+                    </svg>
+                    <input id="searchInput" type="text" placeholder="Search courses, years, topics..." value="${escapeHtml(state.search)}" />
+                  </div>
+
+                  ${
+                    continueExam
+                      ? `
+                    <button class="continue-card" data-continue="${continueExam.id}">
+                      <div class="continue-icon">${continueExam.icon || "📘"}</div>
+                      <div class="continue-body">
+                        <div class="continue-label">Continue</div>
+                        <div class="continue-title">${escapeHtml(continueExam.title)}</div>
+                        <div class="continue-meta">${Object.keys(state.progress[continueExam.id] || {}).length} / ${continueExam.questions.length} answered</div>
+                      </div>
+                      <svg class="course-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                  `
+                      : ""
+                  }
+
+              ${(() => {
+                const bookmarkCount = Object.values(state.bookmarks).reduce(
+                  (s, exam) => s + Object.keys(exam).length,
+                  0,
+                );
+                return bookmarkCount > 0
+                  ? `
+                  <div class="section-title" style="margin-top:8px;">
+                    ⭐ Bookmarked Questions
+                    <span class="count">${bookmarkCount}</span>
+                  </div>
+                  <div class="list" style="margin-bottom:16px;">
+                    <button class="course-card" data-open-bookmarks="1"
+                      style="--course-color:#f5b800;--course-color-2:#ff6d00;">
+                      <div class="course-thumb" style="background:rgba(245,184,0,0.12);border-color:rgba(245,184,0,0.3);">⭐</div>
+                      <div class="course-body">
+                        <div class="course-title">Review Bookmarked</div>
+                        <div class="course-meta">${bookmarkCount} question${bookmarkCount === 1 ? "" : "s"} · tap to open list</div>
+                      </div>
+                      <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                  </div>
+                `
+                  : "";
+              })()}
+
+                  <div class="section-title">
+                    STUDY MATERIALS
+                    <span class="count">${(NOTES_DATA.length > 0 ? 1 : 0) + (PPTS_DATA.length > 0 ? 1 : 0)}</span>
+                  </div>
+                  <div class="list" style="margin-bottom:24px;">
+                    ${
+                      NOTES_DATA.length > 0
+                        ? `
+                      <button class="course-card" data-open-notes-quick="1"
+                        style="--course-color:#7c4dff;--course-color-2:#4d9fff;">
+                        <div class="course-thumb" style="background:rgba(124,77,255,0.12);border-color:rgba(124,77,255,0.3);">📝</div>
+                        <div class="course-body">
+                          <div class="course-title">Open Notes</div>
+                          <div class="course-meta">${NOTES_DATA.length} notes across ${[...new Set(NOTES_DATA.map((n) => n.subject))].length} subjects</div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                      </button>
+                    `
+                        : ""
+                    }
+                    ${
+                      PPTS_DATA.length > 0
+                        ? `
+                      <button class="course-card" data-open-ppts-quick="1"
+                        style="--course-color:#f5b800;--course-color-2:#ff6d00;">
+                        <div class="course-thumb" style="background:rgba(245,184,0,0.12);border-color:rgba(245,184,0,0.3);">📊</div>
+                        <div class="course-body">
+                          <div class="course-title">PowerPoint Slides</div>
+                          <div class="course-meta">${PPTS_DATA.length} subjects · ${PPTS_DATA.reduce((s, sub) => s + sub.teachers.reduce((t, te) => t + te.files.length, 0), 0)} files</div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                      </button>
+                    `
+                        : ""
+                    }
+                  </div>
+
+                  <div class="list" style="margin-bottom:16px;">
+                    <button class="course-card" onclick="window.location.href='flashcards.html'" 
+                            style="--course-color:#e91e63;--course-color-2:#7c4dff;">
+                        <div class="course-thumb" style="background:rgba(233,30,99,0.12);border-color:rgba(233,30,99,0.3);">🃏</div>
+                        <div class="course-body">
+                            <div class="course-title">Flashcards</div>
+                            <div class="course-meta">Study key concepts · Q&A format</div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                  </div>
+
+                  <div class="section-title">
+                    MSK COURSES
+                    <span class="count">${filtered.length}</span>
+                  </div>
+
+                  ${
+                    QUIZ_DATA.length === 0
+                      ? `<div class="empty-state">
+                         <span class="emoji">📚</span>
+                         <div class="title">No MSK exams yet</div>
+                         <div class="desc">Paste your MSK quiz data in the QUIZ_DATA section to get started.</div>
+                       </div>`
+                      : filtered.length === 0
+                        ? `<div class="empty-state">
+                           <span class="emoji">🔍</span>
+                           <div class="title">No results</div>
+                           <div class="desc">Nothing matches "${escapeHtml(state.search)}".</div>
+                         </div>`
+                        : `<div class="list">${filtered.map(renderCourseCard).join("")}</div>`
+                  }
+                `;
+
+        bindCourseEvents();
+      }
+
+      function renderCourseCard(subject) {
+        const style = getCourseStyle(subject);
+        const p = getCourseProgress(subject);
+        const pct = p.total ? Math.round((p.answered / p.total) * 100) : 0;
+        return `
+                  <button class="course-card"
+                          data-course="${escapeHtml(subject)}"
+                          style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                    <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${style.icon}</div>
+                    <div class="course-body">
+                      <div class="course-title">${escapeHtml(subject)}</div>
+                      <div class="course-meta">
+                        ${p.examsCount} ${p.examsCount === 1 ? "exam" : "exams"}
+                        <span class="dot">·</span>
+                        ${p.total} questions
+                        ${p.answered > 0 ? `<span class="dot">·</span>${p.correct} correct` : ""}
+                      </div>
+                      ${p.answered > 0 ? `<div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>` : ""}
+                    </div>
+                    <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                  </button>
+                `;
+      }
+
+      function bindCourseEvents() {
+        const search = document.getElementById("searchInput");
+        if (search) {
+          search.addEventListener("input", (e) => {
+            state.search = e.target.value;
+            renderCourses();
+            const s2 = document.getElementById("searchInput");
+            if (s2) {
+              s2.focus();
+              s2.setSelectionRange(s2.value.length, s2.value.length);
+            }
+          });
+        }
+        document.querySelectorAll("[data-course]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.course = el.dataset.course;
+            state.view = "years";
+            state.search = "";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const resetBtn = document.getElementById("resetBtn");
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            if (
+              !confirm(
+                "⚠️ Reset ALL progress?\n\nThis will erase all your answered questions and start fresh. This cannot be undone.",
+              )
+            )
+              return;
+            localStorage.removeItem(STORAGE_KEY);
+            state.progress = {};
+            state.streak = 0;
+            state.startTime = null;
+            showToast("✓ All progress reset");
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+
+        document.querySelectorAll("[data-open-notes-quick]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "notes";
+            state.noteSubject = null;
+            state.activeNote = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-open-ppts-quick]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "ppts";
+            state.pptSubject = null;
+            state.pptTeacher = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        document.querySelectorAll("[data-continue]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const exam = QUIZ_DATA.find((e) => e.id === el.dataset.continue);
+            if (!exam) return;
+            state.course = exam.subject;
+            state.exam = exam;
+            const p = state.progress[exam.id] || {};
+            const answered = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => a - b);
+            state.qIndex =
+              answered.length > 0 ? answered[answered.length - 1] : 0;
+            state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
+            state.view = "quiz";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        document.querySelectorAll("[data-open-bookmarks]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "bookmarks";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 YEARS VIEW
+                 ===================================================================== */
+      function renderYears() {
+        const style = getCourseStyle(state.course);
+        const exams = QUIZ_DATA.filter((e) => e.subject === state.course).sort(
+          (a, b) => b.year - a.year,
+        );
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backToCoursesBtn" title="Back to courses" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg, ${style.color}, ${style.color2});">MSK</div>
+                      <div>
+                        <div class="logo-text">${escapeHtml(state.course)}</div>
+                        <div class="logo-sub">${exams.length} ${exams.length === 1 ? "exam" : "exams"} available</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">${escapeHtml(state.course)}</span>
+                  </div>
+
+                  <div class="section-title">
+                    Available Years
+                    <span class="count">${exams.length}</span>
+                  </div>
+
+                  <div class="year-list">
+                    ${
+                      exams.length === 0
+                        ? `<div class="empty-state">
+                           <span class="emoji">📭</span>
+                           <div class="title">No exams for this course</div>
+                           <div class="desc">Add some exams in the QUIZ_DATA section.</div>
+                         </div>`
+                        : exams.map((e) => renderYearCard(e, style)).join("")
+                    }
+                  </div>
+                `;
+
+        document.querySelectorAll("[data-crumb]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            state.course = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const backBtn = document.getElementById("backToCoursesBtn");
+        if (backBtn) {
+          backBtn.addEventListener("click", () => {
+            state.view = "courses";
+            state.course = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+
+        document.querySelectorAll("[data-exam]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const exam = QUIZ_DATA.find((e) => e.id === el.dataset.exam);
+            if (!exam) return;
+            state.exam = exam;
+            const p = state.progress[exam.id] || {};
+            const answered = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => a - b);
+            state.qIndex =
+              answered.length > 0 ? answered[answered.length - 1] : 0;
+            state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
+            state.view = "quiz";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      function renderYearCard(exam, style) {
+        const p = getExamProgress(exam);
+        const pct = p.total ? Math.round((p.answered / p.total) * 100) : 0;
+        let status = "new",
+          statusLabel = "New";
+        if (p.answered === p.total && p.total > 0) {
+          status = "done";
+          statusLabel = "Completed";
+        } else if (p.answered > 0) {
+          status = "progress";
+          statusLabel = "In Progress";
+        }
+
+        return `
+                  <button class="year-card" data-exam="${exam.id}">
+                    <div class="badge-year" style="background:${style.bg};color:${style.color};border-color:${style.border};">
+                      ${exam.year}
+                    </div>
+                    <div class="year-body">
+                      <div class="year-title">${escapeHtml(exam.title)}</div>
+                      <div class="year-meta">
+                        ${
+                          p.answered > 0
+                            ? `${p.answered}/${p.total} answered · ${p.correct} correct`
+                            : `${p.total} questions`
+                        }
+                      </div>
+                      ${p.answered > 0 ? `<div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,${style.color},${style.color2});"></div></div>` : ""}
+                    </div>
+                    <span class="year-status ${status}">${statusLabel}</span>
+                  </button>
+                `;
+      }
+
+      /* =====================================================================
+                 NOTES — COURSES LIST
+                 ===================================================================== */
+      function renderNotesCourses() {
+        const subjectsWithNotes = [
+          ...new Set(NOTES_DATA.map((n) => n.subject)),
+        ];
+        const allCourses = [...new Set(QUIZ_DATA.map((e) => e.subject))];
+        const coursesToShow =
+          allCourses.length > 0
+            ? [...new Set([...allCourses, ...subjectsWithNotes])]
+            : subjectsWithNotes;
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backToCoursesFromNotes" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,#7c4dff,#4d9fff);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                          <path d="M14 2v6h6"/>
+                        </svg>
+                      </div>
+                      <div>
+                        <div class="logo-text">Notes</div>
+                        <div class="logo-sub">${NOTES_DATA.length} ${NOTES_DATA.length === 1 ? "note" : "notes"} available</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-notes="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">Notes</span>
+                  </div>
+
+                  ${
+                    coursesToShow.length === 0
+                      ? `<div class="empty-state">
+                         <span class="emoji">📝</span>
+                         <div class="title">No notes yet</div>
+                         <div class="desc">Add notes to the NOTES_DATA section in the file to see them here.</div>
+                       </div>`
+                      : `
+                      <div class="section-title">
+                        Courses
+                        <span class="count">${coursesToShow.length}</span>
+                      </div>
+                      <div class="list">
+                        ${coursesToShow.map(renderNoteCourseCard).join("")}
+                      </div>
+                    `
+                  }
+                `;
+
+        bindNotesEvents();
+      }
+
+      function renderNoteCourseCard(subject) {
+        const style = getCourseStyle(subject);
+        const notes = NOTES_DATA.filter((n) => n.subject === subject);
+        const count = notes.length;
+
+        return `
+                  <button class="course-card"
+                          data-note-course="${escapeHtml(subject)}"
+                          style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                    <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">
+                      ${style.icon}
+                    </div>
+                    <div class="course-body">
+                      <div class="course-title">${escapeHtml(subject)}</div>
+                      <div class="course-meta">
+                        ${count} ${count === 1 ? "note" : "notes"}
+                        ${count === 0 ? `<span class="dot">·</span>Coming soon` : ""}
+                      </div>
+                    </div>
+                    <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                  </button>
+                `;
+      }
+
+      function bindNotesEvents() {
+        const back = document.getElementById("backToCoursesFromNotes");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+        document.querySelectorAll("[data-crumb-notes]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-note-course]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.noteSubject = el.dataset.noteCourse;
+            state.view = "note";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 NOTES — DETAIL VIEW
+                 ===================================================================== */
+      function renderNoteDetail() {
+        const subject = state.noteSubject;
+        const style = getCourseStyle(subject);
+        const notes = NOTES_DATA.filter((n) => n.subject === subject);
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backToNotesList" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,${style.color},${style.color2});">
+                        ${style.icon}
+                      </div>
+                      <div>
+                        <div class="logo-text">${escapeHtml(subject)}</div>
+                        <div class="logo-sub">${notes.length} ${notes.length === 1 ? "note" : "notes"}</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-notes="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb link" data-crumb-notes="notes">Notes</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">${escapeHtml(subject)}</span>
+                  </div>
+
+                  ${
+                    notes.length === 0
+                      ? `<div class="empty-state">
+                         <span class="emoji">📝</span>
+                         <div class="title">No notes for ${escapeHtml(subject)}</div>
+                         <div class="desc">Add notes for this course in the NOTES_DATA section.</div>
+                       </div>`
+                      : `<div class="list" style="gap:14px;">
+                        ${notes.map(renderNoteCard).join("")}
+                      </div>`
+                  }
+                `;
+
+        bindNoteDetailEvents();
+      }
+
+      function renderNoteCard(note) {
+        const body = note.file
+          ? `
+                    <a href="${escapeHtml(note.file)}" target="_blank" rel="noopener"
+                       style="display:inline-flex;align-items:center;gap:8px;
+                              padding:13px 20px;border-radius:12px;
+                              background:linear-gradient(135deg,var(--accent),var(--accent-2));
+                              color:#fff;font-weight:700;text-decoration:none;font-size:14px;
+                              box-shadow:0 4px 14px rgba(233,30,99,0.3);">
+                      📄 Open document
+                    </a>
+                    <div style="font-size:12px;color:var(--text-dim);margin-top:10px;">
+                      Opens in a new tab — you can view, download, or print it.
+                    </div>
+                  `
+          : note.content || "No content.";
+
+        return `
+                  <div class="note-card" style="
+                    background: var(--card);
+                    border: 1px solid var(--border);
+                    border-radius: var(--radius);
+                    padding: 18px;
+                  ">
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+                      <div style="font-size:20px;">${note.icon || "📝"}</div>
+                      <div style="font-size:15px;font-weight:800;">${escapeHtml(note.title)}</div>
+                    </div>
+                    <div style="font-size:14px;line-height:1.75;color:#c9d1d9;">
+                      ${body}
+                    </div>
+                  </div>
+                `;
+      }
+
+      function bindNoteDetailEvents() {
+        document.querySelectorAll("[data-crumb-notes]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbNotes;
+            if (target === "courses") {
+              state.view = "courses";
+            } else if (target === "notes") {
+              state.view = "notes";
+            }
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const back = document.getElementById("backToNotesList");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "notes";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+      }
+
+      /* =====================================================================
+                 PPTS — COURSES LIST (subjects)
+                 ===================================================================== */
+      function renderPptsCourses() {
+        const totalFiles = PPTS_DATA.reduce(
+          (s, sub) =>
+            s + sub.teachers.reduce((t, te) => t + te.files.length, 0),
+          0,
+        );
+        const totalTeachers = PPTS_DATA.reduce(
+          (s, sub) => s + sub.teachers.length,
+          0,
+        );
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backFromPpts" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,#f5b800,#ff6d00);">📊</div>
+                      <div>
+                        <div class="logo-text">PPTs</div>
+                        <div class="logo-sub">${totalFiles} slides · ${totalTeachers} sections</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-ppts="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">PPTs</span>
+                  </div>
+
+                  <div class="section-title">
+                    Subjects
+                    <span class="count">${PPTS_DATA.length}</span>
+                  </div>
+
+                  <div class="list">
+                    ${PPTS_DATA.map((sub) => {
+                      const style =
+                        getCourseStyle("MSK " + sub.subject) ||
+                        getCourseStyle(sub.subject) ||
+                        {};
+                      const fileCount = sub.teachers.reduce(
+                        (t, te) => t + te.files.length,
+                        0,
+                      );
+                      const color = style.color || "#f5b800";
+                      const color2 = style.color2 || "#ff6d00";
+                      const bg = style.bg || "rgba(245,184,0,0.12)";
+                      const border = style.border || "rgba(245,184,0,0.3)";
+                      return `
+                      <button class="course-card"
+                              data-ppt-subject="${escapeHtml(sub.subject)}"
+                              style="--course-color:${color};--course-color-2:${color2};--course-bg:${bg};--course-border:${border};">
+                        <div class="course-thumb" style="background:${bg};border-color:${border};">${sub.emoji}</div>
+                        <div class="course-body">
+                          <div class="course-title">${escapeHtml(sub.subject)}</div>
+                          <div class="course-meta">
+                            ${sub.teachers.length} ${sub.teachers.length === 1 ? "section" : "sections"}
+                            <span class="dot">·</span>
+                            ${fileCount} ${fileCount === 1 ? "file" : "files"}
+                          </div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                      </button>
+                      `;
+                    }).join("")}
+                  </div>
+                `;
+
+        bindPptsCoursesEvents();
+      }
+
+      function bindPptsCoursesEvents() {
+        const back = document.getElementById("backFromPpts");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+        document.querySelectorAll("[data-crumb-ppts]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-ppt-subject]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.pptSubject = el.dataset.pptSubject;
+            state.view = "ppt-teachers";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 PPTS — TEACHERS LIST
+                 ===================================================================== */
+      function renderPptsTeachers() {
+        const sub = PPTS_DATA.find((s) => s.subject === state.pptSubject);
+        if (!sub) {
+          state.view = "ppts";
+          return render();
+        }
+        const style = getCourseStyle("MSK " + sub.subject) || {};
+        const color = style.color || "#f5b800";
+        const color2 = style.color2 || "#ff6d00";
+        const bg = style.bg || "rgba(245,184,0,0.12)";
+        const border = style.border || "rgba(245,184,0,0.3)";
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backToPptsList" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,${color},${color2});">${sub.emoji}</div>
+                      <div>
+                        <div class="logo-text">${escapeHtml(sub.subject)}</div>
+                        <div class="logo-sub">${sub.teachers.length} sections</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-ppts="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb link" data-crumb-ppts="ppts">PPTs</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">${escapeHtml(sub.subject)}</span>
+                  </div>
+
+                  <div class="section-title">
+                    Teachers & Sections
+                    <span class="count">${sub.teachers.length}</span>
+                  </div>
+
+                  <div class="list">
+                    ${sub.teachers
+                      .map((te) => {
+                        const fileCount = te.files.length;
+                        return `
+                      <button class="course-card"
+                              data-ppt-teacher="${escapeHtml(te.name)}"
+                              style="--course-color:${color};--course-color-2:${color2};--course-bg:${bg};--course-border:${border};">
+                        <div class="course-thumb" style="background:${bg};border-color:${border};">👨‍🏫</div>
+                        <div class="course-body">
+                          <div class="course-title">${escapeHtml(te.name)}</div>
+                          <div class="course-meta">
+                            ${fileCount} ${fileCount === 1 ? "file" : "files"}
+                          </div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                      </button>
+                      `;
+                      })
+                      .join("")}
+                  </div>
+                `;
+
+        bindPptsTeachersEvents();
+      }
+
+      function bindPptsTeachersEvents() {
+        const back = document.getElementById("backToPptsList");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "ppts";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+        document.querySelectorAll("[data-crumb-ppts]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbPpts;
+            if (target === "courses") state.view = "courses";
+            else if (target === "ppts") state.view = "ppts";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-ppt-teacher]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.pptTeacher = el.dataset.pptTeacher;
+            state.view = "ppt-files";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 PPTS — FILES LIST
+                 ===================================================================== */
+      function renderPptsFiles() {
+        const sub = PPTS_DATA.find((s) => s.subject === state.pptSubject);
+        const te = sub && sub.teachers.find((t) => t.name === state.pptTeacher);
+        if (!sub || !te) {
+          state.view = "ppts";
+          return render();
+        }
+        const style = getCourseStyle("MSK " + sub.subject) || {};
+        const color = style.color || "#f5b800";
+        const color2 = style.color2 || "#ff6d00";
+        const bg = style.bg || "rgba(245,184,0,0.12)";
+        const border = style.border || "rgba(245,184,0,0.3)";
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backToPptsTeachers" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,${color},${color2});">📄</div>
+                      <div>
+                        <div class="logo-text">${escapeHtml(te.name)}</div>
+                        <div class="logo-sub">${te.files.length} ${te.files.length === 1 ? "file" : "files"}</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-ppt="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb link" data-crumb-ppt="ppts">PPTs</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb link" data-crumb-ppt="sub">${escapeHtml(sub.subject)}</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">${escapeHtml(te.name)}</span>
+                  </div>
+
+                  <div class="list" style="gap:12px;">
+                    ${te.files
+                      .map(
+                        (f) => `
+                      <a href="${escapeHtml(f.file)}" target="_blank" rel="noopener"
+                         class="course-card"
+                         style="--course-color:${color};--course-color-2:${color2};--course-bg:${bg};--course-border:${border};text-decoration:none;color:inherit;">
+                        <div class="course-thumb" style="background:${bg};border-color:${border};">📄</div>
+                        <div class="course-body">
+                          <div class="course-title" style="font-size:14px;color:inherit;">${escapeHtml(f.title)}</div>
+                          <div class="course-meta">
+                            <span style="color:${color};font-weight:700;">PDF</span>
+                            <span class="dot">·</span>
+                            Tap to open
+                          </div>
+                        </div>
+                        <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                      </a>
+                    `,
+                      )
+                      .join("")}
+                  </div>
+                `;
+
+        bindPptsFilesEvents();
+      }
+
+      function bindPptsFilesEvents() {
+        const back = document.getElementById("backToPptsTeachers");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "ppt-teachers";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+        document.querySelectorAll("[data-crumb-ppt]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbPpt;
+            if (target === "courses") state.view = "courses";
+            else if (target === "ppts") state.view = "ppts";
+            else if (target === "sub") state.view = "ppt-teachers";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 BOOKMARKS LIST VIEW
+                 ===================================================================== */
+      function renderBookmarks() {
+        const items = [];
+        Object.entries(state.bookmarks).forEach(([examId, qs]) => {
+          const exam = QUIZ_DATA.find((e) => e.id === examId);
+          if (!exam) return;
+          Object.keys(qs).forEach((qIdxStr) => {
+            const qIdx = parseInt(qIdxStr);
+            const question = exam.questions[qIdx];
+            if (!question) return;
+            items.push({ exam, qIdx, question });
+          });
+        });
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <button class="icon-btn" id="backFromBookmarks" title="Back" style="margin-right: 4px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                      </button>
+                      <div class="logo-badge" style="background:linear-gradient(135deg,#f5b800,#ff6d00);">
+                        ⭐
+                      </div>
+                      <div>
+                        <div class="logo-text">Bookmarks</div>
+                        <div class="logo-sub">${items.length} ${items.length === 1 ? "question" : "questions"} saved</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="crumbs">
+                    <span class="crumb link" data-crumb-bookmarks="courses">Courses</span>
+                    <span class="crumb-sep">›</span>
+                    <span class="crumb current">Bookmarks</span>
+                  </div>
+
+                  ${
+                    items.length === 0
+                      ? `<div class="empty-state">
+                         <span class="emoji">⭐</span>
+                         <div class="title">No bookmarks yet</div>
+                         <div class="desc">Open any exam and tap the ⭐ icon to save a question for later.</div>
+                       </div>`
+                      : `
+                      <div class="section-title">
+                        Saved Questions
+                        <span class="count">${items.length}</span>
+                      </div>
+                      <div class="list">
+                        ${items.map(renderBookmarkCard).join("")}
+                      </div>
+                    `
+                  }
+                `;
+
+        bindBookmarkEvents();
+      }
+
+      function renderBookmarkCard({ exam, qIdx, question }) {
+        const style = getCourseStyle(exam.subject);
+        const qText =
+          question.q.length > 120
+            ? question.q.slice(0, 120).trim() + "…"
+            : question.q;
+
+        return `
+                  <button class="course-card"
+                          data-bookmark-exam="${exam.id}"
+                          data-bookmark-q="${qIdx}"
+                          style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                    <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">
+                      ${style.icon}
+                    </div>
+                    <div class="course-body">
+                      <div class="course-title" style="font-size:14px;">
+                        ${escapeHtml(exam.subject)} — ${escapeHtml(exam.title)}
+                      </div>
+                      <div class="course-meta" style="margin-bottom:6px;">
+                        <span style="color:${style.color};font-weight:800;">Q${qIdx + 1}</span>
+                        <span class="dot">·</span>
+                        <span>${escapeHtml(exam.topic)}</span>
+                      </div>
+                      <div style="font-size:12.5px;color:var(--text-dim);line-height:1.5;">
+                        ${escapeHtml(qText)}
+                      </div>
+                    </div>
+                    <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                  </button>
+                `;
+      }
+
+      function bindBookmarkEvents() {
+        const back = document.getElementById("backFromBookmarks");
+        if (back) {
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        }
+
+        document.querySelectorAll("[data-crumb-bookmarks]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        document.querySelectorAll("[data-bookmark-exam]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const examId = el.dataset.bookmarkExam;
+            const qIdx = parseInt(el.dataset.bookmarkQ);
+            const exam = QUIZ_DATA.find((e) => e.id === examId);
+            if (!exam) return;
+
+            state.course = exam.subject;
+            state.exam = exam;
+            state.qIndex = qIdx;
+            state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
+            state.view = "quiz";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+      }
+
+      /* =====================================================================
+                 QUIZ VIEW
+                 ===================================================================== */
+      function renderQuiz() {
+        const exam = state.exam;
+        const q = exam.questions[state.qIndex];
+        const progress = state.progress[exam.id] || {};
+        const savedAnswer = progress[state.qIndex];
+        const answered = !!savedAnswer;
+        const isCorrect = answered && savedAnswer.correct;
+        const pct = Math.round(
+          ((state.qIndex + 1) / exam.questions.length) * 100,
+        );
+
+        const optionsHTML = q.options
+          .map((opt) => {
+            let cls = "option";
+            if (answered) {
+              cls += " locked";
+              if (opt.letter === q.correct) cls += " correct";
+              else if (opt.letter === savedAnswer.chosen) cls += " wrong";
+            }
+            return `
+                    <button class="${cls}" data-letter="${opt.letter}">
+                      <span class="letter">${opt.letter}</span>
+                      <span>${escapeHtml(opt.text)}</span>
+                    </button>
+                  `;
+          })
+          .join("");
+
+        const qNavHTML = exam.questions
+          .map((_, i) => {
+            const p = progress[i];
+            let cls = "q-nav-btn";
+            if (i === state.qIndex) cls += " current";
+            else if (p)
+              cls += p.correct ? " answered-correct" : " answered-wrong";
+            return `<button class="${cls}" data-qnav="${i}">${i + 1}</button>`;
+          })
+          .join("");
+
+        const allAnswered =
+          Object.keys(progress).length === exam.questions.length;
+
+        app.innerHTML = `
+                  <div class="quiz-header">
+                    <button class="icon-btn" id="backBtn" title="Back to years">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                      </svg>
+                    </button>
+                    <div class="quiz-header-info">
+                      <div class="quiz-header-title">${escapeHtml(exam.title)}</div>
+                      <div class="quiz-header-count">Q${state.qIndex + 1} of ${exam.questions.length}</div>
+                    </div>
+                  <button class="icon-btn" id="bookmarkBtn" title="Bookmark this question" style="${isBookmarked(exam.id, state.qIndex) ? "background:rgba(245,184,0,0.15);border-color:rgba(245,184,0,0.5);color:#f5b800;" : ""}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="${isBookmarked(exam.id, state.qIndex) ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2.2">
+                  <path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/>
+                </svg>
+              </button>
+              <button class="icon-btn" id="closeBtn" title="Close">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+              </button>
+                  </div>
+                  <div class="quiz-progress"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+
+                  <div class="quiz-body">
+                    <div class="breadcrumb">
+                      ${escapeHtml(exam.subject.toUpperCase())}
+                      <span class="dot">·</span>
+                      ${exam.year}
+                      <span class="dot">·</span>
+                      MSK PAST YEAR QUIZ
+                    </div>
+                    <div class="quiz-title">${escapeHtml(exam.title)}</div>
+                    <div class="quiz-section">${escapeHtml(exam.section || "")}</div>
+
+                    <div class="q-tag-row">
+                      <div>
+                        <span class="q-number">Q${state.qIndex + 1}</span>
+                        <span class="q-topic">${escapeHtml(exam.topic)}</span>
+                      </div>
+                      <div class="q-meta-badges">
+                        ${state.streak > 1 ? `<span class="meta-badge streak">🔥 ${state.streak} streak</span>` : ""}
+                      </div>
+                    </div>
+
+                    <div class="q-text">${escapeHtml(q.q)}</div>
+                    <div class="options">${optionsHTML}</div>
+
+                    ${
+                      answered
+                        ? `
+                      <div class="result-row ${isCorrect ? "correct" : "wrong"}">
+                        ${isCorrect ? "✓ Correct" : "✗ Incorrect — correct answer is " + q.correct}
+                      </div>
+                      <div class="action-btns">
+                        <button class="action-btn ${state.showExplanation ? "active" : ""}" id="explBtn">
+                          ${state.showExplanation ? "Hide Explanation" : "Show Explanation"}
+                        </button>
+                      </div>
+                      ${
+                        state.showExplanation
+                          ? `
+                        <div class="explanation">
+                          <div class="explanation-label">Explanation</div>
+                          <div class="explanation-text">${q.explanation || "No explanation provided."}</div>
+                        </div>
+                      `
+                          : ""
+                      }
+                    `
+                        : ""
+                    }
+
+                    <div class="q-nav">${qNavHTML}</div>
+
+                    <div class="nav-buttons">
+                      <button class="nav-btn" id="prevBtn" ${state.qIndex === 0 ? "disabled" : ""}>← Previous</button>
+                      ${
+                        state.qIndex === exam.questions.length - 1
+                          ? `<button class="nav-btn primary" id="finishBtn">${allAnswered ? "See Results →" : "Next →"}</button>`
+                          : `<button class="nav-btn primary" id="nextBtn">Next →</button>`
+                      }
+                    </div>
+                  </div>
+                `;
+
+        bindQuizEvents();
+      }
+
+      function bindQuizEvents() {
+        const exam = state.exam;
+        const q = exam.questions[state.qIndex];
+
+        document
+          .getElementById("backBtn")
+          .addEventListener("click", goBackToYears);
+        document
+          .getElementById("closeBtn")
+          .addEventListener("click", goBackToYears);
+
+        const bookmarkBtn = document.getElementById("bookmarkBtn");
+        if (bookmarkBtn) {
+          bookmarkBtn.addEventListener("click", () => {
+            toggleBookmark(exam.id, state.qIndex);
+            renderQuiz();
+          });
+        }
+
+        const progress = state.progress[exam.id] || {};
+        const answered = !!progress[state.qIndex];
+
+        if (!answered) {
+          document.querySelectorAll(".option").forEach((opt) => {
+            opt.addEventListener("click", () => pickAnswer(opt.dataset.letter));
+          });
+        }
+
+        const explBtn = document.getElementById("explBtn");
+        if (explBtn) {
+          explBtn.addEventListener("click", () => {
+            state.showExplanation = !state.showExplanation;
+            renderQuiz();
+          });
+        }
+
+        document.querySelectorAll("[data-qnav]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            state.qIndex = parseInt(btn.dataset.qnav);
+            state.showExplanation = false;
+            renderQuiz();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const prev = document.getElementById("prevBtn");
+        const next = document.getElementById("nextBtn");
+        const finish = document.getElementById("finishBtn");
+        if (prev)
+          prev.addEventListener("click", () => {
+            if (state.qIndex > 0) {
+              state.qIndex--;
+              state.showExplanation = false;
+              renderQuiz();
+              window.scrollTo(0, 0);
+            }
+          });
+        if (next)
+          next.addEventListener("click", () => {
+            if (state.qIndex < exam.questions.length - 1) {
+              state.qIndex++;
+              state.showExplanation = false;
+              renderQuiz();
+              window.scrollTo(0, 0);
+            }
+          });
+        if (finish)
+          finish.addEventListener("click", () => {
+            state.view = "finish";
+            render();
+            window.scrollTo(0, 0);
+          });
+      }
+
+      function pickAnswer(chosen) {
+        const exam = state.exam;
+        const q = exam.questions[state.qIndex];
+        if (!state.progress[exam.id]) state.progress[exam.id] = {};
+        const wasCorrect = chosen === q.correct;
+        state.progress[exam.id][state.qIndex] = {
+          chosen,
+          correct: wasCorrect,
+          t: Date.now(),
+        };
+        saveProgress();
+        if (wasCorrect) {
+          state.streak = (state.streak || 0) + 1;
+          if (state.streak >= 3)
+            showToast(`🔥 ${state.streak} correct in a row!`);
+        } else {
+          state.streak = 0;
+        }
+        state.showExplanation = false;
+        renderQuiz();
+        setTimeout(() => {
+          const r = document.querySelector(".result-row");
+          if (r) r.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 50);
+      }
+
+      function goBackToYears() {
+        state.view = "years";
+        state.exam = null;
+        render();
+        window.scrollTo(0, 0);
+      }
+
+      /* =====================================================================
+                 FINISH VIEW
+                 ===================================================================== */
+      function renderFinish() {
+        const exam = state.exam;
+        const p = getExamProgress(exam);
+        const pct = p.total ? Math.round((p.correct / p.total) * 100) : 0;
+        const elapsed = state.startTime
+          ? Math.round((Date.now() - state.startTime) / 1000)
+          : 0;
+        const mins = Math.floor(elapsed / 60);
+        const secs = elapsed % 60;
+
+        let emoji = "🎉",
+          title = "Great job!",
+          sub = "You finished the exam.";
+
+        if (pct === 100) {
+          emoji = "🏆";
+          title = "Perfect score!";
+          sub = "You aced every question.";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          title = "Excellent!";
+          sub = "You're well prepared.";
+        } else if (pct >= 60) {
+          emoji = "👍";
+          title = "Good work!";
+          sub = "Keep practicing to improve.";
+        } else if (pct >= 40) {
+          emoji = "📖";
+          title = "Keep going!";
+          sub = "Review the explanations and try again.";
+        } else {
+          emoji = "💪";
+          title = "Don't give up!";
+          sub = "Practice makes perfect — review and retry.";
+        }
+
+        app.innerHTML = `
+                  <header class="topbar">
+                    <div class="logo-wrap">
+                      <div class="logo-badge">MSK</div>
+                      <div>
+                        <div class="logo-text">Results</div>
+                        <div class="logo-sub">${escapeHtml(exam.title)}</div>
+                      </div>
+                    </div>
+                    <div class="avatar">MSK</div>
+                  </header>
+
+                  <div class="finish-card">
+                    <span class="finish-emoji">${emoji}</span>
+                    <div class="finish-title">${title}</div>
+                    <div class="finish-sub">${sub}</div>
+                    <div class="finish-score">${pct}%</div>
+                    <div class="finish-score-label">${p.correct} of ${p.total} correct · ${mins}m ${secs}s</div>
+                    <div class="finish-btns">
+                      <button class="nav-btn" id="reviewBtn" style="flex:0;padding:14px 22px;">Review</button>
+                      <button class="nav-btn" id="backToYearsBtn" style="flex:0;padding:14px 22px;">Back to Years</button>
+                      <button class="nav-btn primary" id="retryBtn" style="flex:0;padding:14px 22px;">Retry</button>
+                    </div>
+                  </div>
+                `;
+
+        document.getElementById("reviewBtn").addEventListener("click", () => {
+          state.qIndex = 0;
+          state.showExplanation = false;
+          state.view = "quiz";
+          render();
+          window.scrollTo(0, 0);
+        });
+        document
+          .getElementById("backToYearsBtn")
+          .addEventListener("click", () => {
+            state.view = "years";
+            state.exam = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.getElementById("retryBtn").addEventListener("click", () => {
+          if (!confirm("Clear your answers for this exam and start over?"))
+            return;
+          delete state.progress[exam.id];
+          saveProgress();
+          state.qIndex = 0;
+          state.showExplanation = false;
+          state.streak = 0;
+          state.startTime = Date.now();
+          state.view = "quiz";
+          render();
+          window.scrollTo(0, 0);
+        });
+      }
+
+      /* =====================================================================
+                 KEYBOARD SHORTCUTS
+                 ===================================================================== */
+      document.addEventListener("keydown", (e) => {
+        if (state.view === "quiz") {
+          if (
+            ["1", "2", "3", "4", "5", "a", "b", "c", "d", "e"].includes(
+              e.key.toLowerCase(),
+            )
+          ) {
+            const map = {
+              1: "A",
+              2: "B",
+              3: "C",
+              4: "D",
+              5: "E",
+              a: "A",
+              b: "B",
+              c: "C",
+              d: "D",
+              e: "E",
+            };
+            const letter = map[e.key.toLowerCase()];
+            const opt = document.querySelector(
+              `.option[data-letter="${letter}"]:not(.locked)`,
+            );
+            if (opt) opt.click();
+          } else if (e.key === "ArrowRight") {
+            const n = document.getElementById("nextBtn");
+            if (n) n.click();
+          } else if (e.key === "ArrowLeft") {
+            const p = document.getElementById("prevBtn");
+            if (p && !p.disabled) p.click();
+          } else if (e.key === "Escape") {
+            goBackToYears();
+          }
+        } else if (state.view === "years") {
+          if (e.key === "Escape") {
+            state.view = "courses";
+            state.course = null;
+            render();
+          }
+        }
+      });
+
+      /* =====================================================================
+                 BOOT
+                 ===================================================================== */
+      render();
+    </script>
+  </body>
+</html>
