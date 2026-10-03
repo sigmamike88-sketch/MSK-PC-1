@@ -1,0 +1,3310 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSK Flashcards</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦴</text></svg>"
+    />
+    <style>
+      :root {
+        --bg: #0a0e14;
+        --card: #121821;
+        --border: #1f2836;
+        --border-2: #2b3648;
+        --text: #e6edf3;
+        --text-dim: #8b949e;
+        --text-faint: #5a6472;
+        --accent: #4dd0e1;
+        --accent-2: #4d9fff;
+        --blue: #4d9fff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .header {
+        width: 100%;
+        max-width: 600px;
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 18px;
+        background: rgba(77, 208, 225, 0.08);
+        border: 1px solid rgba(77, 208, 225, 0.25);
+        border-radius: 999px;
+        color: #e6edf3;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.25s ease;
+        width: fit-content;
+      }
+      .back-btn:hover {
+        background: rgba(77, 208, 225, 0.18);
+        border-color: var(--accent);
+        color: #fff;
+        transform: translateX(-3px);
+        box-shadow: 0 4px 14px rgba(77, 208, 225, 0.25);
+      }
+      h1 {
+        font-size: 24px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+      }
+
+      /* ===== SUBJECT FILTER CHIPS ===== */
+      .filter-row {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+      }
+      .chip {
+        padding: 7px 13px;
+        border-radius: 999px;
+        background: #171d28;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+        transition: all 0.18s;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .chip:hover {
+        border-color: var(--border-2);
+        color: var(--text);
+      }
+      .chip.active {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(77, 208, 225, 0.3);
+      }
+      .mode-row {
+        width: 100%;
+        max-width: 600px;
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+        padding: 10px 12px;
+        background: #10151d;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .mode-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 14px;
+        border-radius: 10px;
+        background: #171d28;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+        transition: all 0.18s;
+        cursor: pointer;
+        font-family: inherit;
+      }
+      .mode-btn:hover {
+        border-color: var(--border-2);
+        color: var(--text);
+      }
+      .mode-btn.active {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 3px 10px rgba(77, 208, 225, 0.3);
+      }
+      .mode-btn#shuffleNowBtn {
+        margin-left: auto;
+      }
+      @media (max-width: 420px) {
+        .mode-btn#shuffleNowBtn {
+          margin-left: 0;
+        }
+      }
+
+      /* ===== FLASHCARD ===== */
+      .flashcard-container {
+        width: 100%;
+        max-width: 600px;
+        height: 420px;
+        perspective: 1000px;
+        margin-bottom: 20px;
+      }
+      .flashcard {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        transform-style: preserve-3d;
+        transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1);
+        cursor: pointer;
+      }
+      .flashcard.is-flipped {
+        transform: rotateY(180deg);
+      }
+      .flashcard-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 50px 40px 40px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
+      }
+      .flashcard-face::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        border-radius: 16px 16px 0 0;
+      }
+      .flashcard-face.back {
+        transform: rotateY(180deg);
+        background: linear-gradient(
+          135deg,
+          rgba(77, 208, 225, 0.05),
+          rgba(77, 159, 255, 0.05)
+        );
+      }
+      .subject-badge {
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        white-space: nowrap;
+        border: 1px solid;
+        max-width: 90%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .subject-anatomy {
+        color: #4dd0e1;
+        background: rgba(77, 208, 225, 0.12);
+        border-color: rgba(77, 208, 225, 0.4);
+      }
+      .subject-physiology {
+        color: #26c6da;
+        background: rgba(38, 198, 218, 0.12);
+        border-color: rgba(38, 198, 218, 0.4);
+      }
+      .subject-pathology {
+        color: #4d9fff;
+        background: rgba(77, 159, 255, 0.12);
+        border-color: rgba(77, 159, 255, 0.4);
+      }
+      .subject-pharmacology {
+        color: #00bcd4;
+        background: rgba(0, 188, 212, 0.12);
+        border-color: rgba(0, 188, 212, 0.4);
+      }
+      .subject-microbiology {
+        color: #18ffff;
+        background: rgba(24, 255, 255, 0.1);
+        border-color: rgba(24, 255, 255, 0.3);
+      }
+      .subject-biochemistry {
+        color: #00e5ff;
+        background: rgba(0, 229, 255, 0.1);
+        border-color: rgba(0, 229, 255, 0.3);
+      }
+
+      .card-label {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        margin-bottom: 20px;
+      }
+      .front .card-label {
+        color: var(--accent);
+      }
+      .back .card-label {
+        color: var(--accent-2);
+      }
+      .card-content {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: 600;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 4px;
+      }
+      .back .card-content {
+        font-size: 16px;
+        font-weight: 500;
+        color: #c9d1d9;
+        text-align: left;
+      }
+
+      /* ===== CONTROLS ===== */
+      .controls {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 10px;
+      }
+      button {
+        font-family: inherit;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        padding: 12px 24px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 700;
+        transition: all 0.2s;
+      }
+      button:hover:not(:disabled) {
+        border-color: var(--accent);
+        background: #1a2130;
+      }
+      button:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+      button.primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 14px rgba(77, 208, 225, 0.3);
+      }
+      button.primary:hover:not(:disabled) {
+        box-shadow: 0 6px 20px rgba(77, 208, 225, 0.4);
+        transform: translateY(-1px);
+      }
+      .counter {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-dim);
+        min-width: 60px;
+        text-align: center;
+      }
+      .hint {
+        margin-top: 20px;
+        font-size: 12px;
+        color: var(--text-dim);
+        text-align: center;
+      }
+
+      /* ===== SECTIONED NAVIGATOR GRID ===== */
+      .q-nav-section {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 24px;
+      }
+      .q-nav-section-title {
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .q-nav-section-title .count {
+        background: #171d28;
+        color: var(--text-dim);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
+      }
+      .section-group {
+        margin-bottom: 22px;
+      }
+      .section-header {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 10px;
+        padding: 0 4px;
+      }
+      .section-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+      .section-name {
+        font-size: 11.5px;
+        font-weight: 800;
+        letter-spacing: 0.9px;
+        text-transform: uppercase;
+        color: var(--text);
+      }
+      .section-range {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--text-faint);
+        margin-left: auto;
+      }
+      .q-nav-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        padding: 14px;
+        background: #10151d;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+      }
+      .q-nav-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #171d28;
+        border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--text-dim);
+        transition: all 0.15s;
+        padding: 0;
+        cursor: pointer;
+      }
+      .q-nav-btn:hover {
+        border-color: var(--accent-2);
+        color: var(--text);
+      }
+      .q-nav-btn.current {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #fff;
+        border-color: transparent;
+        box-shadow: 0 4px 14px rgba(77, 208, 225, 0.4);
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 14px;
+        padding: 12px 16px;
+        background: #10151d;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+      }
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--text-dim);
+      }
+      .legend-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(20px);
+        background: #171d28;
+        border: 1px solid var(--border-2);
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text);
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+        z-index: 100;
+        white-space: nowrap;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <a href="index.html" class="back-btn">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7" />
+        </svg>
+        Back to Main Page
+      </a>
+      <h1>MSK Flashcards</h1>
+    </div>
+
+    <div class="filter-row" id="filterRow"></div>
+
+    <div class="mode-row">
+      <button
+        class="mode-btn active"
+        id="modeSequential"
+        onclick="setMode('sequential')"
+      >
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        Sequential
+      </button>
+      <button class="mode-btn" id="modeRandom" onclick="setMode('random')">
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+        </svg>
+        Random
+      </button>
+      <button
+        class="mode-btn"
+        id="shuffleNowBtn"
+        onclick="reshuffle()"
+        title="Reshuffle"
+      >
+        <svg
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path
+            d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"
+          />
+        </svg>
+        Reshuffle
+      </button>
+    </div>
+
+    <div class="flashcard-container">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="flashcard-face front">
+          <span class="subject-badge" id="subjectFront">Subject</span>
+          <span class="card-label">Question</span>
+          <div class="card-content" id="questionText">Loading...</div>
+        </div>
+        <div class="flashcard-face back">
+          <span class="subject-badge" id="subjectBack">Subject</span>
+          <span class="card-label">Answer</span>
+          <div class="card-content" id="answerText">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn" onclick="prevCard()">← Prev</button>
+      <div class="counter" id="counter">1 / 1</div>
+      <button id="nextBtn" class="primary" onclick="nextCard()">Next →</button>
+    </div>
+
+    <div class="hint">Click the card to flip · Use ← → keys to navigate</div>
+
+    <div class="q-nav-section">
+      <div class="q-nav-section-title">
+        Jump to Question
+        <span class="count" id="navCount">0</span>
+      </div>
+      <div id="sectionsWrapper"></div>
+
+      <div class="legend">
+        <span class="legend-item"
+          ><span class="legend-dot" style="background: #4dd0e1"></span
+          >Anatomy</span
+        >
+        <span class="legend-item"
+          ><span class="legend-dot" style="background: #4d9fff"></span
+          >Pathology</span
+        >
+        <span class="legend-item"
+          ><span class="legend-dot" style="background: #00bcd4"></span
+          >Pharmacology</span
+        >
+        <span class="legend-item"
+          ><span class="legend-dot" style="background: #00e5ff"></span
+          >Biochemistry</span
+        >
+        <span class="legend-item"
+          ><span class="legend-dot" style="background: #18ffff"></span
+          >Microbiology</span
+        >
+      </div>
+    </div>
+
+    <script>
+      /* ============================================================
+         FLASHCARD DATA
+         ------------------------------------------------------------
+         Format: { s: "Subject", section: "Section Name", q: "Question", a: "Answer" }
+         Subjects: Anatomy | Pathology | Pharmacology | Biochemistry | Microbiology
+         ============================================================ */
+
+      const flashcards = [
+        // ==================== INTEGUMENTARY SYSTEM ====================
+        // ==================== UPPER LIMB ====================
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which of the following joints represents the ONLY articulation between the superior appendicular skeleton and the axial skeleton?",
+          a: "Sternoclavicular joint. It allows for a high degree of mobility for the upper limb.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A 22-year-old cyclist falls onto his shoulder and sustains a fracture of the clavicle. Where is the most common and anatomically weakest site of fracture on the clavicle?",
+          a: "Junction of the middle and lateral thirds.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Following a complete fracture of the clavicle at its weakest point, which muscle elevates the medial fragment?",
+          a: "Sternocleidomastoid (SCM). The lateral fragment drops due to the weight of the limb.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Over which ribs does the triangular blade of the scapula lie on the posterolateral thorax?",
+          a: "2nd to 7th ribs.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which region of the humerus is clinically recognized as the most frequent site of fracture?",
+          a: "Surgical neck.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A fracture of the surgical neck of the humerus most likely injures which nerve?",
+          a: "Axillary nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A mid-shaft fracture of the humerus at the level of the radial groove most likely compromises which nerve?",
+          a: "Radial nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A fracture of the medial epicondyle of the humerus most likely injures which nerve?",
+          a: "Ulnar nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which statement about the distal articulation of the ulna is CORRECT?",
+          a: "The ulna does not reach and does not participate in the wrist (radiocarpal) joint.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "In a Colles fracture, which statement is FALSE?",
+          a: "FALSE: 'The radial styloid process is mostly avulsed while the ulnar styloid remains intact.' In reality, the distal radial fragment is displaced dorsally and the ulnar styloid is often avulsed.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which carpal bone is the largest bone in the distal row of the wrist?",
+          a: "Capitale.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The pisiform bone of the proximal carpal row rests directly on the palmar surface of which carpal bone?",
+          a: "Triquetrum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which carpal bone has a prominent hooked projection on its palmar aspect?",
+          a: "Hamate (hook of hamate).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The 'knuckles' of the hand are formed by which articulation?",
+          a: "Distal metacarpal heads and proximal phalanges.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "How many phalanges does the thumb have compared to digits 2 through 5?",
+          a: "Thumb has 2 phalanges (proximal, distal); digits 2–5 have 3 phalanges each (proximal, middle, distal).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The brachial fascia sends two intermuscular septa to the humerus. What fascial compartments do these septa create?",
+          a: "Anterior (flexor) and posterior (extensor) compartments of the arm.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What structure is formed by the posterior thickening of the antebrachial fascia across the distal forearm?",
+          a: "Extensor retinaculum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What is the central, thick, triangular portion of the deep fascia in the palm that radiates into four bands to digits 2 through 5?",
+          a: "Palmar aponeurosis.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Cutaneous nerves supplying the shoulder region originate from which neural plexus?",
+          a: "Cervical plexus.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which dermatome supplies sensation to the lateral aspect of the arm?",
+          a: "C5.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A patient loses sensation over the lateral forearm and the thumb. Which dermatome is impacted?",
+          a: "C6.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Sensation over the middle three fingers is mediated by which spinal segment?",
+          a: "C7.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which dermatome supplies the little finger and the medial side of the hand and wrist?",
+          a: "C8.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which dermatome covers the medial forearm extending up toward the axilla?",
+          a: "T1.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which superficial vein travels in the deltopectoral groove and drains into the axillary vein?",
+          a: "Cephalic vein.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Near the middle-inferior third of the arm, which fascia does the basilic vein pierce?",
+          a: "Brachial fascia.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which vein is most commonly selected for routine venipuncture in the cubital fossa?",
+          a: "Median cubital vein.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which veins are most frequently used for long-term IV fluid therapy?",
+          a: "Veins of the dorsal venous network, cephalic vein, and basilic vein.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Between which two structures is the retromammary space located?",
+          a: "Breast tissue and the underlying pectoral fascia.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Fibrous bands attaching the mammary gland lobes to skin and pectoral fascia are called?",
+          a: "Suspensory ligaments of Cooper.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Where does milk accumulate during lactation prior to release through the nipple?",
+          a: "Lactiferous sinuses.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Sensory innervation to the nipple comes from which nerve?",
+          a: "4th intercostal nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Greater than 75% of breast lymph (lateral quadrants) drains initially into which node group?",
+          a: "Axillary lymph nodes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Approximately 60% of all breast carcinomas originate in which quadrant?",
+          a: "Upper lateral quadrant.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What is the dual innervation of pectoralis major?",
+          a: "Lateral and medial pectoral nerves.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What is the primary action of the subclavius muscle?",
+          a: "Anchors and depresses the clavicle; protects underlying subclavian vessels and brachial plexus.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which muscle lies deep to pectoralis major on the anterior axillary wall and is innervated by the medial pectoral nerve?",
+          a: "Pectoralis minor.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "A patient presents with 'winged scapula' and cannot abduct the arm above horizontal. Which nerve and muscle are damaged?",
+          a: "Long thoracic nerve; Serratus anterior.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Motor innervation of the trapezius muscle comes from which nerve?",
+          a: "Spinal accessory nerve (CN XI); C3/C4 branches provide proprioception.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which muscle extends, adducts, and medially rotates the humerus and is innervated by the thoracodorsal nerve?",
+          a: "Latissimus dorsi.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which nerve innervates both rhomboid muscles?",
+          a: "Dorsal scapular nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which muscle acts as a shunt to resist inferior displacement of the humeral head and is innervated by the axillary nerve?",
+          a: "Deltoid.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which rotator cuff muscle initiates abduction of the arm but does NOT rotate the humerus?",
+          a: "Supraspinatus (first 15°).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which two rotator cuff muscles are innervated by the suprascapular nerve?",
+          a: "Supraspinatus and Infraspinatus.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Rupture of which rotator cuff tendon is the most common rotator cuff injury?",
+          a: "Supraspinatus tendon.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What are the boundaries and contents of the Quadrangular Space?",
+          a: "Boundaries: Teres minor (superior), Teres major (inferior), Long head of triceps (medial), Surgical neck of humerus (lateral). Contents: Axillary nerve & posterior circumflex humeral artery.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which vessel passes through the Triangular Space?",
+          a: "Circumflex scapular artery.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What structures pass through the Triangular Interval?",
+          a: "Radial nerve and profunda brachii (deep brachial) artery.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which structures form the posterior wall of the axilla?",
+          a: "Scapula, subscapularis, teres major, and latissimus dorsi.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The superior trunk of the brachial plexus is formed by the union of which roots?",
+          a: "C5 and C6.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What forms the anterior wall of the axilla?",
+          a: "Pectoralis major and pectoralis minor with their fascia.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What forms the medial wall of the axilla?",
+          a: "Thoracic wall (1st–4th ribs and intercostal muscles) and serratus anterior.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Where does the axillary artery become the brachial artery?",
+          a: "At the inferior border of teres major.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which branch is given off by the first part of the axillary artery?",
+          a: "Superior thoracic artery.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which two branches arise from the second part of the axillary artery?",
+          a: "Thoracoacromial artery and lateral thoracic artery.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which statement about the axillary vein is CORRECT?",
+          a: "Formed by union of the accompanying brachial veins and the basilic vein; lies anteromedial to the axillary artery; ends at the lateral border of the 1st rib as the subclavian vein.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The pectoral (anterior) axillary lymph nodes receive lymph predominantly from which areas?",
+          a: "Lateral quadrants of the breast and superficial anterolateral abdominal wall above the umbilicus.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which axillary node group receives lymph from the back down to the iliac crests?",
+          a: "Subscapular (posterior) group.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which axillary node group is at the apex and receives from ALL other groups?",
+          a: "Apical nodes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What is the anatomical curvature of the clavicle shaft?",
+          a: "Medial 2/3 is convex anteriorly; lateral 1/3 is flattened and concave anteriorly.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "How does the scapular spine divide the posterior scapula?",
+          a: "Into a small supraspinous fossa and a large infraspinous fossa.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which structure on the distal humerus articulates with the head of the radius?",
+          a: "Capitulum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which posterior humeral fossa receives the olecranon during extension?",
+          a: "Olecranon fossa.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What forms the walls of the trochlear notch of the ulna?",
+          a: "Olecranon posteriorly; coronoid process anteriorly.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Where is the radial notch of the ulna?",
+          a: "On the lateral side of the coronoid process.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which projection is present on the medial surface of the proximal radius below the neck?",
+          a: "Radial tuberosity.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Where are the ulnar notch and radial styloid process located at the distal radius?",
+          a: "Ulnar notch medially; radial styloid process laterally.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which carpal bone is in the distal row?",
+          a: "Trapezium (distal row: trapezium, trapezoid, capitate, hamate).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which fascia forms the floor of the axilla?",
+          a: "Axillary fascia (continuation of the pectoral fascia).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What fascia invests the deltoid?",
+          a: "Deltoid fascia.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What is the function of the fibrous bands extending from palmar aponeurosis to skin?",
+          a: "To hold palmar skin tightly bound for improved grip.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "During development, on which border is the thumb located?",
+          a: "Cranial (preaxial) side.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which dermatome supplies the base of the neck and top of the shoulder?",
+          a: "C4.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which dermatome supplies a small area of the upper arm and the axilla?",
+          a: "T2.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The superior lateral brachial cutaneous nerve supplies skin over the inferior deltoid. From which nerve does it arise?",
+          a: "Axillary nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "The lateral antebrachial cutaneous nerve is the direct continuation of which nerve?",
+          a: "Musculocutaneous nerve.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "From which network do the cephalic and basilic veins originate?",
+          a: "Dorsal venous network of the hand.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which vein ascends the middle of the anterior forearm?",
+          a: "Median antebrachial vein.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Superficial lymphatics along the basilic vein drain into which nodes?",
+          a: "Cubital lymph nodes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Deep lymphatic vessels of the upper limb terminate in which nodes?",
+          a: "Humeral (lateral) axillary lymph nodes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What type of glands are the breasts anatomically?",
+          a: "Modified sweat glands without a special capsule.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which muscles underlie the breast?",
+          a: "Pectoralis major (anterior 2/3) and serratus anterior (1/3).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which histology feature is unique to the subcutaneous layer beneath the areola and nipple?",
+          a: "Contains no fat beneath the areola and nipple (contains smooth muscle fibers and lactiferous ducts/sinuses).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "How does the pigmentation of the areola change during a woman's first pregnancy?",
+          a: "Changes from pink to brown.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "What tissue forms most of the internal structure of the nipple to allow erection upon tactile stimulation?",
+          a: "Circularly arranged smooth muscle fibers.",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Which artery is NOT a main arterial supply to the breast?",
+          a: "Profunda brachii artery (it supplies the posterior arm).",
+        },
+        {
+          s: "Anatomy",
+          section: "Upper Limb",
+          q: "Into which node group does lymph from the medial and inferior parts of the breast drain?",
+          a: "Parasternal and abdominal lymph nodes.",
+        },
+
+        // ==================== HISTOLOGY ====================
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Meissner corpuscles are primarily located in which part of the skin?",
+          a: "Dermal papillae. They detect light touch and low-frequency vibration.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which structure is the characteristic feature of the stratum granulosum?",
+          a: "Keratohyalin granules.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Intercellular bridges are most characteristic of which epidermal layer?",
+          a: "Stratum spinosum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which cell type is responsible for antigen presentation and immune surveillance within the epidermis?",
+          a: "Langerhans cell.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which structure is normally present in thin skin but absent from thick skin?",
+          a: "Hair follicles.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Sebaceous glands release their secretion by which mechanism?",
+          a: "Holocrine secretion.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which structure is absent from the epidermis of thick skin?",
+          a: "Hair follicles.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about epiphyseal plate closure is correct?",
+          a: "The timing varies among different bones.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "What is the primary direction of Haversian canals in compact bone?",
+          a: "Parallel to the long axis of the bone.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement correctly describes Volkmann's canals?",
+          a: "They connect adjacent osteons.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which structure is lined by the endosteum?",
+          a: "Internal bone surfaces including the medullary cavity and trabeculae.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Appositional growth of bone primarily results in an increase in:",
+          a: "Bone diameter.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which type of cartilage contains abundant elastic fibers?",
+          a: "Elastic cartilage.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about cartilage is INCORRECT?",
+          a: "Cartilage normally contains abundant type I collagen (INCORRECT — most cartilage is type II collagen; fibrocartilage is the exception).",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which tumor produces cartilage matrix and is malignant?",
+          a: "Chondrosarcoma.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which feature is most characteristic of fibrocartilage?",
+          a: "Large amounts of type I collagen.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which type of growth allows a long bone to increase in length during childhood?",
+          a: "Interstitial growth at the epiphyseal plate.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which layer of the epidermis is directly attached to the basement membrane?",
+          a: "Stratum basale.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which sensory receptor is specialized primarily for deep pressure and vibration?",
+          a: "Pacinian corpuscle.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which structure is responsible for producing the hair shaft?",
+          a: "Hair matrix.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement best explains why cartilage generally has limited regenerative ability?",
+          a: "Cartilage lacks a direct blood supply.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which gland is characterized histologically by simple coiled tubular secretory units?",
+          a: "Eccrine sweat gland.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "In which zone of the epiphyseal growth plate are cartilage cells arranged in vertical columns?",
+          a: "Proliferation zone.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which fibers are most conspicuous in elastic cartilage under light microscopy?",
+          a: "Elastic fibers.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Choose the WRONG statement.",
+          a: "WRONG: 'Epiphyseal closure occurs at the same time for all long bones in the body.' Timing varies by bone.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "What is the correct sequence of fracture healing?",
+          a: "4, 1, 3, 2 — Hematoma → Fibrocartilaginous callus → Bony callus → Remodeling.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "In which zone of the growth plate do chondrocytes become greatly enlarged and vacuolated?",
+          a: "Zone of hypertrophy.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "The free surface of a synovium or a synovial cavity is lined by:",
+          a: "Type A (macrophage-like) synoviocytes — option A and B are correct.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which bone cell is derived from a different embryonic lineage?",
+          a: "Osteoclasts (hematopoietic/monocyte lineage).",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which glycosaminoglycans are found in hyaline cartilage?",
+          a: "All of the above — hyaluronic acid, chondroitin-4-sulfate, chondroitin-6-sulfate, keratan sulfate.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which type of cartilage is identified by its homogeneous matrix?",
+          a: "Hyaline cartilage.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which description of hyaline cartilage ECM is WRONG?",
+          a: "WRONG: 'The side chains of the proteoglycans bind noncovalently to the collagen fibrils by link proteins.' Link proteins stabilize HA-proteoglycan association, not direct proteoglycan-collagen cross-links.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "How is avascularity of mature cartilage revealed?",
+          a: "All of the above — absence of vessels/lymphatics/nerves; slow healing; slow turnover; low metabolic activity.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Hyaline cartilage is found in the wall of all EXCEPT:",
+          a: "Bronchioles.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which cells produce and maintain the cartilage ECM?",
+          a: "Chondrocytes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "If an MRI shows an open epiphyseal growth plate in lower limb bones, is growth likely?",
+          a: "Yes — longitudinal growth can still occur.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "What is newly secreted, uncalcified organic bone matrix called?",
+          a: "Osteoid.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which epidermal layer has intercellular bridges?",
+          a: "Stratum spinosum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about the stratum granulosum is TRUE?",
+          a: "It contains keratohyalin and lamellar granules.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about Langerhans cells is TRUE?",
+          a: "They play an immunological role in the skin.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Meissner corpuscles are present in which region of the skin?",
+          a: "Dermal papillary layer.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement concerning thin skin is TRUE?",
+          a: "It contains hair follicles.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about eccrine sweat glands is TRUE?",
+          a: "They have a narrow duct lined by a stratified cuboidal epithelium.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about hair follicles is TRUE?",
+          a: "They are present in thin skin but not in thick skin.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement concerning skin melanocytes is TRUE?",
+          a: "They synthesize a pigment that protects against UV radiation damage.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement concerning sebaceous glands is TRUE?",
+          a: "They employ the mechanism of holocrine secretion.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which epidermal cells are found in all strata?",
+          a: "Keratinocytes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "The nail plate is a highly compressed extension of which stratum?",
+          a: "Stratum corneum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which epidermal cells are associated with albinism?",
+          a: "Melanocytes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which cartilage type has a homogeneous matrix?",
+          a: "Hyaline cartilage.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which bone develops through both endochondral and intramembranous ossification?",
+          a: "Clavicle.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Where are nail capillaries used to assess peripheral circulation found?",
+          a: "Nail bed.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which cells produce and maintain the cartilage ECM (2018)?",
+          a: "Chondrocytes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement about stratum granulosum is TRUE (2018)?",
+          a: "It contains keratohyalin granules.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Which statement is WRONG (2018)?",
+          a: "WRONG: 'Epiphyseal closure occurs at the same time for all long bones in the body.'",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "A benign cartilage tumor is called:",
+          a: "Chondroma.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "If CT shows epiphyseal growth plates in femur and tibia, is height growth likely?",
+          a: "Yes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "In which stratum are desmosomes most numerous?",
+          a: "Stratum spinosum.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "The free surface of synovium is lined by:",
+          a: "A and B — Type A and Type B synoviocytes.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "How is avascularity of mature cartilage revealed (2018)?",
+          a: "All of the above.",
+        },
+        {
+          s: "Anatomy",
+          section: "Histology",
+          q: "Where do chondrocytes become enlarged and vacuolated (2018)?",
+          a: "Zone of hypertrophy.",
+        },
+
+        // ==================== EMBRYOLOGY ====================
+        {
+          s: "Anatomy",
+          section: "Embryology",
+          q: "[Embryology questions coming soon — no MCQs were provided in your MSK QUIZ_DATA yet. Check back after your embryology exams.]",
+          a: "Placeholder — replace this card once embryology MCQs are added to QUIZ_DATA.",
+        },
+        // ==================== BONE & JOINT PATHOLOGY ====================
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "[Start hidden in photo] ... small for gestational age. The infant has immediate ... limb shortening, frontal skull bossing, and small thorax. A radiograph shows ... without fractures. What is the most likely diagnosis?",
+          a: "Thanatophoric dysplasia — the most common lethal skeletal dysplasia, caused by an activating FGFR3 mutation. Features: micromelia, frontal bossing, small thorax, telephone-receiver femurs.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 2-year-old child has had multiple bone fractures with minor trauma, hepatosplenomegaly, palsies of cranial nerves II/VII/VIII, and pancytopenia. Radiographs show diffusely sclerotic bones with poorly formed metaphyses. Molecular analysis reveals a defect in carbonic anhydrase production. Which bone cell is functionally deficient?",
+          a: "Osteoclasts — this is osteopetrosis (marble bone disease). Carbonic anhydrase II deficiency prevents bone resorption. Osteoclasts derive from the monocyte lineage, so stem cell transplantation replaces them.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "What causes osteoporosis?",
+          a: "All of the following: senile/age-related, postmenopausal (estrogen loss → ↑RANKL → ↑osteoclast activity), and calcium/nutritional deficiency. Osteoporosis = reduced bone mass with normal mineralization.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 10-year-old male presents with pain and inflammation of the right lower leg. X-ray shows a tibial shaft with sequestrum and involucrum. What is the diagnosis?",
+          a: "Chronic osteomyelitis — sequestrum (necrotic bone fragment) surrounded by involucrum (reactive new bone sheath).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "An 82-year-old man has worsening lower back/hip/shoulder pain for 6 years, had to buy larger hats, and shows bone biopsy with a mosaic trabecular pattern with increased osteoclasts and osteoblasts. Which complication is most likely?",
+          a: "Osteosarcoma — this is Paget disease of bone. Secondary osteosarcoma occurs in ~1% of long-standing polyostotic disease.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 28-year-old flips over an ATV and lands on his leg. Pain on palpation over the shin, no shortening, skin intact. X-ray shows mid-shaft tibia and fibula fracture into multiple fragments. Which term best describes these fractures?",
+          a: "Comminuted — the bone is broken into more than two fragments.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is the major cause of dwarfism?",
+          a: "Achondroplasia — most common cause of disproportionate dwarfism. Gain-of-function FGFR3 mutation impairs chondrocyte proliferation in the growth plate.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A benign bone tumor with nocturnal pain relieved by NSAIDs is:",
+          a: "Osteoid osteoma. Small (<2 cm) nidus that produces prostaglandin E2, causing severe night pain relieved by aspirin or NSAIDs. X-ray shows a radiolucent nidus with surrounding sclerosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 9-year-old boy has right hip pain for 3 weeks with fever 38.2 °C, swelling, tenderness, and reduced ROM. X-ray shows osteolysis and cortical erosion at the femoral metaphysis with soft-tissue swelling and abscess formation. Which organism is most likely?",
+          a: "Staphylococcus aureus — the most common cause of acute hematogenous osteomyelitis in children.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 39-year-old man has back pain for 3 months, chronic cough for 2 years, lumbar tenderness without warmth/swelling, L2 compression fracture, and CT shows a right psoas abscess. Which organism is most likely?",
+          a: "Mycobacterium tuberculosis — Pott disease (tuberculous spondylitis) with cold psoas abscess.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is a cartilage-forming tumor?",
+          a: "Osteochondroma — a benign cartilage-capped bony outgrowth (exostosis). Multiple hereditary exostoses = EXT1/EXT2 mutations.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 14-year-old female presents with a distal femoral mass. X-ray shows Codman's triangle. Most likely diagnosis?",
+          a: "Osteosarcoma — most common primary malignant bone tumor in adolescents; arises in the metaphysis (distal femur, proximal tibia).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 16-year-old boy has pain around the right knee for 3 months. X-ray shows an ill-defined metaphyseal mass with periosteal elevation. Biopsy shows large, hyperchromatic, pleomorphic spindle cells forming osteoid. Which tumor suppressor gene is most likely mutated?",
+          a: "RB (RB1). Osteosarcoma is associated with RB1 and TP53 mutations.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is NOT a feature of rheumatoid arthritis?",
+          a: "Osteophyte — osteophytes (bone spurs) are a hallmark of osteoarthritis, not RA. RA produces pannus, marginal erosions, and ankylosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Tophaceous arthritis is a morphologic type of:",
+          a: "Gout arthritis — tophi are aggregates of monosodium urate crystals surrounded by foreign-body giant cell reaction.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 72-year-old man has 7-kg weight loss, proximal muscle weakness, difficulty with urination for 4 months. Strength 4/5 in proximal extremities, no pain. Anti-AChR negative. No response to anticholinesterases. Which underlying condition is most likely?",
+          a: "Small cell lung carcinoma — Lambert-Eaton myasthenic syndrome is a paraneoplastic syndrome caused by autoantibodies against presynaptic P/Q-type voltage-gated calcium channels.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 30-year-old woman has progressive muscle weakness with myalgia. Violaceous rash on face (palpebral). Dusky red patches on elbows, knees, knuckles. CK 620 U/L. Biopsy shows mononuclear inflammatory infiltrate around small vessels and perifascicular atrophy. What is the mechanism?",
+          a: "Antibody- and complement-mediated injury to the microvasculature — this is dermatomyositis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 71-year-old woman on a cholesterol-lowering drug develops diffuse muscle tenderness, CK 2049 U/L, creatinine 2 mg/dL, and urine dipstick positive for blood WITHOUT red cells. Which drug?",
+          a: "Lovastatin (statin). It can cause myopathy and rhabdomyolysis; released myoglobin causes dipstick-positive 'blood' without RBCs and can cause AKI.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 58-year-old man with Sjogren syndrome develops worsening double vision and eyelid drooping toward the end of the day, difficulty chewing. Strength decreases with repetitive movement. Edrophonium restores strength. What lab finding is expected?",
+          a: "Acetylcholine receptor antibody positivity — this is myasthenia gravis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 20-year-old man has a cluster of small lesions on his upper lip for 5 days. Four lesions 0.2–0.5 cm, raised and filled with clear fluid. Which descriptive term applies?",
+          a: "Vesicles — raised, fluid-filled lesions smaller than 0.5 cm. Cluster on lip suggests herpes labialis (HSV-1).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A middle-aged male has well-defined erythematous plaques with silvery white scales on scalp and elbows, plus onycholysis. What is the likely diagnosis?",
+          a: "Psoriasis — chronic immune-mediated (Th17/IL-23) disease; Auspitz sign, Koebner phenomenon; nail pitting and onycholysis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is NOT true about urticaria?",
+          a: "None — all three statements about urticaria (mast cell degranulation, dermal vessel hyperpermeability, erythematous/edematous/pruritic plaques) are TRUE.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which is NOT true about impetigo?",
+          a: "More common in adults than children — FALSE. Impetigo is most common in children aged 2–5 years.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which premalignant lesion is caused by UV-induced DNA damage with TP53 mutations and frequently progresses to squamous cell carcinoma?",
+          a: "Actinic keratosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is NOT a risk factor for malignant skin tumors?",
+          a: "None — all listed (chronic UV exposure, xeroderma pigmentosum, immunosuppression, chronic ulcers/burn scars) are risk factors.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which arthritic diseases are seronegative spondyloarthritis?",
+          a: "All — psoriatic arthritis, reactive arthritis, and ankylosing spondylitis are all HLA-B27 associated seronegative spondyloarthritides.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which bacteria are commonly implicated in suppurative arthritis?",
+          a: "All — S. aureus, Streptococcus, and N. gonorrhoeae are all common causes.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "What is the most sensitive serologic test for SLE?",
+          a: "ANA — positive in ~95% of SLE cases. Anti-dsDNA is more specific but less sensitive.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "What is immediately formed after a fracture in the healing process?",
+          a: "Hematoma — bleeding from torn vessels forms a clot at the fracture site immediately.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is TRUE about rheumatoid arthritis?",
+          a: "All of the following are true: wrist/ankle/knee commonly affected; juxta-articular osteoporosis; joint deformity; low-grade fever.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 50-year-old has flaccid blisters that rupture easily, with acantholysis on biopsy. What is the key autoantibody?",
+          a: "Anti-desmoglein IgG — this is pemphigus vulgaris. Desmoglein 3 (mucosal) and Desmoglein 1 + 3 (mucocutaneous).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 40-year-old man with acute great toe pain has negatively birefringent needle-shaped crystals in synovial fluid. What is the underlying metabolic defect?",
+          a: "Purine metabolism dysfunction — gout caused by monosodium urate crystal deposition. Needle-shaped, negatively birefringent.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient has thickened skin with prominent markings due to chronic scratching. What is this called?",
+          a: "Lichenification — thickening of skin with accentuated markings from chronic rubbing.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 30-year-old presents with well-demarcated pink to salmon plaques covered by loosely adherent silvery-white scales. What is the most likely diagnosis?",
+          a: "Psoriasis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient with anti-Jo-1 antibodies develops interstitial lung disease and mechanic's hands. This is most associated with:",
+          a: "Polymyositis — antisynthetase syndrome (anti-Jo-1). Associated with ILD, mechanic's hands, arthritis, Raynaud, fever.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 45-year-old woman has a 5 mm flat brown lesion on her forearm. No elevation or scaling. What is the most appropriate term?",
+          a: "Macule — flat, nonpalpable, <1 cm, change in skin color.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A newborn presents with multiple fractures after minimal handling and blue sclerae. Genetic testing shows a COL1A1 mutation. What is the diagnosis?",
+          a: "Osteogenesis imperfecta (Type I) — hereditary disorder of type I collagen.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "An umbilicated papule in a child is caused by:",
+          a: "Molluscum contagiosum — poxvirus producing firm, pink, umbilicated papules.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 45-year-old diabetic has numbness and burning pain in both feet over 6 months. Nerve conduction shows reduced amplitude but preserved conduction velocity. What is the pathology?",
+          a: "Axonal neuropathy — diabetic peripheral neuropathy is length-dependent axonal polyneuropathy.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which pair is INCORRECT about fractures?",
+          a: "Greenstick: extending only partially through the bone, common in elderly when bones are thick — FALSE. Greenstick fractures are characteristic of CHILDREN.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A bilateral vestibular schwannoma is most associated with:",
+          a: "NF2 — neurofibromatosis type 2, caused by mutations in the NF2 gene (merlin).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A diabetic with a foot ulcer develops localized bone pain and fever. MRI shows bone marrow edema; S. aureus cultured. What is the diagnosis?",
+          a: "Osteomyelitis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A newborn has a large congenital nevus. What is the most significant risk?",
+          a: "Malignant melanoma — large/giant congenital melanocytic nevi have increased risk of melanoma.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A chronic ulcer in a burn scar transforms into a keratin-producing tumor. What is the most likely mutation?",
+          a: "TP53 — Marjolin ulcer, most commonly SCC of the skin.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Select the WRONG statement about gout.",
+          a: "WRONG: 'Primary gout (90%) is idiopathic, affects females more than males, and is typically seen in older women.' Gout is more common in MEN, not women.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient develops ascending paralysis 2 weeks after Campylobacter jejuni infection. CSF shows elevated protein without pleocytosis. What is the diagnosis?",
+          a: "Guillain-Barré syndrome — classic postinfectious acute immune-mediated peripheral neuropathy with albuminocytologic dissociation.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 70-year-old man has a pearly nodular lesion with telangiectasia on his nose. Biopsy shows peripheral palisading of basaloid cells. What is the diagnosis?",
+          a: "Basal cell carcinoma.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 10-year-old with fever and 'onion-skin' periosteal reaction on X-ray has a small round blue cell tumor. What is the key genetic marker?",
+          a: "t(11;22) translocation — Ewing sarcoma (EWSR1-FLI1 fusion).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 50-year-old woman has heliotrope rash and proximal muscle weakness. Muscle biopsy shows perifascicular atrophy and C5b-9 deposition in capillaries. What is the diagnosis?",
+          a: "Dermatomyositis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "The most common benign soft tissue tumor of adulthood?",
+          a: "Lipoma — well-circumscribed, slow-growing, painless, mobile; composed of mature adipocytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is CORRECT about rheumatoid arthritis?",
+          a: "RA is thought to be caused by an autoimmune reaction. It is symmetric (not asymmetric), affects small joints (not just weight-bearing), and does NOT cause osteophytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is CORRECT about osteogenesis imperfecta?",
+          a: "It is the most common inherited disorder of connective tissue. It involves type I collagen (not type IV), joint hypermobility (not hypomobility), and thin/osteopenic bone (not thick bone).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 50-year-old on long-term steroids presents with hip pain worse on weight-bearing. X-ray shows subchondral collapse. What is the underlying pathology?",
+          a: "Osteonecrosis (avascular necrosis) — most common non-traumatic causes are corticosteroids and alcohol abuse. Crescent sign on X-ray.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient with Paget disease develops hearing loss and lion-like facies. What is the most feared complication?",
+          a: "Osteosarcoma — malignant transformation occurs in ~1% of long-standing polyostotic Paget disease.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is the characteristic GROSS feature of osteosarcoma?",
+          a: "It produces a large, firm, white-tan mass with necrosis and hemorrhage. (Metaphyseal location and osteoid production are site/histology, not gross.)",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A benign tumor arising from eccrine sweat glands is called:",
+          a: "Syringoma — benign adnexal neoplasm with eccrine differentiation; presents as small papules on lower eyelids of young women.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A targetoid lesion with a pink border and pale center appears after penicillin use. This describes:",
+          a: "Erythema multiforme — Type IV hypersensitivity with classic targetoid lesions. HSV is the most common trigger.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A tense subepidermal blister in an elderly patient is most suggestive of:",
+          a: "Bullous pemphigoid — IgG against BP180/BP230; tense bullae; negative Nikolsky; elderly patients.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient with silvery-white scaly plaques on elbows has nail pitting. What is the most likely diagnosis?",
+          a: "Psoriasis.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 3-year-old child with short-limbed dwarfism and macrocephaly has an FGFR3 mutation. What is the key pathogenic mechanism?",
+          a: "Impaired chondrocyte proliferation — constitutively active FGFR3 inhibits endochondral bone growth. Membranous ossification is unaffected (hence macrocephaly).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is FALSE about osteoporosis?",
+          a: "FALSE: 'Primary causes include immobilization, endocrinopathies.' These are SECONDARY causes. Primary = postmenopausal (type I) and senile/age-related (type II).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 30-year-old pregnant woman develops facial hyperpigmentation. Which condition is most likely?",
+          a: "Melasma — 'mask of pregnancy', triggered by estrogen/progesterone + sun exposure.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A newborn with multiple fractures after minimal handling and blue sclerae has a COL1A1 mutation. What is the diagnosis?",
+          a: "Osteogenesis imperfecta (Type I) — mild, non-lethal, autosomal dominant.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient with Pott disease has kyphosis and vertebral collapse. What is the causative organism?",
+          a: "Mycobacterium tuberculosis — hematogenous spread to vertebral bodies; cold psoas abscess.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A newborn with respiratory distress and hypotonia improves with pyridostigmine. Genetic testing shows a mutation in the ε-subunit of AChR. What is this?",
+          a: "Congenital myasthenic syndrome — loss-of-function mutations in CHRNE (ε-subunit of postsynaptic nicotinic AChR).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is INCORRECT about pyogenic osteomyelitis?",
+          a: "INCORRECT: 'The most common route of infection is direct inoculation from adjacent infection.' The most common route is HEMATOGENOUS spread.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 20-year-old with milder limb-girdle weakness has partial dystrophin staining on IHC. What is this?",
+          a: "Becker muscular dystrophy — non-frameshift dystrophin mutation producing truncated but partially functional dystrophin.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A patient with NF1 develops a plexiform neurofibroma. What is the risk of malignant transformation?",
+          a: "5–10% — plexiform neurofibromas carry a 5–10% lifetime risk of transformation to malignant peripheral nerve sheath tumor (MPNST).",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 60-year-old fair-skinned man has a variegated, irregularly bordered pigmented lesion on his back. Biopsy shows malignant melanocytes invading the dermis. Which growth phase is this?",
+          a: "Vertical growth phase — invasion into deep dermis as a nodule, with metastatic potential. Breslow depth predicts risk.",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "Which one is NOT true about Ewing sarcoma?",
+          a: "INCORRECT: 'Grossly, often affects the metaphysis of long bones...' — Ewing sarcoma arises in the DIAPHYSIS, not metaphysis. (Osteosarcoma arises in the metaphysis.)",
+        },
+        {
+          s: "Pathology",
+          section: "Bone & Joint Pathology",
+          q: "A 70-year-old man has quadriceps weakness and dysphagia. Biopsy shows rimmed vacuoles. What is the most likely condition?",
+          a: "Inclusion body myositis — most common inflammatory myopathy in older adults; rimmed vacuoles on biopsy.",
+        },
+
+        // ==================== SKIN PATHOLOGY ====================
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 28-year-old woman presents with scaly red patches on her face in a 'butterfly distribution.' Histology shows basal layer liquefaction degeneration and DIF shows granular basement membrane immune deposits. What is the most likely diagnosis?",
+          a: "Lupus erythematosus — butterfly distribution, basal layer liquefaction, granular IgG/IgM/C3 at the dermoepidermal junction.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What percentage of patients with Discoid Lupus Erythematosus (DLE) progress to Systemic Lupus Erythematosus (SLE)?",
+          a: "Approximately 5%.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 32-year-old man presents with violaceous, flat-topped, pruritic papules on the flexor surfaces of his wrists. Histology shows hypergranulosis, saw-tooth rete ridges, and a band-like lymphocytic infiltrate. What oral manifestation is associated?",
+          a: "Wickham striae (white reticular lines) — lichen planus. The 6 Ps: pruritic, purple, polygonal, planar papules/plaques.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which stratum layer change is diagnostic of active psoriasis?",
+          a: "Acanthosis with loss of stratum granulosum and confluent parakeratosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In psoriasis, the collection of neutrophils within the parakeratotic stratum corneum is specifically termed:",
+          a: "Munro microabscesses.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The Auspitz sign (pinpoint bleeding upon scraping a psoriatic plaque) is directly caused by which histological finding?",
+          a: "Thinning of the epidermal roof over elongated, tortuous dermal papillae capillaries.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What immunologic hypersensitivity mechanism drives Allergic Contact Dermatitis?",
+          a: "Type IV (cell-mediated delayed-type).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Atopic Dermatitis is fundamentally linked with which immunologic features and personal/family history?",
+          a: "Type I hypersensitivity, elevated serum IgE, and history of asthma/allergic rhinitis (the atopic triad).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the primary histological hallmark of acute eczema characterized by intercellular epidermal edema?",
+          a: "Spongiosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In Acne Vulgaris, which resident microorganism metabolizes sebum lipids into proinflammatory free fatty acids?",
+          a: "Cutibacterium acnes (formerly Propionibacterium acnes).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the term for the non-inflammatory primary lesion of acne vulgaris formed by follicular keratin plugging?",
+          a: "Comedo (open or closed) — open = blackhead; closed = whitehead.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Lichen Simplex Chronicus develops as a cutaneous response to chronic rubbing/scratching. Its microscopic hallmark is:",
+          a: "Epidermal hyperplasia (acanthosis) with hypergranulosis and dermal fibrosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In Lichen Planus, apoptotic basal keratinocytes degenerate into necrotic, enucleated colloid bodies termed:",
+          a: "Civatte (colloid) bodies.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which serologic autoantibodies are most specific for SLE?",
+          a: "Anti-double stranded DNA (anti-dsDNA) and anti-Smith (anti-Sm).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Follicular plugging, epidermal atrophy, and superficial/deep perivascular/periappendageal lymphocytic infiltrate are characteristic of:",
+          a: "Cutaneous Lupus Erythematosus (DLE).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The emergence of new psoriatic or lichen planus lesions at sites of local cutaneous trauma is known as the:",
+          a: "Koebner phenomenon.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Neutrophils collecting within the stratum spinosum to form 'spongiform pustules of Kogoj' are seen in:",
+          a: "Psoriasis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which epidermal layer contains the self-renewing stem cell population responsible for epidermal regeneration?",
+          a: "Stratum basalis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Intercellular desmosome attachments ('prickles') between keratinocytes are most prominent in which layer?",
+          a: "Stratum spinosum.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 25-year-old patient develops erythematous, weeping, pruritic vesicles on the wrist 2 days after wearing a nickel watch. What microscopic feature is expected?",
+          a: "Intraepidermal intercellular edema (spongiosis) — allergic contact dermatitis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the specific primary autoantibody target in Pemphigus Vulgaris?",
+          a: "Desmoglein 3 (and Desmoglein 1) in desmosomes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the level of histological cleavage and blister formation in Pemphigus Vulgaris?",
+          a: "Suprabasal intraepidermal.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The histological feature where basal keratinocytes remain attached to the basement membrane while overlying keratinocytes separate in Pemphigus Vulgaris is called:",
+          a: "Tombstoning.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "DIF of perilesional skin in Pemphigus Vulgaris demonstrates:",
+          a: "Intercellular 'fishnet-like' pattern of IgG and C3 throughout the epidermis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Why do skin bullae in Pemphigus Vulgaris rupture easily compared to those in Bullous Pemphigoid?",
+          a: "Pemphigus blisters have a thin intraepidermal roof; Bullous Pemphigoid blisters have a full-thickness epidermal roof.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Painful oral mucosal erosions and ulcers are present in almost all patients with:",
+          a: "Pemphigus Vulgaris — desmoglein 3 is highly expressed in oral mucosa.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Pemphigus Foliaceus differs from Pemphigus Vulgaris because autoantibodies target Desmoglein 1, producing cleavage at which level?",
+          a: "Subcorneal / stratum granulosum layer.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What are the autoantibody targets in Bullous Pemphigoid?",
+          a: "Hemidesmosomal antigens BP180 (type XVII collagen) and BP230.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the primary histological finding in Bullous Pemphigoid?",
+          a: "Subepidermal blister with an intact epidermal roof and an eosinophil-rich infiltrate.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Direct Immunofluorescence in Bullous Pemphigoid reveals:",
+          a: "Continuous linear band of IgG and C3 along the dermoepidermal basement membrane zone.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Dermatitis Herpetiformis is strongly associated with which underlying systemic disorder?",
+          a: "Celiac disease (gluten-sensitive enteropathy).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the pathognomonic DIF finding in Dermatitis Herpetiformis?",
+          a: "Granular IgA deposits localized specifically to the tips of dermal papillae.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Microscopic examination of early lesions in Dermatitis Herpetiformis reveals:",
+          a: "Neutrophilic microabscesses at the tips of dermal papillae.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 72-year-old male has large, tense bullae on his limbs that do not rupture easily. Oral mucosa is normal. What is the most likely diagnosis?",
+          a: "Bullous pemphigoid.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The clinical sign where gentle lateral pressure on unblistered skin induces epidermal detachment is:",
+          a: "Nikolsky sign.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In Erythema Multiforme, what cell type mediates keratinocyte apoptosis at the dermoepidermal junction?",
+          a: "CD8+ cytotoxic T lymphocytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the most common antecedent infectious trigger for Erythema Multiforme?",
+          a: "Herpes Simplex Virus (HSV).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "TEN is distinguished from SJS primarily by:",
+          a: "Percentage of total body surface area involved by epidermal detachment (>30% in TEN, <10% in SJS).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Histologically, TEN demonstrates:",
+          a: "Full-thickness epidermal necrosis and extensive dermoepidermal separation.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A pregnant patient in her 3rd trimester develops severe pruritus and tense periumbilical bullae. DIF reveals linear C3 along the basement membrane zone. Diagnosis?",
+          a: "Gestational pemphigoid (Herpes gestationis).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 65-year-old man presents with multiple tan-to-dark brown, waxy, coin-like plaques on his trunk that appear 'stuck-on.' What is the diagnosis?",
+          a: "Seborrheic keratosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What activated growth factor signaling gene mutation is characteristically found in Seborrheic Keratoses?",
+          a: "Activating mutations in FGFR3.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The sudden eruption of dozens of seborrheic keratoses (Leser-Trelat sign) is a paraneoplastic indicator for:",
+          a: "Gastrointestinal adenocarcinoma (e.g., gastric carcinoma).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What key microscopic feature defines Seborrheic Keratosis?",
+          a: "Monotonous proliferation of basaloid cells with keratin-filled horn cysts and pseudo-horn cysts.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Actinic Keratosis is a direct premalignant precursor lesion for which invasive skin cancer?",
+          a: "Cutaneous Squamous Cell Carcinoma (SCC).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Histopathology of Actinic Keratosis demonstrates:",
+          a: "Cytologic atypia confined to lower epidermal layers, parakeratosis, and dermal solar elastosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "When keratinocyte atypia involves the FULL thickness of the epidermis without basement membrane breach, it is termed:",
+          a: "Squamous Cell Carcinoma in situ (Bowen disease).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A 60-year-old farmer presents with a rough, sandpaper-like scaly papule on the dorsum of his hand. What is the initial treatment?",
+          a: "Local destruction via cryotherapy or topical agents (5-FU, imiquimod) to prevent progression.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Keratoacanthoma is clinically and histologically classified as:",
+          a: "A very well-differentiated variant of Squamous Cell Carcinoma that grows rapidly and may spontaneously regress.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What classic gross clinical appearance is pathognomonic for Keratoacanthoma?",
+          a: "Cup-shaped (crateriform) nodule with a central plug of keratin debris.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the most common malignant skin cancer worldwide?",
+          a: "Basal Cell Carcinoma (BCC).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Basal Cell Carcinoma is driven by constitutive activation of the Hedgehog pathway due to loss-of-function mutations in:",
+          a: "PTCH1 (Patched 1).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Gorlin syndrome (Nevoid BCC Syndrome) is caused by inherited PTCH1 mutations and presents with early BCCs alongside:",
+          a: "Medulloblastomas, odontogenic keratocysts, and palmar/plantar pits.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The classic gross appearance of a nodular Basal Cell Carcinoma is a:",
+          a: "Pearly, translucent papule or nodule with prominent telangiectasias and rolled borders.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Histologically, Basal Cell Carcinoma is recognized by dermal islands of basaloid cells demonstrating:",
+          a: "Peripheral palisading of nuclei and stromal retraction artifact (clefting).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Squamous Cell Carcinoma classically arises on the ___; Basal Cell Carcinoma classically arises on the ___.",
+          a: "SCC: lower lip; BCC: upper lip.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Cutaneous SCC in solid organ transplant recipients is strongly associated with immunosuppression and infection by:",
+          a: "Human Papillomavirus (HPV).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "SCC arising within a chronic ulcer, burn scar, or draining osteomyelitis sinus tract is called a:",
+          a: "Marjolin ulcer.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Diagnostic microscopic hallmarks of well-differentiated invasive cutaneous SCC include:",
+          a: "Concentric keratin collections forming 'keratin pearls' and intercellular desmosomal bridges.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What inherited defect in Nucleotide Excision Repair causes extreme UV sensitivity and high risk for BCC, SCC, and Melanoma?",
+          a: "Xeroderma Pigmentosum.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which neural crest-derived cells synthesize melanin within specialized organelles called melanosomes?",
+          a: "Melanocytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Vitiligo is characterized by depigmented macules. What is its underlying pathogenesis?",
+          a: "Autoimmune destruction of functional melanocytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Oculocutaneous Albinism is primarily caused by an inherited autosomal recessive defect in which enzyme?",
+          a: "Tyrosinase (preventing tyrosine conversion to dopaquinone/melanin).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Patients with oculocutaneous albinism are at high risk for skin cancers because:",
+          a: "Lack of protective melanin allows unmitigated UVB-induced pyrimidine dimer formation.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Histologically, freckles (ephelides) demonstrate:",
+          a: "Normal density/number of melanocytes, with increased melanin pigment in basal keratinocytes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "How do freckles (ephelides) differ clinically from lentigines (lentigo simplex)?",
+          a: "Freckles darken with sun exposure; lentigines do NOT darken with sun exposure.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Lentigo simplex is histologically defined by:",
+          a: "Benign linear, non-nested proliferation (hyperplasia) of melanocytes along the basement membrane.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is Melasma?",
+          a: "Acquired mask-like facial hyperpigmentation associated with pregnancy or oral contraceptive use.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In the clinical evolution of acquired melanocytic nevi, match the correct histological site: Junctional; Compound; Intradermal.",
+          a: "Junctional: nests at DEJ. Compound: nests at DEJ AND dermis. Intradermal: nests restricted to dermis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the single most important prognostic indicator for cutaneous Malignant Melanoma?",
+          a: "Breslow thickness (depth of invasion in mm from granular layer to deepest tumor cell).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "In the ABCDE mnemonic for melanoma, what does 'E' represent?",
+          a: "Evolution (changes in size, shape, color, or symptoms over time).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What distinguishes the Radial Growth Phase of melanoma from its Vertical Growth Phase?",
+          a: "Radial = horizontal spread within epidermis/superficial dermis, no metastasis. Vertical = invasion of deep dermis with nodule formation, metastatic risk.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the most common clinical subtype of Malignant Melanoma overall?",
+          a: "Superficial spreading melanoma (~70% of cases).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Acral Lentiginous Melanoma is distinct because it occurs on palms, soles, and subungual sites, and is:",
+          a: "Completely unrelated to sun/UV light exposure and is the most common subtype in dark-skinned individuals.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What somatic gain-of-function oncogenic mutation is present in over 50% of cutaneous melanomas?",
+          a: "BRAF V600E.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Non-sun-exposed melanomas (mucosal, acral) frequently harbor activating mutations in:",
+          a: "c-KIT receptor tyrosine kinase.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Familial Melanoma syndrome is strongly linked to germline loss-of-function mutations in the CDKN2A gene locus, which encodes:",
+          a: "p16/INK4a and p14/ARF tumor suppressors.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Histopathology of melanoma shows single atypical melanocytes or poorly formed nests scattered throughout all epidermal levels. This pattern is called:",
+          a: "Pagetoid spread (buckshot scatter).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Cytologically, malignant melanoma cells characteristically display prominent:",
+          a: "'Cherry red' eosinophilic nucleoli.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which immunohistochemical marker is widely used to confirm melanocytic origin and evaluate sentinel lymph nodes?",
+          a: "HMB-45 (alongside S100 and Melan-A/MART-1).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Impetigo is a highly contagious superficial bacterial skin infection in children. What are its two primary causative pathogens?",
+          a: "Staphylococcus aureus and Streptococcus pyogenes.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the classic clinical appearance of non-bullous Impetigo?",
+          a: "Erythematous macules/papules that rupture to form honey-colored, dried serum crusts.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the histological hallmark of Impetigo?",
+          a: "Subcorneal pustules containing neutrophils and bacterial cocci.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Cellulitis is a deep bacterial infection involving which anatomical tissue layers?",
+          a: "Dermis and subcutaneous tissue.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "A rapidly progressive, life-threatening infection involving deep subcutaneous tissue and fascia, characterized by gas production (crepitus) and toxicity, is:",
+          a: "Necrotizing fasciitis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which bacterial toxins cause Staphylococcus Scalded Skin Syndrome (SSSS)?",
+          a: "Exfoliative toxins A and B (produced by Staphylococcus aureus).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "At what specific anatomical layer do exfoliative toxins A and B cleave cell adhesion in SSSS?",
+          a: "Stratum granulosum.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "How is SSSS distinguished histologically and clinically from Toxic Epidermal Necrolysis (TEN)?",
+          a: "SSSS causes superficial cleavage at the stratum granulosum; TEN causes deep full-thickness dermoepidermal junction necrosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Cutaneous warts (verrucae) are benign epidermal hyperplasias caused by infection with:",
+          a: "Human Papillomavirus (HPV).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the pathognomonic histopathological feature of HPV-infected keratinocytes in verrucae?",
+          a: "Koilocytosis — perinuclear cytoplasmic vacuolization with an irregular, hyperchromatic nucleus.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Molluscum Contagiosum is caused by which viral pathogen?",
+          a: "Poxvirus.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What is the classic clinical appearance of Molluscum Contagiosum lesions?",
+          a: "Firm, pink, umbilicated (center-dimpled) papules.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "The histopathological hallmark of Molluscum Contagiosum within keratinocytes is:",
+          a: "Large, ellipsoidal, intracytoplasmic viral inclusion bodies (Molluscum or Henderson-Paterson bodies).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Which diagnostic histochemical stains are used to highlight fungal hyphae and spores in dermatophytes?",
+          a: "Periodic acid-Schiff (PAS) or Gomori methenamine silver (GMS).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Superficial fungal dermatophytes (tinea) typically present clinically as:",
+          a: "Pruritic, scaly erythematous macules/plaques with an expanding annular (ring-like) border.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Acanthosis Nigricans presents as dark, velvety hyperpigmented flexural plaques. It is strongly associated with:",
+          a: "Insulin resistance / Type 2 Diabetes Mellitus or internal visceral malignancy (e.g., gastric adenocarcinoma).",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "What histological pattern describes intercellular edema between keratinocytes within the epidermis?",
+          a: "Spongiosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Thickening of the stratum corneum accompanied by abnormal retention of cell nuclei is termed:",
+          a: "Parakeratosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Premature, abnormal keratinization of individual keratinocytes below the stratum corneum is called:",
+          a: "Dyskeratosis.",
+        },
+        {
+          s: "Pathology",
+          section: "Skin Pathology",
+          q: "Diffuse epidermal hyperplasia resulting in thickening of the stratum spinosum layer is termed:",
+          a: "Acanthosis.",
+        },
+        // ==================== MUSCULOSKELETAL PHARMACOLOGY ====================
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Acute skin inflammation with oozing, vesiculation, and crusting is best treated with:",
+          a: "Tincture — the dermatological rule is 'if it is wet, dry it.' Ointments are highly occlusive and trap moisture, which can aggravate oozing skin.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "It is effective in the treatment of impetigo caused by methicillin-resistant S. aureus (MRSA):",
+          a: "Mupirocin — inhibits bacterial isoleucyl-tRNA synthetase; first-line topical treatment for MRSA impetigo.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Which statement about retinoids for acne vulgaris treatment is NOT true?",
+          a: "Transformation of open comedones into closed ones — FALSE. Retinoids accelerate turnover, unclog pores, and resolve comedones; reversing them would worsen acne.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Acne vulgaris is highly related to androgen levels. A drug that inhibits conversion of testosterone to dihydrotestosterone, used in acne vulgaris, is:",
+          a: "Azelaic acid — inhibits 5-α-reductase, has antibacterial action against C. acnes, is comedolytic, and inhibits tyrosinase.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "An α-adrenergic agonist indicated for topical treatment of persistent facial erythema of rosacea in adults 18 years or older is:",
+          a: "Brimonidine — selective topical α-adrenergic agonist causing cutaneous vasoconstriction.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Topical corticosteroids are a mainstay of psoriasis therapy because of several effects, EXCEPT:",
+          a: "Vasodilation — corticosteroids cause VASOCONSTRICTION, not vasodilation. Effects: anti-inflammatory, antiproliferative, immunosuppressive, vasoconstrictive.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "An oral drug that inhibits phosphodiesterase-4, reducing production of inflammatory mediators in psoriasis, is:",
+          a: "Apremilast — elevates intracellular cAMP, downregulating TNF-α, IL-17, and IL-23.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A topical skin-whitening agent that reduces hyperpigmentation through inhibition of tyrosinase is:",
+          a: "Hydroquinone — competitively inhibits tyrosinase, damages melanosomes, increases melanocyte degradation.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Which statement about succinylcholine is INCORRECT?",
+          a: "INCORRECT: 'Is metabolized by acetyl cholinesterase.' Succinylcholine is broken down by PLASMA PSEUDOCHOLINESTERASE (butyrylcholinesterase), not synaptic acetylcholinesterase.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A drug that inhibits ryanodine receptor 1 (RyR1) in the sarcoplasmic reticulum, preventing Ca²⁺ release, used for skeletal muscle spasm and malignant hyperthermia, is:",
+          a: "Dantrolene — the definitive life-saving agent for malignant hyperthermia.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Prolonged apnea after succinylcholine can occur due to:",
+          a: "Oral contraceptive use — exogenous estrogens reduce hepatic synthesis of pseudocholinesterase, slowing succinylcholine degradation.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Which statement about bisphosphonates is INCORRECT?",
+          a: "INCORRECT: 'Completely absorbed after oral administration.' Oral bioavailability is <1–5% due to their hydrophilic, polar nature.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A parathyroid hormone receptor agonist that stimulates osteoblastic activity and increases bone formation, used for high fracture risk or failed osteoporosis therapy, is:",
+          a: "Teriparatide — recombinant PTH (1-34). Intermittent once-daily administration has an anabolic effect on bone.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Methotrexate is a mainstay of RA treatment for all the following reasons EXCEPT:",
+          a: "Response occurs within a few hours — FALSE. Methotrexate is a slow-acting DMARD; benefit takes ~6–8 weeks. It is given orally once weekly and arrests disease progression.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "Which drug combination should be AVOIDED in the treatment of rheumatoid arthritis?",
+          a: "Adalimumab + Abatacept — combining two biologic DMARDs markedly increases risk of severe infections without added benefit.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A drug administered as an IV infusion every 4 weeks that inhibits full T-cell activation and reduces the inflammatory response in RA is:",
+          a: "Abatacept — CTLA-4-Ig fusion protein; binds CD80/CD86 on APCs, preventing CD28 co-stimulation.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A drug with anti-inflammatory activity specific for acute gout that binds tubulin and decreases neutrophil migration into the inflamed joint is:",
+          a: "Colchicine — binds tubulin dimers, prevents microtubule assembly, inhibits neutrophil motility and inflammasome activation.",
+        },
+        {
+          s: "Pharmacology",
+          section: "Musculoskeletal Pharmacology",
+          q: "A drug that converts uric acid to allantoin, indicated in tumor lysis syndrome and refractory chronic gout, is:",
+          a: "Pegloticase — pegylated recombinant uricase enzyme.",
+        },
+
+        // ==================== MUSCULOSKELETAL BIOCHEMISTRY ====================
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which statement INCORRECTLY describes slow-twitch muscle tissues?",
+          a: "During the active state, they use ATP faster than it can be replaced — INCORRECT. Slow-twitch fibers have high mitochondrial density, myoglobin, and capillaries, so they resist fatigue. ATP consumption exceeding production is more typical of fast-twitch fibers.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is used as an energy fuel for muscle contraction during vigorous exercise?",
+          a: "Glycogen — muscle glycogen is the primary fuel for vigorous exercise, broken down to glucose for rapid ATP via glycolysis.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What are the key laboratory features in osteomalacia?",
+          a: "↓ Serum calcium, ↓ serum phosphate, ↑ PTH — vitamin D deficiency decreases Ca²⁺ and phosphate absorption, causing secondary hyperparathyroidism.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What is a major cause of muscle fatigue?",
+          a: "Calcium homeostasis imbalance — impaired Ca²⁺ release and reuptake by the sarcoplasmic reticulum reduces force generation during repeated intense contractions.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which statement correctly describes the effect of PTH on phosphorus homeostasis?",
+          a: "A & C are correct — PTH releases phosphate from bone AND acts in opposition to calcitonin. Note: PTH also increases renal phosphate excretion.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is considered a specific marker of osteoblast function, correlating with bone formation rate?",
+          a: "Osteocalcin — a non-collagenous protein produced by osteoblasts, used as a biochemical marker of bone formation.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What is the primary function of creatine phosphate in muscle metabolism?",
+          a: "To provide energy for muscle contraction — rapidly regenerates ATP from ADP via creatine kinase during the first few seconds of maximal exercise.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is a risk factor for osteoporosis?",
+          a: "Overproduction of parathyroid hormone — persistent excess PTH favors osteoclastic bone resorption and bone loss.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays a role in bone remodeling?",
+          a: "Parathyroid hormone — regulates bone remodeling and calcium homeostasis via osteoblast signaling (RANKL pathway).",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone stimulates bone growth and development during childhood?",
+          a: "Growth hormone — stimulates IGF-1 production, which acts on the epiphyseal growth plate.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays a role in regulating calcium levels in the blood?",
+          a: "Parathyroid hormone — the major rapid regulator of extracellular calcium.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is responsible for inhibiting osteoclast activity?",
+          a: "Calcitonin — produced by thyroid C cells, inhibits osteoclasts and reduces bone resorption.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What types of cells are involved in bone remodeling?",
+          a: "Osteoclasts and osteoblasts — coordinated balance between bone resorption (osteoclasts) and bone formation (osteoblasts).",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is responsible for stimulating bone resorption?",
+          a: "Parathyroid hormone — acts indirectly by increasing RANKL expression on osteoblasts, activating osteoclasts.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Collagen biosynthesis occurs in which cellular compartment?",
+          a: "Endoplasmic reticulum — collagen polypeptide chains are synthesized in the rough ER, where hydroxylation and triple-helix formation occur.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which element is required to aid vitamin C for optimal collagen biosynthesis?",
+          a: "Iron — required as a cofactor for prolyl hydroxylase and lysyl hydroxylase. Vitamin C maintains iron in the reduced (Fe²⁺) state.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cleavage of collagen triple helix during tissue remodeling?",
+          a: "Collagenase (MMP-1) — cleaves native collagen triple helix at specific sites, initiating breakdown.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is a regulatory protein that modulates collagen biosynthesis?",
+          a: "Transforming growth factor beta (TGF-β) — stimulates fibroblasts to produce collagen; excessive activity causes fibrosis.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is a common post-translational modification of collagen?",
+          a: "Glycosylation — hydroxylysine residues are glycosylated after hydroxylation, contributing to collagen folding and stability.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is NOT a source of collagen for biomedical applications?",
+          a: "Plant extracts — collagen is an animal protein; plants do not naturally produce true collagen.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cross-linking collagen fibers?",
+          a: "Lysyl oxidase — copper-dependent enzyme that oxidizes lysine/hydroxylysine residues to form covalent cross-links.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which type of collagen is found primarily in basement membranes?",
+          a: "Type IV — forms a network-like meshwork, not fibrils.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which type of collagen is found primarily in blood vessels?",
+          a: "Type III (reticular) collagen.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is a disorder caused by defects in collagen processing?",
+          a: "Ehlers-Danlos syndrome — inherited disorders of collagen synthesis, structure, or processing.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which statement INCORRECTLY describes slow-twitch muscle tissues (2016)?",
+          a: "During the active state, they use ATP faster than it can be replaced — INCORRECT (same reasoning as the 2015 question).",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is used as an energy fuel for muscle contraction during vigorous exercise (2016)?",
+          a: "All of the above — blood glucose, glycogen, and ketone bodies can all serve as metabolic fuels, with different relative importance.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What are the key laboratory features in osteomalacia (2016)?",
+          a: "↓ Serum calcium, ↓ serum phosphate, ↑ PTH.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is a specific marker of osteoblast function (2016)?",
+          a: "Osteocalcin.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What is the primary function of creatine phosphate (2016)?",
+          a: "Rapid regeneration of ATP from ADP during intense muscle activity.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays a role in bone remodeling (2016)?",
+          a: "Parathyroid hormone.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays a role in regulating calcium levels in the blood (2016)?",
+          a: "Parathyroid hormone.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is responsible for inhibiting osteoclast activity (2016)?",
+          a: "Calcitonin.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What types of cells are involved in bone remodeling (2016)?",
+          a: "Osteoclasts and osteoblasts.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cleavage of collagen triple helix (2016)?",
+          a: "Collagenase.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cross-linking collagen fibers (2016)?",
+          a: "Lysyl oxidase.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is a disorder caused by defects in collagen processing (2016)?",
+          a: "Ehlers-Danlos syndrome.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "The following conditions can lead to enhanced osteoclast activity, EXCEPT:",
+          a: "Increased bone formation — osteoclasts resorb bone; osteoblasts form bone. Increased bone formation does not directly stimulate osteoclast activity.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is NOT a post-translational modification of collagen?",
+          a: "None of the above — hydroxylation, glycosylation, and interchain disulfide bonds are ALL post-translational modifications of collagen.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is the direct action of PTH? EXCEPT",
+          a: "Increased bone mineralization — PTH promotes bone RESORPTION when sustained, not mineralization. It increases renal Ca²⁺ reabsorption and (indirectly via vitamin D) intestinal Ca²⁺ absorption.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which laboratory measurement is used to assess vitamin D status?",
+          a: "25-hydroxy vitamin D — the main circulating storage form; the preferred measurement for vitamin D status.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Primary hyperparathyroidism is usually caused by a parathyroid adenoma. Which biochemical finding is NOT characteristic?",
+          a: "Decreased serum calcium and phosphate — in primary hyperparathyroidism, calcium is elevated and phosphate is low; the classic profile is high Ca²⁺, low phosphate, high PTH.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is secreted in response to increased serum calcium?",
+          a: "Calcitonin — released by thyroid C cells when blood calcium rises.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is NOT a direct action of parathyroid hormone?",
+          a: "Increased bone mineralization.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which is the major factor determining whether glucose is oxidized by aerobic or anaerobic glycolysis?",
+          a: "NADH and the ATP/ADP ratio — the cell's energy and redox state regulate glycolytic flux and the fate of pyruvate.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which statement INCORRECTLY describes slow-twitch muscle tissues (2017)?",
+          a: "During the active state, they use ATP faster than it can be replaced — INCORRECT.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "What are the key laboratory features in osteomalacia (2017)?",
+          a: "↓/normal serum calcium, ↓ serum phosphate, ↑ PTH.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone is a specific marker of osteoblast function (2017)?",
+          a: "Osteocalcin.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays an important role in bone remodeling (2017)?",
+          a: "Parathyroid hormone.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which hormone plays a major role in regulating calcium levels in the blood (2017)?",
+          a: "Parathyroid hormone.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which element is required to aid vitamin C for optimal collagen biosynthesis (2017)?",
+          a: "Iron.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is NOT a role of intracellular calcium?",
+          a: "Bone formation — intracellular calcium acts as a second messenger for muscle contraction, hormone secretion, and enzyme activity. Bone formation is an extracellular process.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cross-linking collagen fibers (2017)?",
+          a: "Lysyl oxidase.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which enzyme is responsible for cleavage of the collagen triple helix during tissue remodeling (2017)?",
+          a: "Collagenase.",
+        },
+        {
+          s: "Biochemistry",
+          section: "Musculoskeletal Biochemistry",
+          q: "Which of the following is responsible for bone repair and hydroxyapatite growth?",
+          a: "Osteonectin — a bone matrix glycoprotein that regulates interactions between collagen, cells, and mineral components.",
+        },
+
+        // ==================== MUSCULOSKELETAL MICROBIOLOGY ====================
+        {
+          s: "Microbiology",
+          section: "Musculoskeletal Microbiology",
+          q: "[Microbiology questions coming soon — no MCQs were provided in your MSK QUIZ_DATA yet.]",
+          a: "Placeholder — replace this card once microbiology MCQs are added.",
+        },
+      ];
+
+      /* ============================================================
+         SECTION CONFIG — order, colors, subject for each section
+         ============================================================ */
+      const SECTION_CONFIG = {
+        "Integumentary System": { color: "#4dd0e1", subject: "Anatomy" },
+        "Upper Limb": { color: "#26c6da", subject: "Anatomy" },
+
+        // ==================== MUSCULOSKELETAL PHARMACOLOGY ====================
+        "Lower Limb": { color: "#00bcd4", subject: "Anatomy" },
+        Histology: { color: "#4d9fff", subject: "Anatomy" },
+        Embryology: { color: "#00e5ff", subject: "Anatomy" },
+        "Bone & Joint Pathology": { color: "#4d9fff", subject: "Pathology" },
+        "Muscle Pathology": { color: "#4d9fff", subject: "Pathology" },
+        "Skin Pathology": { color: "#4d9fff", subject: "Pathology" },
+        "Musculoskeletal Pharmacology": {
+          color: "#00bcd4",
+          subject: "Pharmacology",
+        },
+        "Musculoskeletal Biochemistry": {
+          color: "#00e5ff",
+          subject: "Biochemistry",
+        },
+        "Musculoskeletal Microbiology": {
+          color: "#18ffff",
+          subject: "Microbiology",
+        },
+      };
+
+      const SECTION_ORDER = Object.keys(SECTION_CONFIG);
+
+      const SUBJECT_CLASS = {
+        Anatomy: "subject-anatomy",
+        Physiology: "subject-physiology",
+        Pathology: "subject-pathology",
+        Pharmacology: "subject-pharmacology",
+        Microbiology: "subject-microbiology",
+        Biochemistry: "subject-biochemistry",
+      };
+
+      function getSubjectClass(subject) {
+        return SUBJECT_CLASS[subject] || "subject-anatomy";
+      }
+
+      // ============================================================
+      // STATE
+      // ============================================================
+      let activeFilter = "All"; // "All" or a subject name
+      let mode = "sequential"; // "sequential" or "random"
+      let baseCards = flashcards.slice(); // cards after filter, before randomize
+      let filteredCards = flashcards.slice(); // cards currently shown
+      let currentIndex = 0;
+      let isFlipped = false;
+
+      // ============================================================
+      // SHUFFLE HELPERS
+      // ============================================================
+      function shuffleArray(arr) {
+        const a = arr.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      }
+
+      function setMode(newMode) {
+        mode = newMode;
+        document
+          .getElementById("modeSequential")
+          .classList.toggle("active", mode === "sequential");
+        document
+          .getElementById("modeRandom")
+          .classList.toggle("active", mode === "random");
+        applyFilter();
+      }
+
+      function reshuffle() {
+        if (mode !== "random") {
+          setMode("random");
+        } else {
+          applyFilter();
+        }
+        showToast("🔀 Shuffled!");
+      }
+
+      function showToast(msg) {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.id = "toast";
+          toast.className = "toast";
+          document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        toast.classList.add("show");
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(() => toast.classList.remove("show"), 1500);
+      }
+
+      const flashcardEl = document.getElementById("flashcard");
+      const questionEl = document.getElementById("questionText");
+      const answerEl = document.getElementById("answerText");
+      const counterEl = document.getElementById("counter");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const subjectFront = document.getElementById("subjectFront");
+      const subjectBack = document.getElementById("subjectBack");
+      const sectionsWrapper = document.getElementById("sectionsWrapper");
+      const navCount = document.getElementById("navCount");
+      const filterRow = document.getElementById("filterRow");
+
+      // ============================================================
+      // BUILD SECTIONED NAVIGATOR GRID
+      // ============================================================
+      function buildSectionsGrid() {
+        sectionsWrapper.innerHTML = "";
+        navCount.textContent = flashcards.length;
+
+        // Group by section, preserving SECTION_ORDER
+        const groups = {};
+        flashcards.forEach((card, idx) => {
+          const sec = card.section || "Other";
+          if (!groups[sec]) groups[sec] = [];
+          groups[sec].push({ card, idx });
+        });
+
+        // Render in SECTION_ORDER, then any extras
+        const orderedSections = [
+          ...SECTION_ORDER.filter((s) => groups[s]),
+          ...Object.keys(groups).filter((s) => !SECTION_ORDER.includes(s)),
+        ];
+
+        orderedSections.forEach((secName) => {
+          const items = groups[secName];
+          const cfg = SECTION_CONFIG[secName] || {
+            color: "#8b949e",
+            subject: "Anatomy",
+          };
+          const firstNum = items[0].idx + 1;
+          const lastNum = items[items.length - 1].idx + 1;
+
+          const group = document.createElement("div");
+          group.className = "section-group";
+
+          const header = document.createElement("div");
+          header.className = "section-header";
+          header.innerHTML = `
+            <span class="section-dot" style="background:${cfg.color};box-shadow:0 0 8px ${cfg.color}88;"></span>
+            <span class="section-name">${secName}</span>
+            <span class="section-range">${firstNum}–${lastNum}</span>
+          `;
+
+          const grid = document.createElement("div");
+          grid.className = "q-nav-grid";
+
+          items.forEach(({ idx }) => {
+            const btn = document.createElement("button");
+            btn.className = "q-nav-btn";
+            btn.textContent = idx + 1;
+            btn.dataset.qIndex = idx;
+            btn.addEventListener("click", () => {
+              // If the current filter hides this card, reset to "All"
+              const inFiltered = filteredCards.findIndex(
+                (c) => flashcards.indexOf(c) === idx,
+              );
+              if (inFiltered === -1) {
+                activeFilter = "All";
+                filteredCards = flashcards.slice();
+                buildFilterChips();
+              }
+              const newIdx = filteredCards.findIndex(
+                (c) => flashcards.indexOf(c) === idx,
+              );
+              if (newIdx !== -1) jumpTo(newIdx);
+            });
+            grid.appendChild(btn);
+          });
+
+          group.appendChild(header);
+          group.appendChild(grid);
+          sectionsWrapper.appendChild(group);
+        });
+      }
+
+      function updateGridHighlight() {
+        const currentCard = filteredCards[currentIndex];
+        const globalIdx = currentCard ? flashcards.indexOf(currentCard) : -1;
+        document.querySelectorAll(".q-nav-btn").forEach((btn) => {
+          const btnIdx = parseInt(btn.dataset.qIndex);
+          if (btnIdx === globalIdx) btn.classList.add("current");
+          else btn.classList.remove("current");
+        });
+      }
+
+      // ============================================================
+      // FILTER CHIPS
+      // ============================================================
+      function buildFilterChips() {
+        const counts = {};
+        flashcards.forEach((c) => {
+          const s = c.s || "Other";
+          counts[s] = (counts[s] || 0) + 1;
+        });
+        const subjects = ["All", ...Object.keys(counts).sort()];
+        filterRow.innerHTML = "";
+
+        subjects.forEach((s) => {
+          const btn = document.createElement("button");
+          btn.className = "chip" + (s === activeFilter ? " active" : "");
+          btn.textContent =
+            s === "All" ? `All (${flashcards.length})` : `${s} (${counts[s]})`;
+          btn.addEventListener("click", () => {
+            activeFilter = s;
+            applyFilter();
+            buildFilterChips();
+          });
+          filterRow.appendChild(btn);
+        });
+      }
+
+      function applyFilter() {
+        // Step 1: filter by subject
+        baseCards =
+          activeFilter === "All"
+            ? flashcards.slice()
+            : flashcards.filter((c) => c.s === activeFilter);
+
+        // Step 2: apply mode
+        if (mode === "random") {
+          filteredCards = shuffleArray(baseCards);
+        } else {
+          filteredCards = baseCards.slice();
+        }
+
+        currentIndex = 0;
+        updateCard();
+      }
+
+      function jumpTo(index) {
+        if (index < 0 || index >= filteredCards.length) return;
+        currentIndex = index;
+        updateCard();
+        // Scroll the active button into view
+        const currentCard = filteredCards[currentIndex];
+        const globalIdx = flashcards.indexOf(currentCard);
+        const activeBtn = document.querySelector(
+          `.q-nav-btn[data-q-index="${globalIdx}"]`,
+        );
+        if (activeBtn)
+          activeBtn.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      // ============================================================
+      // CARD LOGIC
+      // ============================================================
+      function updateCard() {
+        const card = filteredCards[currentIndex];
+        if (!card) {
+          questionEl.textContent = "No cards available.";
+          answerEl.textContent = "—";
+          counterEl.textContent = "0 / 0";
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          return;
+        }
+
+        flashcardEl.classList.remove("is-flipped");
+        isFlipped = false;
+
+        const subjectClass = getSubjectClass(card.s);
+        subjectFront.textContent = card.s;
+        subjectFront.className = "subject-badge " + subjectClass;
+        subjectBack.textContent = card.s;
+        subjectBack.className = "subject-badge " + subjectClass;
+
+        questionEl.textContent = card.q;
+        answerEl.textContent = card.a;
+
+        counterEl.textContent = `${currentIndex + 1} / ${filteredCards.length}`;
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === filteredCards.length - 1;
+
+        updateGridHighlight();
+      }
+
+      function flipCard() {
+        flashcardEl.classList.toggle("is-flipped");
+        isFlipped = !isFlipped;
+      }
+
+      function nextCard() {
+        if (currentIndex < filteredCards.length - 1) {
+          currentIndex++;
+          updateCard();
+        }
+      }
+
+      function prevCard() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateCard();
+        }
+      }
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") nextCard();
+        if (e.key === "ArrowLeft") prevCard();
+        if (e.key === " ") {
+          e.preventDefault();
+          flipCard();
+        }
+      });
+
+      // ============================================================
+      // BOOT
+      // ============================================================
+      buildSectionsGrid();
+      buildFilterChips();
+      applyFilter();
+    </script>
+  </body>
+</html>
