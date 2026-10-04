@@ -18933,6 +18933,10 @@
               btn.onclick = () => {
                 currentIndex = idx;
                 renderQuiz();
+                setTimeout(
+                  () => window.scrollTo({ top: 0, behavior: "smooth" }),
+                  0,
+                );
               };
               grid.appendChild(btn);
             });
