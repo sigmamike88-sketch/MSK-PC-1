@@ -1190,9 +1190,15 @@
 
     <!-- HOME SCREEN -->
     <div id="home-screen" class="screen">
+      <button
+        class="back-btn"
+        onclick="window.location.href = 'index.html#msk-anatomy'"
+        style="margin-bottom: 16px"
+      >
+        ← Back to MSK Anatomy
+      </button>
       <h1 class="home-title">Study Portal</h1>
       <div class="home-sub">Master your PPT — five ways to study</div>
-
       <button class="menu-btn" onclick="startMode('quiz')">
         <span class="emoji">📝</span>
         <span class="label-wrap">
@@ -1522,6 +1528,14 @@
     <div class="toast" id="toast"></div>
 
     <script>
+      // Redirect to index.html on page refresh
+      if (
+        performance.navigation.type === performance.navigation.TYPE_RELOAD ||
+        performance.getEntriesByType("navigation")[0].type === "reload"
+      ) {
+        window.location.href = "index.html#msk-anatomy";
+      }
+
       // ============================================================
       // STUDY DATA — replace with your PPT-generated content
       // Optional fields: tag (string), difficulty ('easy'|'medium'|'hard')

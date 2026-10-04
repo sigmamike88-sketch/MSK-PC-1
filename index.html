@@ -22873,21 +22873,30 @@
                           <span class="crumb current">${escapeHtml(state.course)}</span>
                         </div>
 
-                        ${
-                          exams.length === 0
-                            ? `<div class="empty-state">
-                                 <span class="emoji">📭</span>
-                                 <div class="title">No exams for this course</div>
-                                 <div class="desc">Add some exams in the QUIZ_DATA section.</div>
-                               </div>`
-                            : orderedKeys
-                                .map((key) => {
-                                  const groupExams = groups[key];
-                                  const gColor =
-                                    GROUP_COLORS[key] || style.color;
-                                  const gIcon = GROUP_ICONS[key] || "📘";
-                                  const gLabel = GROUP_LABELS[key] || key;
-                                  return `
+                        <a class="course-card" href="Ai generated.html"
+   style="--course-color:#e91e63;--course-color-2:#7c4dff;text-decoration:none;width: calc(100% - 36px);margin: 0 18px 20px;">
+  <div class="course-thumb" style="background:rgba(233,30,99,0.12);border-color:rgba(233,30,99,0.3);">🧠</div>
+  <div class="course-body">
+    <div class="course-title">Ai generated</div>
+    <div class="course-meta">Quiz, flashcards, SRS & PPT viewer</div>
+  </div>
+  <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+</a>
+
+${
+  exams.length === 0
+    ? `<div class="empty-state">
+         <span class="emoji">📭</span>
+         <div class="title">No exams for this course</div>
+         <div class="desc">Add some exams in the QUIZ_DATA section.</div>
+       </div>`
+    : orderedKeys
+        .map((key) => {
+          const groupExams = groups[key];
+          const gColor = GROUP_COLORS[key] || style.color;
+          const gIcon = GROUP_ICONS[key] || "📘";
+          const gLabel = GROUP_LABELS[key] || key;
+          return `
                                 <div class="section-title" style="margin-top:18px;color:${gColor};">
                                   <span>${gIcon} ${gLabel.toUpperCase()}</span>
                                   <span class="count">${groupExams.length}</span>
@@ -22898,9 +22907,9 @@
                                     .join("")}
                                 </div>
                               `;
-                                })
-                                .join("")
-                        }
+        })
+        .join("")
+}
                       `;
 
         document.querySelectorAll("[data-crumb]").forEach((el) => {
