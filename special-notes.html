@@ -55,15 +55,19 @@
         flex-direction: column;
       }
 
-      /* ========== TOP BAR ========== */
+                 /* ========== TOP BAR ========== */
       .topbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 16px 18px 10px;
-        position: sticky;
+        position: fixed;
         top: 0;
-        z-index: 20;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 680px; /* This keeps it in the middle */
+        z-index: 1000;
         background: linear-gradient(180deg, var(--bg) 75%, transparent);
         backdrop-filter: blur(10px);
       }
@@ -394,7 +398,7 @@
     </style>
   </head>
   <body>
-    <div id="app">
+        <div id="app" style="max-width: 680px; margin: 0 auto; display: flex; flex-direction: column; padding-top: 80px;">
       <header class="topbar">
         <div class="logo-wrap">
           <a href="index.html" class="icon-btn" title="Back to Home">
@@ -628,7 +632,7 @@
         <!-- ===== PHARMACOLOGY ===== -->
         <button
           class="course-card"
-          onclick="alert('Pharmacology notes coming soon!')"
+          onclick="showNote('notePharm')"
           style="--course-color: #22c55e"
         >
           <div
@@ -692,7 +696,7 @@
         <!-- ===== MICROBIOLOGY ===== -->
         <button
           class="course-card"
-          onclick="alert('Microbiology notes coming soon!')"
+          onclick="showNote('noteMicro')"
           style="--course-color: #14b8a6"
         >
           <div
@@ -19746,6 +19750,1171 @@
         <!-- ========================================== -->
       </div>
     </div>
+        <!-- ===== PHARMACOLOGY NOTES (Scrollable List) ===== -->
+    <div
+      id="notePharm"
+      style="display: none; padding: 0 18px; margin-bottom: 40px"
+    >
+      <div
+        style="
+          max-width: 600px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 32px;
+        "
+      >
+        <!-- Welcome Note -->
+        <div>
+          <div
+            style="
+              font-size: 18px;
+              font-weight: 800;
+              margin-bottom: 16px;
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            "
+          >
+            <span>💊</span> PHARMACOLOGY
+          </div>
+
+          <div
+            style="
+              background: #0f6a99;
+              color: white;
+              padding: 10px 14px;
+              border-radius: 8px;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 18px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span>🩺 Welcome to Pharmacology</span>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              font-size: 14.5px;
+              line-height: 1.6;
+            "
+          >
+            <div style="display: flex; gap: 8px; align-items: flex-start">
+              <span style="font-size: 16px">📌</span>
+              <div>
+                Ready for your Pharmacology notes. Start pasting your content
+                below!
+              </div>
+            </div>
+          </div>
+        </div>
+                <!-- ========================================== -->
+        <!-- NOTE: Neuromuscular Blocking Agents        -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div
+            style="
+              background: #0f6a99;
+              color: white;
+              padding: 10px 14px;
+              border-radius: 8px;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 18px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span>💉 1. Neuromuscular Blocking Agents (NMBAs)</span>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              font-size: 14.5px;
+              line-height: 1.6;
+              padding-left: 4px;
+            "
+          >
+            <!-- Overview -->
+            <div style="font-weight: 800; margin-top: 4px; color: #f59e0b;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-right: 4px;">❌</span> Overview & Clinical Indications
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>
+                Neuromuscular blocking agents are utilized to achieve skeletal muscle paralysis during anesthesia, surgical procedures, and critical care management.
+              </div>
+            </div>
+
+            <!-- Surgical Uses -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-right: 4px;">🚪</span> Surgical Uses
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Optimizes surgical field exposure (abdominal, thoracic, orthopedic surgeries).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Prevents sudden movement during delicate operations (neurosurgery, ophthalmology).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Facilitates robotic procedures.</div>
+            </div>
+
+            <!-- Critical Care & Emergency Uses -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-right: 4px;">🚑</span> Critical Care & Emergency Uses
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Facilitates Rapid Sequence Intubation (RSI) to secure the airway.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Manages severe tetanus or status epilepticus.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Controls muscle activity during mechanical ventilation in severe ARDS.</div>
+            </div>
+
+            <!-- NMJ Physiology -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-right: 4px;">⚡</span> Neuromuscular Junction (NMJ) Physiology
+            </div>
+          </div>
+        </div>
+                  <!-- NMJ Physiology Continued -->
+          <div style="display: flex; flex-direction: column; gap: 16px; font-size: 14.5px; line-height: 1.6; padding-left: 4px; margin-top: 8px;">
+            
+            <!-- Target -->
+            <div style="font-weight: 800; color: #f59e0b;">
+              <span style="color: #ff5c5c; margin-right: 6px;">🎯</span> Target
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> The Nicotinic Acetylcholine Receptor (nAChR) is a pentameric ligand-gated ion channel located at the motor endplate (adult composition: two alpha-1, one beta-1, one delta, and one epsilon subunit).</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Two acetylcholine (ACh) molecules must bind to the two alpha-1 subunits to open the channel.</li>
+            </ul>
+
+            <!-- Presynaptic Release -->
+            <div style="font-weight: 800; color: #f59e0b; margin-top: 8px;">
+              <span style="color: #ff5c5c; margin-right: 6px;">💗</span> Presynaptic Release
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Nerve depolarization opens voltage-gated Ca²⁺ channels.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Calcium influx triggers SNARE proteins (Synaptobrevin, Syntaxin, SNAP-25) to fuse vesicles and release ACh into the synaptic cleft.</li>
+            </ul>
+
+            <!-- Postsynaptic Activation -->
+            <div style="font-weight: 800; color: #f59e0b; margin-top: 8px;">
+              <span style="color: #ff5c5c; margin-right: 6px;">💪</span> Postsynaptic Activation
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Ach binding opens the central pore, allowing Na⁺ and Ca²⁺ influx and K⁺ efflux.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> The resulting End Plate Potential (EPP) triggers a muscle action potential that travels down T-tubules, releasing Ca²⁺ from the Sarcoplasmic Reticulum (SR) to cause contraction.</li>
+            </ul>
+
+            <!-- Termination -->
+            <div style="font-weight: 800; color: #f59e0b; margin-top: 8px;">
+              <span style="color: #ff5c5c; margin-right: 6px;">🔴</span> Termination
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Acetylcholinesterase (AChE) in the synaptic basement membrane rapidly hydrolyzes ACh into choline and acetate, permitting repolarization.</li>
+            </ul>
+
+            <!-- Depolarizing NMBAs -->
+            <div style="font-weight: 800; color: #f59e0b; margin-top: 16px;">
+              <span style="color: #ff5c5c; margin-right: 6px;">💥</span> Depolarizing NMBAs: (Succinylcholine)
+            </div>
+            
+            <!-- Chemical Structure -->
+            <div style="font-weight: 800; color: #22c55e; margin-top: 4px;">
+              <span style="margin-right: 6px;">✅</span> Chemical Structure
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Composed of two ACh molecules linked end-to-end.</li>
+            </ul>
+
+            <!-- Phase I Block -->
+            <div style="font-weight: 800; color: #ef4444; margin-top: 8px;">
+              <span style="margin-right: 6px;">⚠️</span> Phase I Block (Depolarizing)
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Acts as an nAChR agonist.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Because it is not rapidly degraded by AChE at the NMJ, it causes sustained endplate depolarization.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> This keeps surrounding voltage-gated Na⁺ channels in an inactivated (refractory) state, preventing further action potentials and leading to flaccid paralysis preceded by transient fasciculations (muscle twitches).</li>
+            </ul>
+
+            <!-- Phase II Block -->
+            <div style="font-weight: 800; color: #3b82f6; margin-top: 8px;">
+              <span style="margin-right: 6px;">⚙️</span> Phase II Block (Desensitizing)
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Occurs with high doses or prolonged exposure.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> The endplate repolarizes, but nAChRs become desensitized and resistant to ACh activation, functionally resembling a non-depolarizing block.</li>
+            </ul>
+
+            <!-- Pharmacokinetics -->
+            <div style="font-weight: 800; color: #8b949e; margin-top: 8px;">
+              <span style="margin-right: 6px;">⚪</span> Pharmacokinetics
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Ultra-fast onset (less than 60 seconds).</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Ultra-short duration (5–10 minutes).</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Ideal for RSI.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Hydrolyzed in plasma by Plasma Butyrylcholinesterase (Pseudocholinesterase / BChE).</li>
+            </ul>
+
+            <!-- Atypical BChE Deficiency -->
+            <div style="font-weight: 800; color: #a855f7; margin-top: 8px;">
+              <span style="margin-right: 6px;">🧬</span> Atypical BChE Deficiency
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Autosomal recessive condition causing reduced BChE activity.</li>
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Results in prolonged paralysis (lasting hours) after standard doses.</li>
+            </ul>
+
+            <!-- Warnings Box -->
+            <div style="background: rgba(15, 106, 153, 0.15); border: 1px solid rgba(15, 106, 153, 0.4); border-radius: 8px; padding: 16px; margin-top: 12px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="font-weight: 800; color: #f87171; display: flex; justify-content: space-between; align-items: center;">
+                <span><span style="font-size: 16px; margin-right: 6px;">🚨</span> ABSOLUTE CONTRAINDICATIONS & WARNINGS FOR SUCCINYLCHOLINE</span>
+                <span style="font-size: 10px; opacity: 0.7;">↗</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="font-size: 16px; color: #ef4444; margin-top: 2px;">🩸</span>
+                <div><strong>Severe Hyperkalemia Risk:</strong> Caused by massive K⁺ efflux during depolarization.</div>
+              </div>
+              <div style="margin-top: 4px;">Contraindicated in extra-junctional nAChR upregulation:</div>
+              
+              <ul style="padding-left: 24px; margin: 0; display: flex; flex-direction: column; gap: 6px; list-style: none;">
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Burns (greater than 24 hours post-injury).</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Massive trauma/crush injuries.</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Spinal cord injury (paraplegia/quadriplegia).</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Prolonged immobilization.</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Severe intra-abdominal infections.</li>
+              </ul>
+              
+              <div style="font-weight: 700; margin-top: 8px; color: #f59e0b;"><span style="font-size: 16px; margin-right: 6px;">⚠️</span> Other Risks:</div>
+              
+              <ul style="padding-left: 24px; margin: 0; display: flex; flex-direction: column; gap: 6px; list-style: none;">
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Malignant Hyperthermia trigger.</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Bradycardia (muscarinic stimulation).</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Increased Intraocular Pressure (avoid in open-globe injuries).</li>
+                <li style="position: relative;"><span style="position: absolute; left: -20px; color: #ff5c5c; font-size: 12px; top: 3px;">🔻</span> Increased Intragastric pressure.</li>
+              </ul>
+            </div>
+
+            <!-- Non-Depolarizing NMBAs -->
+            <div style="font-weight: 800; color: #f59e0b; margin-top: 16px;">
+              <span style="color: #ff5c5c; margin-right: 6px;">🖊️</span> Non-Depolarizing NMBAs (NDMBAs)
+            </div>
+            <ul style="padding-left: 28px; margin: 0; display: flex; flex-direction: column; gap: 8px; list-style: none;">
+              <li style="position: relative;"><span style="position: absolute; left: -24px; color: #ff5c5c; font-size: 14px; top: 1px;">🔻</span> Non-depolarizing agents act as competitive antagonists at nAChR alpha subunits, blocking ACh binding without receptor activation (produces flaccid paralysis without fasciculations).</li>
+            </ul>
+          </div>
+                  <!-- ========================================== -->
+        <!-- TABLE: Neuromuscular Blocking Agents       -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 16px;">
+          <!-- Table Container (No Scroll) -->
+          <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; background: var(--card); table-layout: fixed;">
+              <!-- Table Head -->
+              <thead>
+                <tr style="background: #162235; border-bottom: 1px solid var(--border);">
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Agent Class</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Examples</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Onset</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Duration</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Elimination</th>
+                  <th style="padding: 8px 6px; color: #e6edf3; font-weight: 700; width: 25%;">Key Features</th>
+                </tr>
+              </thead>
+              <!-- Table Body -->
+              <tbody>
+                <!-- Row 1 -->
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Aminosteroids</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Rocuronium</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Fast (1–2 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate (30–45 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Hepatic (&gt;70%)</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Rapid onset alternative to Succinylcholine; reversed by Sugammadex.</td>
+                </tr>
+                <!-- Row 2 -->
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Aminosteroids</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Vecuronium</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate (2–4 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate (30–45 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Hepatic &amp; Renal</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Organ-dependent clearance; reversed by Sugammadex.</td>
+                </tr>
+                <!-- Row 3 -->
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Aminosteroids</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Pancuronium</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Slow (3–5 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Long (90–120 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Renal elimination</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Prolonged action; risk of accumulation in renal failure.</td>
+                </tr>
+                <!-- Row 4 -->
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Benzyl-isoquinolines</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Cisatracurium</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate (2–4 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate (30–45 min)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;"><strong>Hoffmann Elimination</strong></td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Spontaneous organ-independent breakdown; drug of choice in liver/renal failure.</td>
+                </tr>
+                <!-- Row 5 -->
+                <tr>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Benzyl-isoquinolines</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Atracurium</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Intermediate</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Hoffmann &amp; Ester Hydrolysis</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Produces Laudanosine metabolite (CNS stimulant; potential seizure risk).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+                <!-- ========================================== -->
+        <!-- NOTE: Reversal of Neuromuscular Blockade   -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px;">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>⚙️ Reversal of Neuromuscular Blockade</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            
+            <!-- 1. Cholinesterase Inhibitors -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> 1. Cholinesterase Inhibitors
+            </div>
+            <div style="padding-left: 26px; font-style: italic; color: #cbd5e1;">
+              (Neostigmine, Pyridostigmine, Edrophonium)
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Inhibits AChE.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Elevates synaptic ACh concentrations to competitively displace NDMBA.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes muscarinic overstimulation: Bradycardia, Excessive salivation, Hypermotility.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Must be co-administered with an antimuscarinic (Glycopyrrolate or Atropine).</div>
+            </div>
+
+            <!-- 2. Selective Relaxant Binding Agent -->
+            <div style="font-weight: 800; margin-top: 16px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>🧬</span> 2. Selective Relaxant Binding Agent (Sugammadex)
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Modified cyclodextrin ring.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Encapsulates and chelates free steroidal NMBAs (Rocuronium and Vecuronium) in plasma.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Rapidly reverses deep blockades without muscarinic side effects.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Ineffective against benzylisoquinolines.</div>
+            </div>
+
+          </div>
+        </div>
+                <!-- ========================================== -->
+        <!-- NOTE: Spasmolytics & Muscle Relaxants      -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div
+            style="
+              background: #0f6a99;
+              color: white;
+              padding: 10px 14px;
+              border-radius: 8px;
+              font-size: 14px;
+              font-weight: 600;
+              margin-bottom: 18px;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+            "
+          >
+            <span>💪 2. Spasmolytics & Muscle Relaxants</span>
+          </div>
+
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              font-size: 14.5px;
+              line-height: 1.6;
+              padding-left: 4px;
+            "
+          >
+            <!-- Spasticity -->
+            <div style="font-weight: 800; margin-top: 4px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💗</span> Spasticity
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Upper Motor Neuron (UMN) lesions (Cerebral Palsy, Multiple Sclerosis, Stroke) causing hyper-excitability of stretch reflex and tonic muscle contraction.</div>
+            </div>
+
+            <!-- Acute Muscle Spasm -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💛</span> Acute Muscle Spasm
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Involuntary muscle tension arising from peripheral musculoskeletal trauma or localized inflammation.</div>
+            </div>
+
+            <!-- Drugs for Chronic Spasticity -->
+            <div style="font-weight: 800; margin-top: 12px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> Drugs for Chronic Spasticity
+            </div>
+
+            <!-- Baclofen -->
+            <div style="font-weight: 800; margin-top: 4px; color: #a855f7; display: flex; align-items: center; gap: 6px;">
+              <span>🟣</span> Baclofen:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>GABAB receptor agonist that increases K⁺ conductance, hyperpolarizing neurons and reducing excitatory transmitter (Glutamate) release in spinal cord.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Used in MS and spinal cord injuries.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Abrupt withdrawal can precipitate seizures and hallucinations; taper slowly.</div>
+            </div>
+
+            <!-- Diazepam -->
+            <div style="font-weight: 800; margin-top: 8px; color: #3b82f6; display: flex; align-items: center; gap: 6px;">
+              <span>🔵</span> Diazepam:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Potentiates GABAA receptor chloride channels, enhancing presynaptic inhibition in spinal cord.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes marked sedation and dependence risk.</div>
+            </div>
+
+            <!-- Tizanidine -->
+            <div style="font-weight: 800; margin-top: 8px; color: #22c55e; display: flex; align-items: center; gap: 6px;">
+              <span>🟢</span> Tizanidine:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Central alpha-2 adrenergic receptor agonist (congener of Clonidine).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Reduces spasticity with less muscle weakness than Baclofen or Diazepam.</div>
+            </div>
+                        <!-- Tizanidine (Continued) -->
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Monitor LFTs due to hepatotoxicity.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes drowsiness and hypotension.</div>
+            </div>
+
+            <!-- Dantrolene -->
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>🟠</span> Dantrolene:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Acts directly on skeletal muscle by blocking Ryanodine Receptor (RyR1), preventing Ca²⁺ release from SR.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Used orally for spasticity and IV for Malignant Hyperthermia.</div>
+            </div>
+
+            <!-- Botulinum Toxin -->
+            <div style="font-weight: 800; margin-top: 8px; color: #e6edf3; display: flex; align-items: center; gap: 6px;">
+              <span>💉</span> Botulinum Toxin (Botox):
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Enzymatically cleaves SNARE proteins (SNAP-25), preventing vesicular ACh exocytosis at NMJ.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Used for focal spasticity.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Duration 3–4 months.</div>
+            </div>
+
+            <!-- Drugs for Acute Musculoskeletal Spasms -->
+            <div style="font-weight: 800; margin-top: 16px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💥</span> Drugs for Acute Musculoskeletal Spasms
+            </div>
+            <div style="padding-left: 4px; margin-bottom: 4px;">Short-term relief (2–3 weeks) as adjuncts to rest and physical therapy.</div>
+
+            <div style="font-weight: 800; margin-top: 4px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> Cyclobenzaprine:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Structurally related to TCAs.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Exhibits strong anticholinergic side effects (dry mouth, sedation).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>5HT2 antagonism.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> Carisoprodol:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Metabolized to Meprobamate.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Schedule IV abuse/dependence risk.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> Methocarbamol:
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-bottom: 24px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes central depression with less sedation relative to cyclobenzaprine.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NOTE: Malignant Hyperthermia               -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>🔥 3. Malignant Hyperthermia (MH)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            
+            <div style="font-weight: 800; margin-top: 4px; color: #f59e0b;">
+              <span style="color: #a855f7; font-size: 14px; margin-right: 4px;">🧬</span> Etiology
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Inherited pharmacogenetic disorder triggered by exposure to Succinylcholine or volatile anesthetics.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Triggering agents bind mutated RyR1 receptors, causing massive, uncontrolled Ca²⁺ leakage from SR into myoplasm.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b;">
+              <span style="color: #ef4444; font-size: 14px; margin-right: 4px;">⚠️</span> Pathophysiology
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Massive ATP consumption leads to hypermetabolism (increased O₂ demand, increased CO₂ production). Extreme heat (greater than 40°C), Lactic acidosis, Hyperkalemia, Rhabdomyolysis. Elevated CK, Myoglobinuria.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b;">
+              <span style="color: #ef4444; font-size: 14px; margin-right: 4px;">🚨</span> Earliest Sign
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Rapid, unexplained rise in End-Tidal CO₂ (ETCO₂), followed by tachycardia and masseter muscle rigidity.</div>
+            </div>
+
+            <!-- Emergency Treatment Box -->
+            <div style="background: rgba(15, 106, 153, 0.15); border: 1px solid rgba(15, 106, 153, 0.4); border-radius: 8px; padding: 16px; margin-top: 12px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="font-weight: 800; color: #f87171; display: flex; justify-content: space-between; align-items: center;">
+                <span><span style="font-size: 16px; margin-right: 6px;">🚨</span> EMERGENCY MALIGNANT HYPERTHERMIA TREATMENT PROTOCOL</span>
+                <span style="font-size: 10px; opacity: 0.7;">↗</span>
+              </div>
+              
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="background: #586069; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700;">1</span>
+                <div><strong>Antidote:</strong> Administer Dantrolene Sodium (2.5 mg/kg IV) immediately. Repeat as needed until symptoms subside.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="background: #586069; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700;">2</span>
+                <div><strong>Discontinue Triggers:</strong> Stop volatile anesthetics and Succinylcholine. Switch to IV non-triggering agents.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="background: #586069; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700;">3</span>
+                <div><strong>Hyperventilate:</strong> Administer 100% O₂ at high flow rates.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="background: #586069; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700;">4</span>
+                <div><strong>Active Cooling:</strong> IV cold saline, Ice packs, Stomach/bladder lavage.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="background: #586069; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; font-weight: 700;">5</span>
+                <div><strong>Correct Acidosis & Hyperkalemia:</strong> Sodium Bicarbonate, Insulin + Dextrose, Monitor cardiac rhythm.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NOTE: Anti-Inflammatory Drugs & Analgesics -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>💊 4. Anti-Inflammatory Drugs & Analgesics</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            
+            <div style="font-weight: 800; margin-top: 4px; color: #22c55e; display: flex; align-items: center; gap: 6px;">
+              <span>✅</span> Arachidonic Acid Cascade
+            </div>
+            <div style="padding-left: 8px;">
+              Membrane Phospholipids → Phospholipase A2 → Arachidonic Acid.
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>🛢️</span> COX Pathway
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Converts arachidonic acid into Prostaglandins (pain, fever, inflammation) and Thromboxanes (platelet aggregation).</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>🩸</span> COX-1 (Constitutive)
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Mucosal protection (PGE2).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Renal hemodynamics.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Platelet aggregation (TXA2).</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f97316; display: flex; align-items: center; gap: 6px;">
+              <span>🔥</span> COX-2 (Inducible)
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Inflammatory mediator (pain, fever, hyperalgesia).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Constitutive in kidney and vascular endothelium.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 16px; color: #8b949e; display: flex; align-items: center; gap: 6px;">
+              <span>🖊️</span> Non-Selective NSAIDs & Aspirin
+            </div>
+            
+            <div style="font-weight: 800; margin-top: 4px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Aspirin (ASA)
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Irreversibly acetylates COX-1 and COX-2.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Permanently inactivates platelet COX-1 for platelet lifespan (7–10 days).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Low dose (81 mg) for cardioprotection.</div>
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-top: 4px;">
+              <span style="font-size: 16px; color: #f59e0b;">⚠️</span>
+              <div><strong>Reye's Syndrome risk:</strong> Fatal hepatic encephalopathy in children with viral illnesses. Contraindicated in pediatrics.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 12px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Ibuprofen & Naproxen
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Reversible COX inhibitors.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Naproxen has longer t1/2 and safer CV risk profile.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Indomethacin
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Potent inhibitor.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Indicated for acute gout and closing Patent Ductus Arteriosus (PDA).</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Ketorolac
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Potent systemic analgesic.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-bottom: 12px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Restricted to max 5 days due to severe renal toxicity risk.</div>
+            </div>
+
+            <!-- Toxicity Box -->
+            <div style="background: rgba(15, 106, 153, 0.15); border: 1px solid rgba(15, 106, 153, 0.4); border-radius: 8px; padding: 16px; margin-top: 4px; display: flex; flex-direction: column; gap: 12px;">
+              <div style="font-weight: 800; color: #f59e0b; display: flex; justify-content: space-between; align-items: center;">
+                <span><span style="font-size: 16px; margin-right: 6px;">⚠️</span> NSAID TOXICITY & THE TRIPLE WHAMMY</span>
+                <span style="font-size: 10px; opacity: 0.7;">↗</span>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="font-size: 16px; color: #ef4444; margin-top: 2px;">🩸</span>
+                <div><strong>GI Toxicity:</strong> Inhibition of PGE2/PGI2 reduces gastric mucus/bicarbonate. Prevent with PPIs or Misoprostol.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="font-size: 16px; color: #ef4444; margin-top: 2px;">🫘</span>
+                <div><strong>Renal Toxicity:</strong> Prostaglandins dilate renal afferent arterioles. NSAIDs block this, causing afferent constriction and acute kidney injury.</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start;">
+                <span style="font-size: 16px; color: #ef4444; margin-top: 2px;">🚨</span>
+                <div><strong>The "Triple Whammy":</strong> Combination of NSAID + ACE inhibitor + Diuretic severely compromises renal hemodynamics, precipitating acute renal failure.</div>
+              </div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 16px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>💊</span> Selective COX-2 Inhibitors & Acetaminophen
+            </div>
+
+            <div style="font-weight: 800; margin-top: 4px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Celecoxib
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Selectively inhibits COX-2, sparing COX-1.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Spares GI mucosa and does not affect platelet aggregation.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-top: 4px;">
+              <span style="font-size: 16px; color: #f59e0b;">⚠️</span>
+              <div><strong>Black Box Warning:</strong> Increased risk of cardiovascular thrombosis (MI/Stroke) due to suppression of endothelial PGI2 without suppressing TXA2.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>♦️</span> Acetaminophen (Paracetamol)
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Central COX inhibitor providing analgesic and antipyretic action.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Lacks anti-inflammatory activity and does not cause GI or renal toxicity.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-top: 4px;">
+              <span style="font-size: 16px; color: #f59e0b;">⚠️</span>
+              <div><strong>Acetaminophen Toxicity:</strong> Minor metabolic pathway via CYP2E1 produces toxic NAPQI.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Glutathione depletion leads to centrilobular hepatic necrosis.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-bottom: 24px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Treat overdose with N-Acetylcysteine (NAC) within 8–10 hours to replenish glutathione.</div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NOTE: DMARDs                               -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>💊 5. Disease-Modifying Antirheumatic Drugs (DMARDs)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            
+            <div style="padding-left: 4px;">
+              Rheumatoid Arthritis (RA) is driven by TNF-alpha, IL-1, and IL-6.<br><br>
+              While NSAIDs and steroids provide temporary symptom relief, only DMARDs slow or arrest structural joint erosion.
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #e6edf3; display: flex; align-items: center; gap: 6px;">
+              <span>🖊️</span> Non-Biologic (Conventional) DMARDs
+            </div>
+
+            <div style="font-weight: 800; margin-top: 4px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>🟡</span> Methotrexate (MTX)
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>First-line gold standard.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Inhibits Dihydrofolate Reductase (DHFR), impairing DNA synthesis in immune cells.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Requires daily Folic Acid supplementation (omitted on weekly MTX day) to prevent mucosal ulcers/stomatitis.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Teratogenic.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes hepatotoxicity and pulmonary fibrosis.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #22c55e; display: flex; align-items: center; gap: 6px;">
+              <span>🟢</span> Hydroxychloroquine
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Raises lysosomal pH in APCs.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Used in mild RA/SLE.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Causes retinopathy (requires annual eye exams).</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Safe in pregnancy.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #f59e0b; display: flex; align-items: center; gap: 6px;">
+              <span>🟠</span> Sulfasalazine
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Cleaved to Sulfapyridine (active in RA) and 5-ASA.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Risk of G6PD hemolysis.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Safe in pregnancy.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #3b82f6; display: flex; align-items: center; gap: 6px;">
+              <span>🔵</span> Leflunomide
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Inhibits Dihydroorotate Dehydrogenase (DHODH), blocking pyrimidine synthesis.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Long half-life.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div>Requires Cholestyramine washout if pregnancy is planned.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 16px; color: #e6edf3; display: flex; align-items: center; gap: 6px;">
+              <span>🧬</span> Biologic DMARDs & Combination Rules
+            </div>
+
+            <div style="font-weight: 800; margin-top: 4px; color: #ef4444; display: flex; align-items: center; gap: 6px;">
+              <span>🔴</span> TNF-alpha Inhibitors: Infliximab, Adalimumab, Etanercept.
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px; margin-top: 4px;">
+              <span style="font-size: 16px; color: #f59e0b;">⚠️</span>
+              <div><strong>Black Box Warning:</strong> Reactivation of latent Tuberculosis (TB) and Hepatitis B. Screen prior to starting.</div>
+            </div>
+
+            <div style="font-weight: 800; margin-top: 8px; color: #a855f7; display: flex; align-items: center; gap: 6px;">
+              <span>🟣</span> Other Biologics: Rituximab (Anti-CD20), Abatacept (Anti-CD80/86), Tocilizumab (Anti-IL-6R), Anakinra (Anti-IL-1R).
+            </div>
+
+            <!-- Strict Combo Rule Box -->
+            <div style="background: rgba(15, 106, 153, 0.15); border: 1px solid rgba(15, 106, 153, 0.4); border-radius: 8px; padding: 16px; margin-top: 12px; display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+              <div style="font-weight: 800; color: #f87171; display: flex; justify-content: space-between; align-items: center;">
+                <span><span style="font-size: 16px; margin-right: 6px;">🚨</span> STRICT BIOLOGIC COMBINATION RULE</span>
+                <span style="font-size: 10px; opacity: 0.7;">↗</span>
+              </div>
+              <div>NEVER combine two biologic DMARDs (e.g., TNF inhibitor + Abatacept) due to unacceptable, life-threatening infection risks.</div>
+              <div style="margin-top: 4px;">Permissible:</div>
+              <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+                <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+                <div>Triple non-biologic therapy (MTX + Sulfasalazine + Hydroxychloroquine).</div>
+              </div>
+              <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+                <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+                <div>MTX + single biologic.</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NOTE: Gout                                 -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>🦶 6. Gout & Hyperuricemia Management</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            <div style="padding-left: 4px;">
+              Monosodium urate (MSU) crystal deposition due to hyperuricemia (greater than 6.8 mg/dL) from renal underexcretion (90%) or purine overproduction (10%).<br><br>
+              Xanthine Oxidase (XO) converts purines to uric acid.
+            </div>
+          </div>
+        </div>
+                <!-- ========================================== -->
+        <!-- TABLE 1: Chronic ULT                       -->
+        <!-- ========================================== -->
+        <div style="margin-top: 16px; margin-bottom: 16px;">
+          <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; background: var(--card); table-layout: fixed;">
+              <thead>
+                <tr style="background: #162235; border-bottom: 1px solid var(--border);">
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Phase</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 20%;">First-Line Agents</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 25%;">Mechanism of Action</th>
+                  <th style="padding: 8px 6px; color: #e6edf3; font-weight: 700; width: 40%;">Key Clinical Considerations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Chronic ULT</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Febuxostat</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Non-purine XO inhibitor</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Alternative for Allopurinol intolerance or renal impairment. CV risk warning.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Chronic ULT</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Probenecid</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Inhibits URAT1 renal transporter</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Blocks uric acid reabsorption. Contraindicated in kidney stones/renal impairment.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Chronic ULT</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Pegloticase</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Recombinant Uricase enzyme</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Converts uric acid to soluble Allantoin. IV for severe refractory tophaceous gout.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TABLE 2: Acute Flare & Allopurinol         -->
+        <!-- ========================================== -->
+        <div style="margin-top: 16px; margin-bottom: 24px;">
+          <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; background: var(--card); table-layout: fixed;">
+              <thead>
+                <tr style="background: #162235; border-bottom: 1px solid var(--border);">
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 15%;">Phase</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 20%;">First-Line Agents</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 25%;">Mechanism of Action</th>
+                  <th style="padding: 8px 6px; color: #e6edf3; font-weight: 700; width: 40%;">Key Clinical Considerations</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Acute Flare</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">High-Dose NSAIDs (Indomethacin, Naproxen)</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Reversible COX inhibition</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Inhibit inflammation. Aspirin is contraindicated (inhibits uric acid excretion at low doses).</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Acute Flare</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Colchicine</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Binds tubulin; inhibits microtubule polymerization</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Inhibits neutrophil chemotaxis/phagocytosis. Must start within 24–36 hrs. Dose-limiting <strong>severe diarrhea</strong>.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Acute Flare</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Glucocorticoids</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Broad anti-inflammatory</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Oral or intra-articular injection; used when NSAIDs/Colchicine are contraindicated.</td>
+                </tr>
+                <tr style="background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Chronic ULT</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Allopurinol</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Competitive Xanthine Oxidase (XO) inhibitor</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">First-line ULT. <strong>Co-administer Colchicine/NSAID for 3–6 mos</strong> to prevent mobilization flares. Screen HLA-B*5801. Inhibits Azathioprine metabolism (reduce Aza dose by 75%).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- NOTE: Bone Mineral Homeostasis             -->
+        <!-- ========================================== -->
+        <div style="margin-top: 24px">
+          <!-- Blue Section Header -->
+          <div style="background: #0f6a99; color: white; padding: 10px 14px; border-radius: 8px; font-size: 14px; font-weight: 600; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center;">
+            <span>🦴 7. Bone Mineral Homeostasis & Osteoporosis</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14.5px; line-height: 1.6; padding-left: 4px;">
+            
+            <div style="font-weight: 800; margin-top: 4px; color: #e6edf3; display: flex; align-items: center; gap: 6px;">
+              <span>⚖️</span> Key Regulators
+            </div>
+            
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div><strong>PTH:</strong> Stimulates osteoclasts indirectly at continuous high levels.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div><strong>Vitamin D3:</strong> Promotes intestinal Ca²⁺/PO₄³⁻ absorption.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div><strong>Calcium Citrate:</strong> Acid-independent absorption.</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: flex-start; padding-left: 8px;">
+              <span style="color: #ff5c5c; font-size: 14px; margin-top: 2px;">🔻</span>
+              <div><strong>Calcium Carbonate:</strong> Requires acid.</div>
+            </div>
+
+          </div>
+        </div>
+                <!-- ========================================== -->
+        <!-- TABLE: Osteoporosis Drugs                  -->
+        <!-- ========================================== -->
+        <div style="margin-top: 16px; margin-bottom: 24px;">
+          <div style="border: 1px solid var(--border); border-radius: 8px; overflow: hidden;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; background: var(--card); table-layout: fixed;">
+              <thead>
+                <tr style="background: #162235; border-bottom: 1px solid var(--border);">
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 18%;">Drug Class</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 22%;">Examples</th>
+                  <th style="padding: 8px 6px; border-right: 1px solid var(--border); color: #e6edf3; font-weight: 700; width: 30%;">Mechanism of Action</th>
+                  <th style="padding: 8px 6px; color: #e6edf3; font-weight: 700; width: 30%;">Clinical Considerations & Warnings</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Bisphosphonates -->
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Bisphosphonates</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Alendronate<br>Risedronate<br>Zoledronic Acid</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Pyrophosphate analogs; bind hydroxyapatite, taken up by osteoclasts to inhibit FPPS, triggering osteoclast apoptosis.</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Oral absorption &lt;1%. Take with full glass of water, remain upright for <strong>30 mins</strong> to avoid severe <strong>esophagitis</strong>. Risk of Osteonecrosis of Jaw (ONJ) and atypical femur fractures (&gt;5 yrs).</td>
+                </tr>
+                <!-- RANKL Inhibitor -->
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">RANKL Inhibitor</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Denosumab</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Monoclonal antibody targeting RANKL (mimics OPG), blocking osteoclast maturation.</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Administer SC every 6 months. <strong>Safe in renal impairment</strong>. Rebound fracture risk upon stopping.</td>
+                </tr>
+                <!-- PTH Analogs -->
+                <tr style="border-bottom: 1px solid var(--border);">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">PTH Analogs</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Teriparatide<br>Abaloparatide</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;"><strong>Anabolic agent:</strong> Intermittent daily SC administration stimulates osteoblasts over osteoclasts to build bone.</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Max 2 years duration. <strong>Black Box Warning for Osteosarcoma</strong> (avoid in Paget's, open epiphyses, radiation).</td>
+                </tr>
+                <!-- SERM -->
+                <tr style="border-bottom: 1px solid var(--border); background: #1e293b;">
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">SERM</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Raloxifene</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Estrogen agonist at bone (inhibits resorption), antagonist at breast/uterine tissue.</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Indicated in postmenopausal osteoporosis with breast cancer risk. Causes hot flashes, increased DVT/PE risk.</td>
+                </tr>
+                <!-- Sclerostin Inhibitor -->
+                <tr>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Sclerostin Inhibitor</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Romosozumab</td>
+                  <td style="padding: 8px 6px; border-right: 1px solid var(--border); vertical-align: top;">Monoclonal antibody against Sclerostin; dual action (increases bone formation, decreases resorption).</td>
+                  <td style="padding: 8px 6px; vertical-align: top;">Black Box Warning for <strong>Myocardial Infarction and Stroke risk.</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PASTE YOUR NEXT NOTES BELOW THIS LINE      -->
+        <!-- ========================================== -->
+      </div>
+    </div>
+
     <!-- ===== BIOCHEMISTRY NOTES (Scrollable List) ===== -->
     <div
       id="noteBiochem"
@@ -22521,7 +23690,8 @@
         const sections = [
           { id: "notePatho", storageKey: "msk_pinned_sections" },
           { id: "notePhysio", storageKey: "msk_pinned_physio" },
-          { id: "noteBiochem", storageKey: "msk_pinned_biochem" }, // ADD THIS LINE
+          { id: "noteBiochem", storageKey: "msk_pinned_biochem" },
+          { id: "notePharm", storageKey: "msk_pinned_pharm" },
         ];
 
         sections.forEach(({ id: noteId, storageKey }) => {
@@ -22634,7 +23804,7 @@
         });
       }
 
-      function showNote(id) {
+            function showNote(id) {
         // Hide the main list
         document.querySelector(".list").style.display = "none";
         document.querySelector(".hero").style.display = "none";
@@ -22645,12 +23815,23 @@
 
         // Update Back Button
         const backBtn = document.querySelector(".topbar .icon-btn");
+        
+        // Save the original title and subtitle before we change them
+        if (!window.originalTitle) {
+          window.originalTitle = document.querySelector(".logo-text").innerText;
+          window.originalSubtitle = document.querySelector(".logo-sub").innerText;
+        }
+
         backBtn.onclick = function (e) {
           e.preventDefault();
           document.querySelector(".list").style.display = "flex";
           document.querySelector(".hero").style.display = "block";
           document.querySelector(".section-title").style.display = "flex";
           document.getElementById(id).style.display = "none";
+
+          // Reset the title and subtitle back to original
+          document.querySelector(".logo-text").innerText = window.originalTitle;
+          document.querySelector(".logo-sub").innerText = window.originalSubtitle;
 
           // Reset back button to home
           backBtn.onclick = null;
@@ -22666,6 +23847,10 @@
           document.querySelector(".logo-text").innerText = "Biochemistry";
           document.querySelector(".logo-sub").innerText =
             "Metabolism & molecular basics";
+        } else if (id === "notePharm") {
+          document.querySelector(".logo-text").innerText = "Pharmacology";
+          document.querySelector(".logo-sub").innerText =
+            "Drugs, mechanisms & uses";
         } else {
           document.querySelector(".logo-text").innerText = "Physiology";
           document.querySelector(".logo-sub").innerText = "Muscle Tissue";
